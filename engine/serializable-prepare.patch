@@ -1,0 +1,27 @@
+diff --git a/src/backend/distributed/transaction/transaction_management.c b/src/backend/distributed/transaction/transaction_management.c
+--- a/src/backend/distributed/transaction/transaction_management.c
++++ b/src/backend/distributed/transaction/transaction_management.c
+@@ -550,3 +550,8 @@
++			if (IsolationIsSerializable())
++			{
++				Use2PCForCoordinatedTransaction();
++			}
++
+ 			if (ShouldCoordinatedTransactionUse2PC)
+ 			{
+ 				CoordinatedRemoteTransactionsPrepare();
+diff --git a/src/backend/distributed/transaction/remote_transaction.c b/src/backend/distributed/transaction/remote_transaction.c
+--- a/src/backend/distributed/transaction/remote_transaction.c
++++ b/src/backend/distributed/transaction/remote_transaction.c
+@@ -1087,5 +1087,10 @@
+-		if (ConnectionModifiedPlacement(connection))
++		if (ConnectionModifiedPlacement(connection) || IsolationIsSerializable())
+ 		{
++			if (IsolationIsSerializable())
++			{
++				MarkRemoteTransactionCritical(connection);
++			}
++
+ 			StartRemoteTransactionPrepare(connection);
+ 			connectionList = lappend(connectionList, connection);
+ 		}

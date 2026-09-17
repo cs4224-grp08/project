@@ -13,12 +13,12 @@
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
 
 # IMPORTANT - replace this with your email
-#SBATCH --mail-user=alice_and_bob@u.nus.edu
+#SBATCH --mail-user=e0323256@u.nus.edu
 
 set -euo pipefail
 
 # IMPORTANT: replace 99 with your project team number (e.g., 1, 2, ..., 20) to ensure a unique PGPORT number for each team
-TEAM_ID=${TEAM_ID:8}
+TEAM_ID=${TEAM_ID:-8}
 
 ################# PostgreSQL environment variables
 PGPORT=$((10#${TEAM_ID} + 5432))
@@ -159,6 +159,9 @@ fail() {
 
 psqlx() { ${PSQL} -X -v ON_ERROR_STOP=1 -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" "$@"; }
 
+LIFECYCLE_DIR="$SCRIPT_DIR/../lifecycle"
+source "$LIFECYCLE_DIR/servers.sh"
+
 ### clean up on exit
 cleanup() {
 	local exit_code=$?
@@ -180,21 +183,15 @@ cleanup() {
 	if ((SERVERS_LAUNCHED)); then
 		local n
 		for n in "${NODES[@]:-}"; do
-			srun \
-				--overlap \
-				--exact \
-				--nodes=1 \
-				--ntasks=1 \
-				--cpus-per-task=1 \
-				--nodelist="$n" \
-				bash -c \
-				"${PG_BIN_DIR}/pg_ctl -D '${PGDATA}' stop -m fast \
-		 >/dev/null 2>&1 || true" ||
-				true
+			if ! stop_node_verified "$n" >>"$JOB_RESULT_DIR/$n-shutdown.log" 2>&1; then
+				echo "ERROR: Shutdown unverified on $n; see $JOB_RESULT_DIR/$n-shutdown.log" >&2
+				((exit_code != 0)) || exit_code=1
+			fi
 		done
 		bounded_wait_server_pids || true
 	fi
-	return "$exit_code"
+	release_port_guards
+	exit "$exit_code"
 }
 
 ### reap srun processes
@@ -236,6 +233,10 @@ check_server_steps() {
 	local p
 	local n
 
+	for p in "${PORT_GUARD_PIDS[@]}"; do
+		kill -0 "$p" 2>/dev/null || { echo 'ERROR: Port reservation was lost' >&2; return 1; }
+	done
+
 	# Check the local Slurm server steps.
 	for p in "${SERVER_PIDS[@]:-}"; do
 		if ! kill -0 "$p" 2>/dev/null; then
@@ -255,6 +256,7 @@ check_server_steps() {
 			echo "ERROR: PostgreSQL is unavailable on $n:$PGPORT" >&2
 			return 1
 		fi
+		verify_server_identity "$n" || return 1
 	done
 }
 
@@ -264,6 +266,7 @@ init_node() {
 	srun --overlap --exact --nodes=1 --ntasks=1 --cpus-per-task=1 --nodelist="$n" bash -s <<EOF2
 set -euo pipefail
 
+bash "$LIFECYCLE_DIR/servers.sh" check-stopped "$PG_BIN_DIR/pg_ctl" "$PGDATA"
 if [ -d "${DATA_ROOT}" ]; then rm -rf "$DATA_ROOT"; fi 
 mkdir -p "$PGDATA" "$DATA_ROOT"
 
@@ -317,7 +320,9 @@ record_server_versions() {
 
 ##################################### Start server at each node
 
-trap cleanup EXIT INT TERM
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 info "Slurm job started"
 info "SLURM_JOB_ID=${SLURM_JOB_ID:-UNSET}"
@@ -370,11 +375,14 @@ for n in "${NODES[@]}"; do
 done
 info "All allocated nodes passed Slurm launch test"
 
+acquire_port_guards || fail "Port reservation failed before database initialization"
+
 # initialize database cluster at each server
 for n in "${NODES[@]}"; do init_node "$n"; done
 
 # start postgres server at each node
 # SERVER_PIDS = srun process ids
+SERVERS_LAUNCHED=1
 for n in "${NODES[@]}"; do
 	PG_LOGFILE="${JOB_RESULT_DIR}/$n-postgresql.log"
 	srun --overlap --nodes=1 --ntasks=1 --nodelist="$n" bash -c "exec ${PG_BIN_DIR}/postgres -D '${PGDATA}' > '${PG_LOGFILE}' 2>&1" &
@@ -393,6 +401,7 @@ for n in "${NODES[@]}"; do
 		sleep 1
 	done
 	((ready == 1)) || fail "PostgreSQL failed on $n"
+	verify_server_identity "$n" || fail "Unexpected PostgreSQL instance on $n"
 	${PG_BIN_DIR}/createdb -h "$n" -p "$PGPORT" -U "$PGUSER" "$PGDATABASE"
 	${PSQL} -X -v ON_ERROR_STOP=1 -h "$n" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" -c "CREATE EXTENSION IF NOT EXISTS citus;"
 done
@@ -403,6 +412,12 @@ for w in "${WORKERS[@]}"; do
 done
 
 record_server_versions || true
+
+if [[ "${COMMIT_DIAGNOSTIC:-0}" == "1" ]]; then
+	export PGHOST="$COORDINATOR" PGPORT PGUSER PGDATABASE
+	python3 "$SCRIPT_DIR/commit_diagnostic.py" "$PSQL" "$JOB_RESULT_DIR"
+	exit 0
+fi
 
 ############### Functions: create database schema
 
@@ -448,7 +463,9 @@ SQL
 
 ############### create database schema
 PGHOST="$COORDINATOR"
-create_schema &>"$JOB_RESULT_DIR/schema-create.log"
+if [[ "${LIFECYCLE_CHECK_ONLY:-0}" != "1" ]]; then
+	create_schema &>"$JOB_RESULT_DIR/schema-create.log"
+fi
 
 ################## Functions: generate data
 
@@ -507,7 +524,9 @@ NUM_ORDERS="${NUM_ORDERS:-$(scale_count 5000000)}"
 NUM_ORDER_ITEMS="${NUM_ORDER_ITEMS:-$(scale_count 15000000)}"
 TRUNCATE_FIRST="${TRUNCATE_FIRST:-1}"
 RUN_ANALYZE="${RUN_ANALYZE:-1}"
-generate_data &>"$JOB_RESULT_DIR/data-generation.log"
+if [[ "${LIFECYCLE_CHECK_ONLY:-0}" != "1" ]]; then
+	generate_data &>"$JOB_RESULT_DIR/data-generation.log"
+fi
 echo "Checking PostgreSQL servers after data loading..."
 check_server_steps || fail "Cluster health check failed after data generation"
 
@@ -1012,17 +1031,8 @@ restart_postgres_servers() {
 
 	# Ask every PostgreSQL instance to stop cleanly.
 	for n in "${NODES[@]}"; do
-		srun \
-			--overlap \
-			--exact \
-			--nodes=1 \
-			--ntasks=1 \
-			--cpus-per-task=1 \
-			--nodelist="$n" \
-			bash -c \
-			"${PG_BIN_DIR}/pg_ctl -D '${PGDATA}' stop -m fast \
-       >/dev/null 2>&1 || true" ||
-			true
+		stop_node_verified "$n" >>"$JOB_RESULT_DIR/$n-shutdown.log" 2>&1 ||
+			fail "Restart stopped: shutdown unverified on $n; see $JOB_RESULT_DIR/$n-shutdown.log"
 	done
 
 	# Reap the old background srun processes
@@ -1359,5 +1369,13 @@ EOF
 }
 
 #####################  perform benchmarking
+if [[ "${LIFECYCLE_CHECK_ONLY:-0}" == "1" ]]; then
+	check_server_steps || fail "Lifecycle startup verification failed"
+	restart_postgres_servers
+	check_server_steps || fail "Lifecycle restart verification failed"
+	info "Lifecycle checks passed; verifying final shutdown next"
+	exit 0
+fi
+
 run_benchmark &>"${BENCHMARK_LOG_FILE}"
 info "Experiment complete: $JOB_RESULT_DIR"
