@@ -1,4 +1,3 @@
-
 expt_a0 - performance of baseline design as a function of number of clients for workload A
 
 expt_b0 - performance of baseline design as a function of number of clients for workload B
@@ -33,11 +32,11 @@ Reinstalling PostgreSQL or Citus is not necessary to reset database data.
 
 Potential changes to decide with the user, not implemented:
 
-| Area | Current behavior | Decision needed |
-| --- | --- | --- |
-| Warmup | RESET_AFTER_WARMUP=0; warmup writes carry into the timed run | Is the required starting point pre-warmup or post-warmup data? Reloading also changes cache conditions. |
-| Client counts | Truncate/reload, ANALYZE, and sequence reset; restart reuses PGDATA | Is logical data reset sufficient, or must each client count get a new cluster too? |
-| Old directories | Startup removes only the current job's directory; exit stops servers but leaves data | Add deletion of owned job data after confirmed shutdown, with an option to retain failed-job data? |
+| Area            | Current behavior                                                                     | Decision needed                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Warmup          | RESET_AFTER_WARMUP=0; warmup writes carry into the timed run                         | Is the required starting point pre-warmup or post-warmup data? Reloading also changes cache conditions. |
+| Client counts   | Truncate/reload, ANALYZE, and sequence reset; restart reuses PGDATA                  | Is logical data reset sufficient, or must each client count get a new cluster too?                      |
+| Old directories | Startup removes only the current job's directory; exit stops servers but leaves data | Add deletion of owned job data after confirmed shutdown, with an option to retain failed-job data?      |
 
 A failed warmup currently does not stop the measured run. That is another
 benchmark-validity issue, not a failure of initdb: consider making such failures
@@ -53,21 +52,21 @@ directories when packaging or copying them. The existing installation is used;
 no PostgreSQL or Citus binaries were changed.
 
 - Before initialization, acquire a per-node, per-user/port flock and check that
-	the IPv4/IPv6 port can be bound. Abort on a lock or port conflict before
-	deleting or loading database data. Never unlink the persistent lock file:
-	an empty lock file is normal; its open file descriptor holds the lock.
+  the IPv4/IPv6 port can be bound. Abort on a lock or port conflict before
+  deleting or loading database data. Never unlink the persistent lock file:
+  an empty lock file is normal; its open file descriptor holds the lock.
 - Hold reservations across initialization, measurement, and PostgreSQL restarts.
-	Check guard processes during health checks and release them after shutdown
-	attempts and server-step reaping. Ready markers are removed after guard reaping.
+  Check guard processes during health checks and release them after shutdown
+  attempts and server-step reaping. Ready markers are removed after guard reaping.
 - Check pg_ctl status before removing an existing job data directory; reject a
-	live server or an unknown status instead of deleting its data.
+  live server or an unknown status instead of deleting its data.
 - Verify SHOW data_directory on every node before creating the job database and
-	during health checks. A responding server using another directory is rejected.
+  during health checks. A responding server using another directory is rejected.
 - On restart and exit, use bounded pg_ctl stop with wait and verify stopped
-	status. Record per-node shutdown logs. Stop errors are visible, prevent a
-	restart, and fail an otherwise successful job; existing failures are preserved.
+  status. Record per-node shutdown logs. Stop errors are visible, prevent a
+  restart, and fail an otherwise successful job; existing failures are preserved.
 - SIGINT/SIGTERM exit through cleanup with failure status rather than returning
-	to benchmark execution. No new data-deletion policy was added.
+  to benchmark execution. No new data-deletion policy was added.
 
 The file lock is cooperative: it prevents races between runners using this
 helper, not arbitrary processes or older scripts. A port bind check cannot
@@ -77,17 +76,18 @@ or SIGKILL can interrupt cleanup, so do not interpret silence as proof of a
 successful shutdown; retain the job's lifecycle logs.
 
 Verification on 2026-09-17:
+
 - 12 focused tests pass: lock contention/release, occupied port, expected/wrong
-	server identity, live-directory protection, stop/status errors, verified stop,
-	cleanup exit propagation, and readiness-marker cleanup.
+  server identity, live-directory protection, stop/status errors, verified stop,
+  cleanup exit propagation, and readiness-marker cleanup.
 - Lifecycle-only job 854254 ran on xcnc[0-4], 11:01:50-11:04:05 Singapore time,
-	COMPLETED with exit 0:0 and empty stderr. It started and checked five servers,
-	restarted them using the normal restart function, then verified final shutdown.
-	Each node has two "Verified stopped" records. No benchmark data was loaded
-	and no measurements were taken. The queue was empty afterward.
+  COMPLETED with exit 0:0 and empty stderr. It started and checked five servers,
+  restarted them using the normal restart function, then verified final shutdown.
+  Each node has two "Verified stopped" records. No benchmark data was loaded
+  and no measurements were taken. The queue was empty afterward.
 - Slurm termination left ready-marker files in that smoke job; the subsequent
-	marker-removal change passed its focused regression test. No second cluster
-	run was needed for that file-cleanup-only change.
+  marker-removal change passed its focused regression test. No second cluster
+  run was needed for that file-cleanup-only change.
 
 Run the focused checks with `python3 -B lifecycle/test_lifecycle.py -v`.
 For a lifecycle-only Slurm run, submit from expt_a0 or expt_b0 with
@@ -95,6 +95,58 @@ LIFECYCLE_CHECK_ONLY=1, COMMIT_DIAGNOSTIC=0, explicit SCRIPT_DIR, and a separate
 RESULT_ROOT. Job 854254 used a five-minute limit and expt_b0/lifecycle-results.
 The existing table resets, warmup writes, isolation, and transaction SQL remain
 unchanged. These checks do not fix the Citus commit-error conversion.
+
+### Run-validity gate (2026-09-26)
+
+Working assumption (2026-09-26, pending the instructor's confirmation): client
+aborts caused by the Citus commit-error quirk (see "Commit-Abort Investigation")
+are acceptable. Runs that contain them may be reported, with their abort counts.
+This supersedes the older sections' advice to treat those runs as failed and to
+wait for an engine fix before rerunning the baseline. Those sections are kept as
+a record of the investigation.
+
+An aborted client stops for the rest of the run, so TPS then comes from fewer
+clients than requested; always report the abort counts next to throughput.
+Serialization failures that pgbench retried, or counted as failed after
+`--max-tries`, do not abort clients; they stay in their own columns.
+
+- `lifecycle/run_validity.sh` classifies each client count; both runners source it.
+- `summary.csv` gains `valid`, `warmup_aborted_clients`,
+  `measured_aborted_clients`, and `validity_notes`.
+- Known aborts ("could not commit transaction for shard N on at least one
+  active node") keep `valid=1` and appear as `*_known_commit_aborts_N` notes.
+- `valid=0` means something unexpected: any other abort (e.g. lost connection,
+  statement timeout), an exit code not explained by aborts, or an incomplete run
+  without an abort record. Do not report such a row; investigate it.
+- Invalid client counts are logged, the remaining counts still run, and a
+  WARNING on stderr names the summary. By default (`FAIL_ON_INVALID_RUN=0`) the
+  job still succeeds; `FAIL_ON_INVALID_RUN=1` also fails the Slurm job. Known
+  aborts never fail the job.
+- The gate only detects and labels aborts; it does not prevent or retry them.
+
+Verification:
+
+- `python3 -B -m unittest -v test_run_validity test_lifecycle` from `lifecycle/`:
+  28 tests pass. The integration tests run each runner's real benchmark loop
+  and final gate with a fake pgbench that aborts clients at chosen counts, with
+  either the known Citus error or an unexpected one.
+- All 43 client aborts in jobs 853208 and 882608 are the known Citus error.
+  Replaying the classifier over their pgbench outputs marks every row valid:
+
+| Job | Clients | Aborted clients (warmup / measured) |
+| --- | --- | --- |
+| 853208 (scale 1) | 1, 8 | 0 / 0 |
+| 853208 (scale 1) | 4 | 0 / 2 |
+| 853208 (scale 1) | 16 | 1 / 9 |
+| 853208 (scale 1) | 32 | 1 / 12 |
+| 853208 (scale 1) | 64 | 2 / 8 |
+| 882608 (scale 0.1) | 1 | 0 / 0 |
+| 882608 (scale 0.1) | 32 | 4 / 4 |
+
+- Job 882608 (expt_b0, SCALE=0.1, clients 1 and 32, 30 s warmup, 120 s measured,
+  xcni[17-19],xcnz[0-1]) ran the first version of the gate, which still counted
+  every abort as invalid and failed the job; all five nodes recorded two verified
+  shutdowns. Results are in `expt_b0/gatecheck-results/job-882608` (outside Git).
 
 ## Active Worktree
 
@@ -107,10 +159,18 @@ before any future A submission. No commits, pushes, or reruns were made.
 
 ## Baseline B Validation: Job 853208
 
-Evidence is preserved in `/home/stuproj/cs08/citus_project_b_20260916`.
-See its README for the submission command and smoke history. Full results are
-under `expt_b0/slurm-results/job-853208` within that preserved copy; Slurm logs
-are `expt_b0/citus-853208.out` and `.err` there. Do not delete these artifacts.
+The original copy was archived for removal on 2026-09-17. Evidence is preserved in
+`/home/stuproj/cs08/citus_project_archives/citus_project_b_20260916.tar.gz`
+(outside Git), including its README, hidden handoff notes, smoke results,
+full baseline results, and scripts. The archive was compared successfully
+against every original entry before directory removal.
+
+Archive SHA-256: `6b37b76881058db13099ca56a1d50c8b478356f3e9316435b9ce30fdfe693dbb`.
+
+Paths below referring to the old copy are historical paths within the archive's
+`citus_project_b_20260916/` directory. Full results are under
+`expt_b0/slurm-results/job-853208`; Slurm logs are `expt_b0/citus-853208.out`
+and `.err`. Retain the archive; extract into a separate directory when needed.
 
 The runner logged completion at 2026-09-17 00:05:38 Singapore time. All five
 servers logged final shutdown by 00:06:05. The cs08 queue was empty at the
@@ -119,13 +179,13 @@ the job and sacct returned "No space left on device". This is not evidence
 that the benchmark ran out of disk; the home filesystem reported free space.
 
 | Clients | Warmup pgbench exit | Measured pgbench exit | Measured serialization failures | Client-abort gate |
-| --- | --- | --- | --- | --- |
-| 1 | 0 | 0 | 0 | Pass |
-| 4 | 0 | 2 | 8 | Fail |
-| 8 | 0 | 0 | 84 | Pass |
-| 16 | 2 | 2 | 93 | Fail |
-| 32 | 2 | 2 | 348 | Fail |
-| 64 | 2 | 2 | 337 | Fail |
+| ------- | ------------------- | --------------------- | ------------------------------- | ----------------- |
+| 1       | 0                   | 0                     | 0                               | Pass              |
+| 4       | 0                   | 2                     | 8                               | Fail              |
+| 8       | 0                   | 0                     | 84                              | Pass              |
+| 16      | 2                   | 2                     | 93                              | Fail              |
+| 32      | 2                   | 2                     | 348                             | Fail              |
+| 64      | 2                   | 2                     | 337                             | Fail              |
 
 All twelve tee exits are zero; Slurm stderr is empty. All six summary rows
 and 54 transaction-metric rows are present. Recorded scale, client counts,
@@ -156,6 +216,7 @@ reports a failed commit on xcnc3 followed by an ERROR for shard 102090.
 The c4 measured pgbench output records T7 client 0 aborting on that shard.
 
 Evidence in the preserved job directory:
+
 - xcnc3-postgresql.log:160: worker error and COMMIT statement.
 - xcnc0-postgresql.log:1186: propagated warning, shard error, and COMMIT statement.
 - benchmark-results/result-c4.txt:40: warning/error chain and client abort.
@@ -165,17 +226,18 @@ Evidence in the preserved job directory:
 The available Citus 14.1.0 and PostgreSQL 18.6 source explains the mechanism:
 
 1. `FinishRemoteTransactionCommit` uses `raiseErrors=false` when processing
-	a failed remote commit. `HandleRemoteTransactionResultError` marks that
-	connection failed and reports the worker's error as a WARNING.
+   a failed remote commit. `HandleRemoteTransactionResultError` marks that
+   connection failed and reports the worker's error as a WARNING.
 2. `ErrorIfPostCommitFailedShardPlacements` raises a new ERROR when a modified
-	shard's associated connection failed. Its ereport contains an errmsg but
-	no errcode, so PostgreSQL's default ERROR SQLSTATE is XX000 (internal_error),
-	not the worker serialization-failure code 40001.
+   shard's associated connection failed. Its ereport contains an errmsg but
+   no errcode, so PostgreSQL's default ERROR SQLSTATE is XX000 (internal_error),
+   not the worker serialization-failure code 40001.
 3. pgbench's `getSQLErrorStatus` and `canRetryError` only classify 40001 and
-	40P01 (deadlock) as retryable. An XX000 error follows the client-abort path;
-	increasing --max-tries does not make this error retryable.
+   40P01 (deadlock) as retryable. An XX000 error follows the client-abort path;
+   increasing --max-tries does not make this error retryable.
 
 Source references relative to /home/stuproj/cs08:
+
 - citus-14.1.0/src/backend/distributed/transaction/remote_transaction.c:572
 - citus-14.1.0/src/backend/distributed/transaction/remote_transaction.c:966
 - citus-14.1.0/src/backend/distributed/connection/placement_connection.c:994
@@ -248,12 +310,12 @@ before the transfer. This creates a controlled SSI dependency cycle. A second
 variant adds an explicit witness read to the transfer. Each variant is run
 three times with same-worker destinations and three with cross-worker destinations.
 
-| Transfer destination | Explicit witness read | Repetitions | Transfer COMMIT SQLSTATE | Competitor COMMIT | Final quantities |
-| --- | --- | --- | --- | --- | --- |
-| Same worker | No | 3 | XX000 | 00000 | Match acknowledged effects |
-| Same worker | Yes | 3 | XX000 | 00000 | Match acknowledged effects |
-| Different worker | No | 3 | 40001 | 00000 | Match acknowledged effects |
-| Different worker | Yes | 3 | 40001 | 00000 | Match acknowledged effects |
+| Transfer destination | Explicit witness read | Repetitions | Transfer COMMIT SQLSTATE | Competitor COMMIT | Final quantities           |
+| -------------------- | --------------------- | ----------- | ------------------------ | ----------------- | -------------------------- |
+| Same worker          | No                    | 3           | XX000                    | 00000             | Match acknowledged effects |
+| Same worker          | Yes                   | 3           | XX000                    | 00000             | Match acknowledged effects |
+| Different worker     | No                    | 3           | 40001                    | 00000             | Match acknowledged effects |
+| Different worker     | Yes                   | 3           | 40001                    | 00000             | Match acknowledged effects |
 
 Mapping: source 1 and witness 15 were on shard 102009 on xcnc2; same-worker
 destination 17 was on shard 102017 on xcnc2; cross-worker destination 2 was
@@ -309,11 +371,11 @@ citus-rewrite-diag. It ran from 10:19:20 to 10:19:59 Singapore time on
 2026-09-17, COMPLETED with exit 0:0. All five servers logged shutdown and
 Slurm stderr was empty. Results are in expt_b0/diagnostic-results/job-854116.
 
-| Row placement | Original transfer COMMIT | Combined UPDATE COMMIT |
-| --- | --- | --- |
-| Same shard | XX000 in 6/6 cases | XX000 in 6/6 cases |
-| Same worker, different shards | XX000 in 6/6 cases | 40001 in 6/6 cases |
-| Different workers | 40001 in 6/6 cases | 40001 in 6/6 cases |
+| Row placement                 | Original transfer COMMIT | Combined UPDATE COMMIT |
+| ----------------------------- | ------------------------ | ---------------------- |
+| Same shard                    | XX000 in 6/6 cases       | XX000 in 6/6 cases     |
+| Same worker, different shards | XX000 in 6/6 cases       | 40001 in 6/6 cases     |
+| Different workers             | 40001 in 6/6 cases       | 40001 in 6/6 cases     |
 
 The 36 conflict cases cover both implicit and explicit witness-read variants,
 with three repetitions each. Fifteen separate boundary checks cover success,
@@ -344,10 +406,10 @@ The reproduction is ready to share with the instructor or Citus maintainers.
 
 Additional baseline correlations, all on 2026-09-16 (Singapore time):
 
-| Transaction | pgbench record | Coordinator error | Worker evidence |
-| --- | --- | --- | --- |
-| T2 | result-c16.txt:10, client 8, script 1, shard 102102 | xcnc0-postgresql.log:10633, PID 626768, 23:13:46.456 | xcnc3-postgresql.log:1088, PID 530153, serialization failure on COMMIT |
-| T1 | result-c16.txt:43, client 0, script 0, shard 102110 | xcnc0-postgresql.log:12576, PID 626767, 23:15:56.183 | xcnc3-postgresql.log:1241, PID 540029, serialization failure on COMMIT |
+| Transaction | pgbench record                                      | Coordinator error                                    | Worker evidence                                                        |
+| ----------- | --------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| T2          | result-c16.txt:10, client 8, script 1, shard 102102 | xcnc0-postgresql.log:10633, PID 626768, 23:13:46.456 | xcnc3-postgresql.log:1088, PID 530153, serialization failure on COMMIT |
+| T1          | result-c16.txt:43, client 0, script 0, shard 102110 | xcnc0-postgresql.log:12576, PID 626767, 23:15:56.183 | xcnc3-postgresql.log:1241, PID 540029, serialization failure on COMMIT |
 
 Paths in this table are relative to preserved job 853208, with pgbench records
 inside benchmark-results. T1's same coordinator session also appears in a
@@ -370,16 +432,16 @@ commit outcome is uncertain.
 Two implementation options need maintainer review:
 
 1. For a provably single-writer transaction, retain the worker's SQLSTATE and
-	 propagate 40001/40P01 only after a definite worker rollback and confirmation
-	 that no other remote or local transactional writes committed. A worker
-	 hostname or shard count alone is not a sufficient safety test: one worker
-	 can have multiple participating connections.
+   propagate 40001/40P01 only after a definite worker rollback and confirmation
+   that no other remote or local transactional writes committed. A worker
+   hostname or shard count alone is not a sufficient safety test: one worker
+   can have multiple participating connections.
 2. Use preparation before irreversible commit for serializable transactions
-	 that otherwise reach the affected plain-COMMIT path, including single-shard
-	 writes. Preserve errors from preparation and roll back every prepared
-	 participant on failure. Define how read-only participants are validated
-	 before acknowledging success rather than simply preparing writers and
-	 assuming the remaining participants cannot fail.
+   that otherwise reach the affected plain-COMMIT path, including single-shard
+   writes. Preserve errors from preparation and roll back every prepared
+   participant on failure. Define how read-only participants are validated
+   before acknowledging success rather than simply preparing writers and
+   assuming the remaining participants cannot fail.
 
 Option 2 is the preferred general design to evaluate, not a verified fix or
 an available user setting. It builds on the observed cross-worker behavior
@@ -397,15 +459,15 @@ those is an established equivalent fix.
 
 - Repeat the current 48 conflict and 15 boundary cases with worker command tracing.
 - Exercise the supplied T1/T2/T7 scripts under mixed concurrency, including one
-	and multiple writer connections on the same worker and different workers.
+  and multiple writer connections on the same worker and different workers.
 - Include read-only participant conflicts, coordinator failures, deferred
-	constraint failures, and connection loss during prepare and commit.
+  constraint failures, and connection loss during prepare and commit.
 - Verify failed transactions leave no transactional writes, no unresolved
-	prepared transactions after recovery, and no duplicate effects after retries.
+  prepared transactions after recovery, and no duplicate effects after retries.
 - Verify pgbench retries the confirmed 40001/40P01 failures within its existing
-	retry budget and preserves failures whose outcome is unknown.
+  retry budget and preserves failures whose outcome is unknown.
 - Only then rerun the full baseline under the approved, consistently deployed
-	version. Record the version change and do not mix results across versions.
+  version. Record the version change and do not mix results across versions.
 
 ### Still blocked or deliberately retained
 
@@ -417,4 +479,3 @@ No engine patch or full rerun was made. Implementation and failure-injection
 tests require a separate, non-shared installation and approval before replacing
 the team's database binaries. All original logs, results, and temporary data
 remain preserved; deleting evidence is not part of completing these checks.
-

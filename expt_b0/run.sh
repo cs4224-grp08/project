@@ -81,6 +81,10 @@ PGBENCH_SEED="${PGBENCH_SEED:-42}"
 PGBENCH_MAX_TRIES="${PGBENCH_MAX_TRIES:-3}"
 PGBENCH_FAILURES_DETAILED="${PGBENCH_FAILURES_DETAILED:-1}"
 PGBENCH_QUERY_MODE="${PGBENCH_QUERY_MODE:-simple}"
+# Rows with unexpected pgbench problems are always marked valid=0 in summary.csv.
+# Known Citus commit-error aborts are accepted (see lifecycle/run_validity.sh).
+# Set to 1 to also fail the Slurm job when any row is invalid.
+FAIL_ON_INVALID_RUN="${FAIL_ON_INVALID_RUN:-0}"
 
 CLIENT_COUNTS="${CLIENT_COUNTS:-1 4 8 16 32 64}"
 THREADS="${THREADS:-${SLURM_CPUS_PER_TASK:-4}}"
@@ -161,6 +165,8 @@ psqlx() { ${PSQL} -X -v ON_ERROR_STOP=1 -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -
 
 LIFECYCLE_DIR="$SCRIPT_DIR/../lifecycle"
 source "$LIFECYCLE_DIR/servers.sh"
+source "$LIFECYCLE_DIR/run_validity.sh"
+INVALID_RUN_COUNT=0
 
 ### clean up on exit
 cleanup() {
@@ -678,11 +684,15 @@ extract_pgbench_retry_stats() {
 # 2nd parameter: $LOG_DIR/pgbench-c${C}
 # 3rd parameter: $RUN_DIR/result-c${C}.txt
 # 4th parameter: pgbench return code
+# 5th parameter: classify_run output (valid,warmup_aborted,measured_aborted,validity_notes)
 analyze_run() {
 	local clients="$1"
 	local prefix="$2"
 	local result_file="$3"
 	local pgbench_rc="${4:-0}"
+	local validity="${5:-1,0,0,ok}"
+	local valid warmup_aborted_clients measured_aborted_clients validity_notes
+	IFS=',' read -r valid warmup_aborted_clients measured_aborted_clients validity_notes <<<"$validity"
 
 	local combined="$LOG_DIR/transactions-c${clients}.log"
 	local metrics_dir="$RUN_DIR/metrics-c${clients}"
@@ -778,7 +788,7 @@ analyze_run() {
 	#
 	# Overall benchmark summary.
 	#
-	printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
+	printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
 		"$clients" \
 		"$total_success" \
 		"$unsuccessful_records" \
@@ -792,6 +802,10 @@ analyze_run() {
 		"$serialization_failures" \
 		"$deadlock_failures" \
 		"$pgbench_rc" \
+		"$valid" \
+		"$warmup_aborted_clients" \
+		"$measured_aborted_clients" \
+		"$validity_notes" \
 		>>"$SUMMARY_FILE"
 
 	#
@@ -884,6 +898,11 @@ serialization_failures=$serialization_failures
 deadlock_failures=$deadlock_failures
 
 pgbench_exit_code=$pgbench_rc
+
+valid=$valid
+warmup_aborted_clients=$warmup_aborted_clients
+measured_aborted_clients=$measured_aborted_clients
+validity_notes=$validity_notes
 EOF
 }
 
@@ -1236,6 +1255,7 @@ PGBENCH_SEED=$PGBENCH_SEED
 LOG_SAMPLE_RATE=$LOG_SAMPLE_RATE
 PGBENCH_MAX_TRIES=$PGBENCH_MAX_TRIES
 PGBENCH_FAILURES_DETAILED=$PGBENCH_FAILURES_DETAILED
+FAIL_ON_INVALID_RUN=$FAIL_ON_INVALID_RUN
 RESET_BETWEEN_CLIENT_COUNTS=$RESET_BETWEEN_CLIENT_COUNTS
 RESET_AFTER_WARMUP=$RESET_AFTER_WARMUP
 RESTART_SERVERS_BETWEEN_CLIENT_COUNTS=$RESTART_SERVERS_BETWEEN_CLIENT_COUNTS
@@ -1265,7 +1285,7 @@ T7_MIN_TRANSFER_QTY="${T7_MIN_TRANSFER_QTY}"
 T7_MAX_TRANSFER_QTY="${T7_MAX_TRANSFER_QTY}"
 EOF
 
-	echo "clients,successful_transactions,failed_log_records,overall_tps,overall_avg_latency_ms,overall_median_latency_ms,overall_p95_latency_ms,overall_p99_latency_ms,retried_transactions,total_retries,serialization_failures,deadlock_failures,pgbench_exit_code" \
+	echo "clients,successful_transactions,failed_log_records,overall_tps,overall_avg_latency_ms,overall_median_latency_ms,overall_p95_latency_ms,overall_p99_latency_ms,retried_transactions,total_retries,serialization_failures,deadlock_failures,pgbench_exit_code,valid,warmup_aborted_clients,measured_aborted_clients,validity_notes" \
 		>"$SUMMARY_FILE"
 
 	echo "clients,transaction,name,successful_transactions,tps,avg_latency_ms,p50_latency_ms,p95_latency_ms,p99_latency_ms" \
@@ -1290,16 +1310,19 @@ EOF
 			reset_benchmark_database "before client-count c${clients}"
 		fi
 
+		warmup_rc="-"
+		warmup_file="-"
 		if ((WARMUP_DURATION > 0)); then
 			warmup_rc=0
-			run_pgbench "$clients" "$WARMUP_DURATION" "$RUN_DIR/warmup-c${clients}.txt" "Warmup" "$LOG_DIR/warmup-c${clients}" 0 || warmup_rc=$?
+			warmup_file="$RUN_DIR/warmup-c${clients}.txt"
+			run_pgbench "$clients" "$WARMUP_DURATION" "$warmup_file" "Warmup" "$LOG_DIR/warmup-c${clients}" 0 || warmup_rc=$?
 
 			if ! check_server_steps; then
 				fail "PostgreSQL/Citus cluster became unhealthy during warmup c${clients}"
 			fi
 
 			if ((warmup_rc != 0)); then
-				info "Warmup c${clients} completed with pgbench exit code $warmup_rc; continuing"
+				info "Warmup c${clients} completed with pgbench exit code $warmup_rc; see validity for c${clients}"
 			fi
 
 			if ((RESET_AFTER_WARMUP)); then
@@ -1313,14 +1336,18 @@ EOF
 
 		run_pgbench "$clients" "$DURATION" "$RUN_DIR/result-c${clients}.txt" "Measured run" "$prefix" 1 || pgbench_rc=$?
 
-		analyze_run "$clients" "$prefix" "$RUN_DIR/result-c${clients}.txt" "$pgbench_rc"
+		validity="$(classify_run "$warmup_rc" "$warmup_file" "$pgbench_rc" "$RUN_DIR/result-c${clients}.txt")"
+		analyze_run "$clients" "$prefix" "$RUN_DIR/result-c${clients}.txt" "$pgbench_rc" "$validity"
 
 		if ! check_server_steps; then
 			fail "PostgreSQL/Citus cluster became unhealthy during c${clients}"
 		fi
 
-		if ((pgbench_rc != 0)); then
-			info "Measured c${clients} completed with pgbench exit code $pgbench_rc; results retained and benchmark continues"
+		if [[ "${validity%%,*}" == "1" ]]; then
+			info "Measured c${clients}: VALID (${validity##*,})"
+		else
+			INVALID_RUN_COUNT=$((INVALID_RUN_COUNT + 1))
+			info "Measured c${clients}: INVALID (${validity##*,}); results retained for diagnosis and benchmark continues"
 		fi
 	done
 
@@ -1340,6 +1367,13 @@ summary.csv
   - number of serialization failures
   - number of deadlock failures
   - pgbench exit code
+  - valid: 0 means an unexpected pgbench problem (an abort other than the
+    known Citus commit error, an unexplained exit code, or an incomplete run);
+    do not use such a row as a performance result
+  - warmup_aborted_clients / measured_aborted_clients: clients that stopped
+    early; known Citus commit-error aborts are accepted, but TPS then comes from
+    fewer clients than requested
+  - validity_notes: "ok", or ';'-separated problems and known-abort notes
 
 transaction_metrics.csv
   One row per client count and transaction type (T1-T9). Includes:
@@ -1378,4 +1412,8 @@ if [[ "${LIFECYCLE_CHECK_ONLY:-0}" == "1" ]]; then
 fi
 
 run_benchmark &>"${BENCHMARK_LOG_FILE}"
+if ((INVALID_RUN_COUNT > 0)); then
+	echo "WARNING: ${INVALID_RUN_COUNT} client-count run(s) INVALID (unexpected aborts or pgbench errors); see $SUMMARY_FILE" >&2
+	((FAIL_ON_INVALID_RUN == 0)) || fail "Benchmark produced invalid runs; results retained in $JOB_RESULT_DIR"
+fi
 info "Experiment complete: $JOB_RESULT_DIR"
