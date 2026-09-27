@@ -8,22 +8,25 @@ outputs `slurm-results/job-<id>/` and `citus-<id>.out` / `citus-<id>.err`.
 
 Optimizations are applied progressively: V_N = V_{N-1} + O_N. Unless stated,
 `run.sh` is identical to the baseline's and only `transactions/` changes.
+To see a change directly: `diff -rq expt_a2 expt_a3` (files changed by one
+step) or `diff -u expt_b1/transactions/T7_inventory_transfer.sql
+expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 
-| Folder | Task | Design | Reported job |
-| --- | --- | --- | --- |
-| `expt_a0` | Task 1 | Baseline design, workload A | 882950 |
-| `expt_a1` | Task 2 | V0 + O1 | 883680 |
-| `expt_a2` | Task 2 | V1 + O2 | 883684 |
-| `expt_a3` | Task 2 | V2 + O4 | 883773 |
-| `expt_a4` | Task 2 | V3 + O5 | 883775 |
-| `expt_a5` | Task 2 | V4 + O3 | 884051 |
-| `expt_b0` | Task 3 | Baseline design, workload B | 882953 |
-| `expt_b1` | Task 4 | V0 + O1 | 883683 |
-| `expt_b2` | Task 4 | V1 + O3 | 883685 |
-| `expt_b3` | Task 4 | V2 + O2 | 883774 |
-| `expt_b4` | Task 4 | V3 + O5 | 883776 |
-| `expt_b5` | Task 4 | V4 + O4 | 884052 |
-| `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | 884053 |
+| Folder | Task | Design | Transactions changed (vs baseline) | Reported job |
+| --- | --- | --- | --- | --- |
+| `expt_a0` | Task 1 | Baseline design, workload A | none (baseline) | 882950 |
+| `expt_a1` | Task 2 | V0 + O1 | T3 | 883680 |
+| `expt_a2` | Task 2 | V1 + O2 | T3, T4 | 883684 |
+| `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
+| `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
+| `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
+| `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
+| `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
+| `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
+| `expt_b3` | Task 4 | V2 + O2 | T3, T4, T7 | 883774 |
+| `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
+| `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
+| `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 
 Query-rewrite optimizations:
 
