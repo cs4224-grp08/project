@@ -1,15 +1,28 @@
 #!/usr/bin/env python3
-"""Count pgbench client aborts for each client count of a benchmark job.
+"""Count aborted pgbench clients per client count of one finished job.
 
-Usage:
+Why: pgbench stops a client for the rest of the run when it hits an error it
+cannot retry. summary.csv does not show this, so a c32 run may really have run
+with fewer than 32 clients. Report these counts next to throughput.
+
+What it gives: one CSV row per client count with the warmup and measured
+pgbench exit codes and the number of aborted clients, split into
+  known  - the Citus commit error "could not commit transaction for shard N on
+           at least one active node": a serialization conflict that Citus
+           reports as non-retryable (SQLSTATE XX000). Expected under load.
+  other  - any other error (lost connection, timeout, SQL bug). Should be 0;
+           otherwise check benchmark.log and the <node>-postgresql.log files.
+
+How to run (on the cluster, after the job finishes; standard library only):
     python3 tools/count_aborts.py expt_b0/slurm-results/job-<id>/benchmark-results
 
-Reads warmup-cN.txt and result-cN.txt (written by the provided run.sh) and
-prints one CSV row per client count. An aborted client stops for the rest of
-the run, so measured TPS then comes from fewer clients than configured.
+Example output (baseline workload B, job 882953):
+    clients,warmup_exit,warmup_known_aborts,warmup_other_aborts,measured_exit,measured_known_aborts,measured_other_aborts
+    1,0,0,0,0,0,0
+    4,2,1,0,2,2,0
 
-"known" aborts are the Citus commit error ("could not commit transaction for
-shard N on at least one active node"); "other" aborts need investigation.
+It reads only warmup-cN.txt and result-cN.txt written by the provided run.sh,
+so it works on any job directory without changing run.sh.
 """
 import csv
 import re

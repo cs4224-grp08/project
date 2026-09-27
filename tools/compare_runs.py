@@ -1,12 +1,33 @@
 #!/usr/bin/env python3
-"""Compare benchmark jobs side by side.
+"""Print side-by-side tables comparing several finished jobs (for the report).
 
-Usage: python3 tools/compare_runs.py LABEL=JOB_DIR [LABEL=JOB_DIR ...]
-  JOB_DIR is an expt_*/slurm-results/job-<id> directory.
+What it gives, one table per metric with one row per client count and one
+column per job (the first job is the reference, usually the baseline):
+  - overall TPS from summary.csv, with pgbench's own TPS in [brackets]
+  - speed-up of overall TPS relative to the first job
+  - p50, p95 and p99 latency (ms)
+  - serialization failures (transactions still failing after --max-tries)
+  - aborted clients in the measured run (via count_aborts.py)
 
-Prints, per client count: overall TPS as reported in summary.csv (successful
-transactions / configured duration) with pgbench's own TPS in brackets, p50/
-p95/p99 latency, serialization failures, and measured-run aborted clients.
+Reading the two TPS figures: summary.csv divides successful transactions by
+the configured 600 s, but pgbench waits for in-flight transactions, so slow
+runs take longer and summary.csv overstates TPS (baseline B at 64 clients:
+2.40 vs 1.53). Report the summary.csv figure as the brief defines it, and
+mention the gap when it is large.
+
+How to run (on the cluster, after the jobs finish; standard library only):
+    python3 tools/compare_runs.py LABEL=JOB_DIR [LABEL=JOB_DIR ...]
+e.g.
+    python3 tools/compare_runs.py \\
+        b0=expt_b0/slurm-results/job-882953 b2=expt_b2/slurm-results/job-883685
+JOB_DIR is an expt_*/slurm-results/job-<id> directory; LABEL is any short name
+used as the column header. count_aborts.py must be in the same directory.
+
+Example output (first table):
+    overall_tps [pgbench tps]
+    clients               b0              b2
+          1      3.54 [ 3.54]    14.17 [14.17]
+          4      3.81 [ 3.80]    19.02 [19.00]
 """
 import csv
 import re
