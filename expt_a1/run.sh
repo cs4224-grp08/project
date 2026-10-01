@@ -441,8 +441,8 @@ PERFORM create_reference_table('merchants');
 IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='customers'::regclass) THEN PERFORM create_distributed_table('customers','merchant_id'); END IF;
 IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='products'::regclass) THEN PERFORM create_distributed_table('products','merchant_id', colocate_with=>'customers'); END IF;
 IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='inventory'::regclass) THEN PERFORM create_distributed_table('inventory','merchant_id', colocate_with=>'customers'); END IF;
-IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='orders'::regclass) THEN PERFORM create_distributed_table('orders','order_id'); END IF;
-IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='order_items'::regclass) THEN PERFORM create_distributed_table('order_items','order_item_id'); END IF;
+IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='orders'::regclass) THEN PERFORM create_distributed_table('orders','merchant_id', colocate_with=>'customers'); END IF;
+IF NOT EXISTS(SELECT 1 FROM pg_dist_partition WHERE logicalrelid='order_items'::regclass) THEN PERFORM create_distributed_table('order_items','merchant_id', colocate_with=>'customers'); END IF;
 END IF; END $$;
 SQL
 }
