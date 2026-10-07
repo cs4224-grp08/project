@@ -32,7 +32,6 @@ die() {
 }
 
 sbatch_options() { :; }
-warn_before_submitting() { :; }
 
 check_name() {
 	[[ "$1" =~ ^expt_[ab][0-9]+$ ]] || die "expected expt_aN or expt_bN, got '$1'"
@@ -127,7 +126,6 @@ cmd_submit() {
 		[[ "$setting" =~ ^[A-Z_][A-Z0-9_]*= ]] || die "expected VAR=value, got '$setting'"
 	done
 	cmd_push "$e"
-	warn_before_submitting "$e"
 	others=$(on_login_node 'squeue -h --me -o %i | wc -l')
 	if ((others > 0)); then
 		echo "note: $others of your jobs are queued or running; jobs on one node share PGPORT" >&2

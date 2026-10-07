@@ -36,10 +36,8 @@ on_login_node() {
 	ssh "${SSH_OPTIONS[@]}" "$LOGIN_NODE" "bash -s --$(printf ' %q' "$@")" <<<"$script"
 }
 
-warn_before_submitting() {
-	if grep -q 'alice_and_bob@u.nus.edu' "$ROOT/$1/run.sh"; then
-		echo "note: $1/run.sh has the placeholder --mail-user" >&2
-	fi
+sbatch_options() {
+	echo "--constraint=xcnc"
 }
 
 cmd_shell() {
