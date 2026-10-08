@@ -59,7 +59,9 @@ fi
 
 step "Checking job $job"
 results="$PROJECT_DIR/$EXPT/slurm-results/job-$job/benchmark-results"
-on_login_node 'cat "$1/summary.csv"' "$results" 2>"$STEP_LOG" | sed 's/^/    /'
+summary=$(on_login_node 'cat "$1/summary.csv"' "$results" 2>"$STEP_LOG")
+sed 's/^/    /' <<<"$summary"
+[[ -z "${GITHUB_STEP_SUMMARY:-}" ]] || sed 's/,/ | /g; s/^/| /; s/$/ |/; 1p; 1s/[^|][^|]*/ --- /g' <<<"$summary" >>"$GITHUB_STEP_SUMMARY"
 
 unexpected_aborts=$(on_login_node 'cat "$1"/warmup-c*.txt "$1"/result-c*.txt' "$results" 2>"$STEP_LOG" |
 	grep '^pgbench: error: client .* aborted' | grep -v "$CITUS_COMMIT_CONFLICT" || true)
