@@ -179,12 +179,71 @@ probe_profile() { # per-statement latency (pgbench -r) for PROFILE_FILES
 	done
 }
 
+# Invariants after a concurrent run (see docs on isolation): does the data stay
+# consistent at the configured isolation level? Two phases on freshly reset data:
+#   conserve  only T1 and T7: total stock must equal initial stock minus the
+#             quantity of every new order item (T7 only moves stock)
+#   mix       all nine transactions with workload B weights
+inv_check() { # name expected actual
+	local ok=FAIL
+	[[ "$2" == "$3" ]] && ok=PASS
+	printf 'CHECK %-34s expected=%-10s actual=%-10s %s\n' "$1" "$2" "$3" "$ok"
+	[[ $ok == PASS ]] || INV_FAILS=$((INV_FAILS + 1))
+}
+q1() { psqlx -A -t -c "$1" | tr -d ' \n'; }
+
+probe_invariants() {
+	load_dimensions
+	INV_FAILS=0
+	local phase init_sum final_sum new_items_qty files
+	echo "== isolation in effect: coordinator=$(q1 'SHOW default_transaction_isolation')"
+	psqlx -A -t -c "SELECT result FROM run_command_on_workers('SHOW default_transaction_isolation');" | sort | uniq -c
+	for phase in conserve mix; do
+		echo "== phase $phase (clients=${INV_CLIENTS:-16}, ${INV_SECONDS:-90}s, tries=$PGBENCH_MAX_TRIES)"
+		reset_benchmark_database "invariants $phase" >>"$OUT/resets.log" 2>&1
+		load_dimensions >/dev/null
+		init_sum=$(q1 "SELECT sum(quantity) FROM inventory;")
+		if [[ $phase == conserve ]]; then
+			files=(-f "$BASE_TX/T1_place_order.sql@1" -f "$BASE_TX/T7_inventory_transfer.sql@1")
+		else
+			files=(-f "$BASE_TX/T1_place_order.sql@$T1_WEIGHT" -f "$BASE_TX/T2_update_inventory.sql@$T2_WEIGHT"
+				-f "$BASE_TX/T3_order_history.sql@$T3_WEIGHT" -f "$BASE_TX/T4_product_lookup.sql@$T4_WEIGHT"
+				-f "$BASE_TX/T5_update_order_status.sql@$T5_WEIGHT" -f "$BASE_TX/T6_global_sales.sql@$T6_WEIGHT"
+				-f "$BASE_TX/T7_inventory_transfer.sql@$T7_WEIGHT" -f "$BASE_TX/T8_update_customer.sql@$T8_WEIGHT"
+				-f "$BASE_TX/T9_update_product.sql@$T9_WEIGHT")
+		fi
+		"$PGBENCH" -n -c "${INV_CLIENTS:-16}" -j 4 -T "${INV_SECONDS:-90}" -M simple --max-tries="$PGBENCH_MAX_TRIES" \
+			--random-seed=7 -D DEBUG_MODE=0 "${defs[@]}" "${files[@]}" \
+			-h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" >"$OUT/pgbench-inv-$phase.txt" 2>&1 || true
+		echo "  pgbench: $(grep -m1 'actually processed' "$OUT/pgbench-inv-$phase.txt"); $(grep -m1 'failed transactions' "$OUT/pgbench-inv-$phase.txt"); aborted clients: $(grep -c 'aborted in command' "$OUT/pgbench-inv-$phase.txt")"
+		echo "  prepared transactions before recovery: $(q1 "SELECT (SELECT count(*) FROM pg_prepared_xacts) + (SELECT coalesce(sum(result::int),0) FROM run_command_on_workers('SELECT count(*) FROM pg_prepared_xacts'));")"
+		psqlx -A -t -c "SELECT recover_prepared_transactions();" >/dev/null
+		sleep 5
+		local init=$INITIAL_NUM_ORDERS
+		inv_check "prepared transactions left" 0 "$(q1 "SELECT (SELECT count(*) FROM pg_prepared_xacts) + (SELECT coalesce(sum(result::int),0) FROM run_command_on_workers('SELECT count(*) FROM pg_prepared_xacts'));")"
+		inv_check "negative stock rows" 0 "$(q1 "SELECT count(*) FROM inventory WHERE quantity < 0;")"
+		inv_check "new orders without items" 0 "$(q1 "SELECT count(*) FROM orders WHERE order_id > $init AND order_id NOT IN (SELECT order_id FROM order_items WHERE order_id > $init);")"
+		inv_check "new items without order" 0 "$(q1 "SELECT count(*) FROM order_items WHERE order_id > $init AND order_id NOT IN (SELECT order_id FROM orders WHERE order_id > $init);")"
+		inv_check "order total <> sum(qty*price)" 0 "$(q1 "SELECT count(*) FROM (SELECT order_id, total_amount FROM orders WHERE order_id > $init) o JOIN (SELECT order_id, sum(quantity * unit_price) AS s FROM order_items WHERE order_id > $init GROUP BY order_id) i ON i.order_id = o.order_id WHERE o.total_amount <> i.s;")"
+		psqlx -A -t -c "SELECT 'sample total vs items:', o.order_id, o.total_amount, i.s, i.n FROM (SELECT order_id, total_amount FROM orders WHERE order_id > $init) o JOIN (SELECT order_id, sum(quantity * unit_price) AS s, count(*) AS n FROM order_items WHERE order_id > $init GROUP BY order_id) i ON i.order_id = o.order_id ORDER BY o.order_id LIMIT 3;"
+		inv_check "item merchant <> order merchant" 0 "$(q1 "SELECT count(*) FROM orders o JOIN order_items oi ON oi.order_id = o.order_id WHERE o.order_id > $init AND oi.merchant_id <> o.merchant_id;")"
+		if [[ $phase == conserve ]]; then
+			new_items_qty=$(q1 "SELECT coalesce(sum(quantity),0) FROM order_items WHERE order_id > $init;")
+			final_sum=$(q1 "SELECT sum(quantity) FROM inventory;")
+			echo "  initial stock $init_sum, sold via new items $new_items_qty, new orders $(q1 "SELECT count(*) FROM orders WHERE order_id > $init;")"
+			inv_check "stock conservation (initial-sold)" "$((init_sum - new_items_qty))" "$final_sum"
+		fi
+	done
+	((INV_FAILS == 0)) && echo "INVARIANTS: ALL PASS" || echo "INVARIANTS: $INV_FAILS FAILED"
+}
+
 {
 	echo "probe mode=${PROBE_MODE:-explain} scale=$SCALE started $(date '+%F %T')"
 	case "${PROBE_MODE:-explain}" in
 	explain) probe_explain ;;
 	equiv) probe_equiv ;;
 	profile) probe_profile ;;
+	invariants) probe_invariants ;;
 	*) echo "unknown PROBE_MODE" ;;
 	esac
 	echo "probe finished $(date '+%F %T')"

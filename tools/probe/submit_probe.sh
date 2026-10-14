@@ -10,4 +10,4 @@ sed "s|^run_benchmark &>\"\${BENCHMARK_LOG_FILE}\"$|source \"$root/tools/probe/p
 grep -q "tools/probe/probe.sh" "$script" || { echo "failed to patch run.sh" >&2; exit 1; }
 cd "$work"
 sbatch --parsable --mail-type=NONE --job-name="probe-$mode" --output="probe-$mode-%j.out" --error="probe-$mode-%j.err" \
-	--export="ALL,PROBE_MODE=$mode,SCALE=$scale,PROFILE_FILES=${PROFILE_FILES:-},SCRIPT_DIR=$root/expt_b0,RESULT_ROOT=$work/results" "$@" "$script"
+	--export="ALL,PROBE_MODE=$mode,SCALE=$scale,PROFILE_FILES=${PROFILE_FILES:-},PG_ISOLATION_LEVEL=${ISO:-serializable},INV_SECONDS=${INV_SECONDS:-90},INV_CLIENTS=${INV_CLIENTS:-16},SCRIPT_DIR=$root/${TX_EXPT:-expt_b0},RESULT_ROOT=$work/results" "$@" "$script"
