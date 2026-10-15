@@ -20,6 +20,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
+| `expt_a6` | Task 1 (extra) | `expt_a0` at read committed | none (baseline) | 946081 |
+| `expt_a7` | Task 2 (extra) | `expt_a5` at read committed | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 946082 |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -27,6 +29,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
+| `expt_b7` | Task 3 (extra) | `expt_b0` at read committed | none (baseline) | 946083 |
+| `expt_b8` | Task 4 (extra) | `expt_b5` at read committed | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 946084 |
 
 Query-rewrite optimizations:
 
@@ -44,36 +48,19 @@ Query-rewrite optimizations:
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
 
-### Read committed variants
-
-`expt_a20`-`a25` and `expt_b20`-`b26` repeat `expt_a0`-`a5` and `expt_b0`-`b6`
-(same number + 20) at **read committed**. Each is a copy of its counterpart whose
-`run.sh` differs in one line: the default of `PG_ISOLATION_LEVEL` is `read
-committed` (the provided scripts use `serializable`). Transactions are
-identical, so `diff -r expt_a5 expt_a25` shows only that line. All other
-settings match the serializable runs (scale 1, clients 1-64, 600 s measured).
-
-Why: Citus does not enforce serializable isolation across nodes, and at read
-committed the runs had no serialization failures and no aborted clients. Every
-write to stock is a single-statement relative update, so the anomalies read
-committed allows cannot break the stock, order-total or item invariants (checked
-per transaction and with an invariant check after concurrent runs).
-
-| Folder | Counterpart | Reported job | Folder | Counterpart | Reported job |
-| --- | --- | --- | --- | --- | --- |
-| `expt_a20` | `expt_a0` | 946081 | `expt_b20` | `expt_b0` | 946083 |
-| `expt_a21` | `expt_a1` | 946233 | `expt_b21` | `expt_b1` | 946240 |
-| `expt_a22` | `expt_a2` | 946236 | `expt_b22` | `expt_b2` | 946241 |
-| `expt_a23` | `expt_a3` | 946238 | `expt_b23` | `expt_b3` | 946237 |
-| `expt_a24` | `expt_a4` | 946234 | `expt_b24` | `expt_b4` | 946239 |
-| `expt_a25` | `expt_a5` | 946082 | `expt_b25` | `expt_b5` | 946084 |
-| | | | `expt_b26` | `expt_b6` | 946235 |
+`expt_a6`, `expt_a7`, `expt_b7` and `expt_b8` repeat `expt_a0`, `expt_a5`,
+`expt_b0` and `expt_b5` at **read committed**. Each differs from its counterpart
+only in the default of `PG_ISOLATION_LEVEL` in `run.sh` (`read committed`
+instead of `serializable`); the transactions are identical, so
+`diff -r expt_a5 expt_a7` shows just that line. Citus does not enforce
+serializable isolation across nodes; at read committed these runs had no
+serialization failures and no aborted clients, with no throughput gain.
 
 ## Conventions for new experiments
 
 1. Copy the folder you build on, change `run.sh` and/or `transactions/`, and
-   add a row above. Numbers already used: `a0`-`a5`, `b0`-`b6` and `a20`-`a25`,
-   `b20`-`b26`; take the next free number and check open branches first.
+   add a row above. Numbers already used: `a0`-`a7`, `b0`-`b8`; take the next free
+   number and check open branches first.
 2. Submit from inside the folder so outputs land in the folder:
    `cd expt_wN && sbatch --constraint=xcnc run.sh`. Keep `RESULT_ROOT` at its
    default. All reported runs so far used `xcnc` nodes.
