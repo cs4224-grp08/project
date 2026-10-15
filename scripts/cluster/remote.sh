@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/commands.sh"
 
 LOGIN_NODE=${CLUSTER_HOST:-cs5424}
 POLL_SECONDS=${POLL_SECONDS:-300}
-PROJECT_DIR=${PROJECT_DIR:-runs/$(git -C "$ROOT" rev-parse --abbrev-ref HEAD)}
+PROJECT_DIR=${PROJECT_DIR:-runs/$(git -C "$ROOT" symbolic-ref --short -q HEAD || git -C "$ROOT" rev-parse --short HEAD)}
 SSH_OPTIONS=(-o ControlMaster=auto -o "ControlPath=$HOME/.ssh/cm-%C" -o ControlPersist=15m -o ServerAliveInterval=30)
 RSYNC_TRANSPORT="ssh ${SSH_OPTIONS[*]}"
 

@@ -6,7 +6,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/commands.sh"
 LOCAL_CLUSTER=${LOCAL_CLUSTER:-cs5424-local}
 LOGIN_NODE="$LOCAL_CLUSTER-xlogin"
 POLL_SECONDS=${POLL_SECONDS:-5}
-PROJECT_DIR=${PROJECT_DIR:-citus_project}
+PROJECT_DIR=citus_project
 IMAGE=citus-slurm-cluster
 ACCOUNT=cs08
 ACCOUNT_HOME=/home/stuproj/$ACCOUNT
@@ -27,7 +27,6 @@ EOF
 Environment:
   LOCAL_CLUSTER                  name of the Local Cluster (cs5424-local)
   POLL_SECONDS                   wait's interval in seconds (5)
-  PROJECT_DIR                    project folder (citus_project)
 EOF
 	shared_environment_usage
 	exit 2
@@ -40,7 +39,7 @@ on_login_node() {
 }
 
 sbatch_options() {
-	echo "--nodes=$(on_login_node 'sinfo -h -o %D') --exclude="
+	echo "--nodes=$(on_login_node 'sinfo -h -N | wc -l') --exclude="
 }
 
 is_running() {

@@ -98,6 +98,9 @@ git_revision_of() {
 		echo "$changes"
 		echo
 		git -C "$ROOT" diff HEAD "${code[@]}"
+		git -C "$ROOT" ls-files --others --exclude-standard "${code[@]}" | while read -r file; do
+			git -C "$ROOT" diff --no-index /dev/null "$file" || true
+		done
 	fi
 }
 
@@ -133,8 +136,8 @@ cmd_submit() {
 	sbatch_output=$(sbatch_run_sh "$e" "" "$@")
 	JOB=${sbatch_output%%;*}
 	check_job "$JOB"
-	record_git_revision "$e" "$JOB"
 	echo "Submitted $e as job $JOB"
+	record_git_revision "$e" "$JOB"
 }
 
 cmd_status() {
@@ -142,7 +145,7 @@ cmd_status() {
 }
 
 job_state() {
-	on_login_node 'squeue -h -j "$1" -o %T 2>/dev/null || true' "$1"
+	on_login_node 'state=$(squeue -h -j "$1" -o %T 2>&1) && echo "$state" || [[ "$state" == *"Invalid job id"* ]]' "$1"
 }
 
 cmd_wait() {
@@ -157,7 +160,7 @@ cmd_wait() {
 				last=$state
 			fi
 		else
-			echo "$(date '+%H:%M') can't reach $LOGIN_NODE; retrying" >&2
+			echo "$(date '+%H:%M') can't check job $job; retrying" >&2
 		fi
 		sleep "$POLL_SECONDS"
 	done
@@ -187,6 +190,7 @@ cmd_run() {
 	cmd_wait "$JOB"
 	cmd_pull "$1"
 	cmd_tail "$1" "$JOB"
+	[[ -f "$ROOT/$1/slurm-results/job-$JOB/benchmark-results/summary.csv" ]] || die "job $JOB has no summary.csv"
 }
 
 cmd_tail() {

@@ -100,6 +100,8 @@ Pulling <expt> results from cs5424-local-xlogin:citus_project/<expt>
 
 Results are in `<expt>/slurm-results/job-<job>/`.
 
+After changing the image or `install_citus_slurm.sh`, run `scripts/cluster/local.sh build`.
+
 ### GitHub Cluster
 
 The Local Cluster, in GitHub Actions, for each experiment in each pull request. Useful for
