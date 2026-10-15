@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+env:
+  DOCKER_BUILD_SUMMARY: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
