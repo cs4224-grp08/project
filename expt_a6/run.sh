@@ -11,9 +11,9 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-
+#SBATCH --nodelist=xcnc[2-6]
 # IMPORTANT - replace this with your email
-#SBATCH --mail-user=e1122441@u.nus.edu
+#SBATCH --mail-user=e0969283@u.nus.edu
 
 set -euo pipefail
 
@@ -285,6 +285,7 @@ cat >> "$PGDATA/postgresql.conf" <<CONF
 listen_addresses='*'
 port=$PGPORT
 shared_preload_libraries='citus'
+output_plugin_libraries='pgoutput, test_decoding, citus'
 max_connections=$PG_MAX_CONNECTIONS
 shared_buffers='$PG_SHARED_BUFFERS'
 work_mem='$PG_WORK_MEM'
@@ -1400,7 +1401,14 @@ log_phase_metrics() {
         ' "$input" >"$samples" 2>"${samples}.failures"
         failures="$(tail -n 1 "${samples}.failures")"
         IFS=',' read -r total avg _ p95 p99 _ _ <<<"$(calculate_latency_metrics "$samples")"
-        tps="$(awk -v n="$total" -v d="$duration" 'BEGIN { printf "%.3f", d>0?n/d:0 }')"
+        tps="$(awk -v n="$total" -v d="$duration" '
+          BEGIN {
+            if (d > 0)
+              printf "%.3f", n / d
+            else
+              printf "0.000"
+          }
+        ')"
         workload_log "phase_metrics" "$phase" "" "" "" "" "" "$((duration*1000))" "$tps" "$avg" "$p95" "$p99" "$failures" "complete" "successful_transactions=$total"
         rm -f "$samples" "${samples}.failures"
 }
@@ -1548,6 +1556,7 @@ PG_MAX_WAL_SIZE="${PG_MAX_WAL_SIZE}"
 PG_MIN_WAL_SIZE="${PG_MIN_WAL_SIZE}"
 PG_CHECKPOINT_TIMEOUT="${PG_CHECKPOINT_TIMEOUT}"
 PG_CHECKPOINT_COMPLETION_TARGET="${PG_CHECKPOINT_COMPLETION_TARGET}"
+output_plugin_libraries='pgoutput, test_decoding, citus'
 wal_level=logical
 max_wal_senders=32
 max_replication_slots=32
