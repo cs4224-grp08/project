@@ -1,8 +1,8 @@
-# CS4224/CS5424 Citus project: team 08
+# CS4224/CS5424 Citus Project: Team 08
 
 Each `expt_wN` folder is one experiment for workload `w` (`a` or `b`). It holds
-`run.sh`, the nine transactions in `transactions/`, and, on the cluster, the
-outputs `slurm-results/job-<id>/` and `citus-<id>.out` / `citus-<id>.err`.
+`run.sh`, the nine transactions in `transactions/`, and, after a run, the
+outputs `slurm-results/job-<job>/` and `citus-<job>.out` / `citus-<job>.err`.
 
 ## Experiments
 
@@ -48,31 +48,132 @@ Query-rewrite optimizations:
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
 
-`expt_a6`, `expt_a7`, `expt_b7` and `expt_b8` repeat `expt_a0`, `expt_a5`,
-`expt_b0` and `expt_b5` at **read committed**. Each differs from its counterpart
-only in the default of `PG_ISOLATION_LEVEL` in `run.sh` (`read committed`
-instead of `serializable`); the transactions are identical, so
-`diff -r expt_a5 expt_a7` shows just that line. Citus does not enforce
-serializable isolation across nodes; at read committed these runs had no
-serialization failures and no aborted clients, with no throughput gain.
+## Developer Workflow
 
-## Conventions for new experiments
+Develop and test on the Local Cluster; benchmark on the Remote Cluster.
 
-1. Copy the folder you build on, change `run.sh` and/or `transactions/`, and
-   add a row above. Numbers already used: `a0`-`a7`, `b0`-`b8`; take the next free
-   number and check open branches first.
-2. Submit from inside the folder so outputs land in the folder:
-   `cd expt_wN && sbatch --constraint=xcnc run.sh`. Keep `RESULT_ROOT` at its
-   default. All reported runs so far used `xcnc` nodes.
-3. Keep one reported job per folder; move reruns and failed attempts elsewhere
-   before packaging.
-4. Slurm outputs are not committed to Git. They stay in each folder on the
-   cluster and are copied into `citus_project_team_08/` when packaging.
+| | Before | After |
+| --- | --- | --- |
+| Testing a change | Hours on the Remote Cluster | Minutes on the Local Cluster |
+| Finding bugs | After a Remote Cluster run | Before a Remote Cluster run |
+| Workspace | One shared home directory | Each developer's own laptop |
+| Commit author | `cs4224-service` | Each developer |
+| Results | Not associated with git commit | Associated with git commit |
 
-## Tools (not part of the submission)
+### Overview
 
-- `tools/compare_runs.py label=<job dir> ...`: side-by-side TPS (as in
-  `summary.csv` and as reported by pgbench), p50/p95/p99 latency,
-  serialization failures and aborted clients per client count.
-- `tools/count_aborts.py <job dir>/benchmark-results`: aborted pgbench clients
-  per client count, split into the known Citus commit error and other errors.
+1. Copy the experiment you build on to the next free `expt_wN`, and add it to the
+   [Experiments](#experiments) table. Keep `RESULT_ROOT` at its default.
+2. Test each change on the [Local Cluster](#local-cluster) until it runs.
+3. Open a pull request; the [GitHub Cluster](#github-cluster) runs each experiment.
+4. Once each experiment passes, benchmark on the [Remote Cluster](#remote-cluster).
+5. [Compare runs](#comparing-runs) for the report.
+6. Copy each experiment's reported job into `citus_project_team_08/` for the submission.
+
+### Setup
+
+1. Install `bash`, `git`, `rsync`, `python3` and Docker.
+2. In `~/.ssh/config`, add `cs5424` to the `Host` line you use for the SoC cluster as `cs08`,
+   e.g. `Host soc cs5424`.
+
+### Local Cluster
+
+The SoC compute cluster, in Docker. Useful for testing changes.
+
+Usage:
+
+```
+scripts/cluster/local.sh up [nodes]
+scripts/cluster/local.sh run <expt> [VAR=value ...]
+scripts/cluster/local.sh down
+```
+
+Output:
+
+```
+Pushing <expt> to cs5424-local-xlogin:citus_project/<expt>
+Submitted <expt> as job <job>
+<time> job <job>: RUNNING
+Job <job> is no longer queued
+Pulling <expt> results from cs5424-local-xlogin:citus_project/<expt>
+==> citus-<job>.out <==
+…
+==> slurm-results/job-<job>/benchmark.log <==
+…
+```
+
+Results are in `<expt>/slurm-results/job-<job>/`.
+
+After changing the image or `install_citus_slurm.sh`, run `scripts/cluster/local.sh build`.
+
+### GitHub Cluster
+
+The Local Cluster, in GitHub Actions, for each experiment in each pull request. Useful for
+catching bugs before benchmarking.
+
+Usage:
+
+```
+scripts/smoke-test-experiment.sh <expt>
+```
+
+Output:
+
+```
+==> Starting a Local Cluster with <nodes> nodes
+==> Pushing <expt>
+==> Running <expt>
+==> Checking job <job>
+    clients,successful_transactions,failed_log_records,overall_tps,…
+    <clients>,<transactions>,<failed>,<tps>,…
+PASS <expt>
+```
+
+### Remote Cluster
+
+The SoC compute cluster. Useful for benchmarking.
+
+Usage:
+
+```
+scripts/cluster/remote.sh run <expt> [VAR=value ...]
+scripts/cluster/remote.sh status
+scripts/cluster/remote.sh tail <expt> [job]
+```
+
+Output:
+
+```
+Pushing <expt> to cs5424:runs/<git branch>/<expt>
+Submitted <expt> as job <job>
+<time> job <job>: PENDING
+<time> job <job>: RUNNING
+<job>  COMPLETED  0:0  <elapsed>
+Job <job> is no longer queued
+Pulling <expt> results from cs5424:runs/<git branch>/<expt>
+==> citus-<job>.out <==
+…
+==> slurm-results/job-<job>/benchmark.log <==
+…
+```
+
+Results are in `<expt>/slurm-results/job-<job>/`.
+
+### Comparing Runs
+
+Side-by-side tables of finished jobs. Useful for comparing benchmarks.
+
+Usage:
+
+```
+scripts/compare-runs.py <expt>[/job-<job>] ...
+```
+
+Output:
+
+```
+overall_tps [pgbench tps]
+clients   <expt>:<job>    <expt>:<job>
+<clients> <tps> [<tps>]   <tps> [<tps>]
+…
+```
