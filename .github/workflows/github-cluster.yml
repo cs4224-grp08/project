@@ -1,0 +1,54 @@
+name: GitHub Cluster
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  DOCKER_BUILD_SUMMARY: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: scripts/cluster/image/Dockerfile
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  collect:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      experiments: ${{ steps.collect.outputs.experiments }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: collect
+        run: echo "experiments=$(jq -cn '$ARGS.positional' --args expt_*)" >> "$GITHUB_OUTPUT"
+
+  smoke-test:
+    needs: [build, collect]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        experiment: ${{ fromJSON(needs.collect.outputs.experiments) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: scripts/cluster/image/Dockerfile
+          tags: citus-slurm-cluster
+          load: true
+          cache-from: type=gha
+      - run: scripts/smoke-test-experiment.sh "$EXPERIMENT"
+        env:
+          EXPERIMENT: ${{ matrix.experiment }}
