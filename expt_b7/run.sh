@@ -11,7 +11,7 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-
+#SBATCH --nodelist=xcnc[2-6]
 # IMPORTANT - replace this with your email
 #SBATCH --mail-user=e1122441@u.nus.edu
 
@@ -21,7 +21,7 @@ set -euo pipefail
 TEAM_ID=${TEAM_ID:-8}
 
 ################# PostgreSQL environment variables
-PGPORT=$((10#${TEAM_ID} + 5432))
+PGPORT=$((10#${TEAM_ID} + 5433))
 PGUSER="${SLURM_JOB_USER:-${USER}}"
 
 DATA_ROOT=/tmp/${PGUSER}/citus-${SLURM_JOB_ID}
@@ -57,7 +57,7 @@ PG_SHARED_BUFFERS="${PG_SHARED_BUFFERS:-1GB}"
 PG_WORK_MEM="${PG_WORK_MEM:-32MB}"
 PG_MAINTENANCE_WORK_MEM="${PG_MAINTENANCE_WORK_MEM:-256MB}"
 PG_MAX_CONNECTIONS="${PG_MAX_CONNECTIONS:-1000}"
-PG_ISOLATION_LEVEL=${PG_ISOLATION_LEVEL:-serializable}
+PG_ISOLATION_LEVEL=${PG_ISOLATION_LEVEL:-read committed}
 
 PG_MAX_WAL_SIZE="${PG_MAX_WAL_SIZE:-16GB}"
 PG_MIN_WAL_SIZE="${PG_MIN_WAL_SIZE:-2GB}"
@@ -97,7 +97,7 @@ RESTART_SERVERS_BETWEEN_CLIENT_COUNTS="${RESTART_SERVERS_BETWEEN_CLIENT_COUNTS:-
 SERVER_RESTART_TIMEOUT="${SERVER_RESTART_TIMEOUT:-60}"
 
 # Weights for transaction workloads A & B
-WORKLOAD="${WORKLOAD:-A}"
+WORKLOAD="${WORKLOAD:-B}"
 if [[ "${WORKLOAD}" == "A" ]]; then
 	# Transaction weights for workload A
 	T1_WEIGHT="${T1_WEIGHT:-36}"
@@ -432,7 +432,7 @@ CREATE INDEX IF NOT EXISTS idx_products_merchant_id ON products(merchant_id);
 CREATE INDEX IF NOT EXISTS idx_inventory_merchant_id ON inventory(merchant_id);
 CREATE INDEX IF NOT EXISTS idx_orders_merchant_id ON orders(merchant_id);
 CREATE INDEX IF NOT EXISTS idx_order_items_merchant_id ON order_items(merchant_id);
-CREATE INDEX IF NOT EXISTS idx_orders_merchants_customer_created ON orders(merchant_id, customer_id, created_at DESC);
+CREATE INDEX idx_inventory_product_id ON inventory(product_id);
 SQL
 
 	psqlx <<'SQL'
