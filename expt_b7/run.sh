@@ -11,7 +11,7 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-#SBATCH --nodelist=xcnc[2-6]
+#SBATCH --nodelist=xcnc[34-38]
 # IMPORTANT - replace this with your email
 #SBATCH --mail-user=e1122441@u.nus.edu
 

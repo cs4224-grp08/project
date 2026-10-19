@@ -20,6 +20,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
+| `expt_a6` |   -    | V0 + O6 | - | 932991 |
+| `expt_a6` |   -    | V0 + O6 + O8| - | 977150 |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -27,8 +29,10 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
+| `expt_b7` |   -    | V0 + O7 | - | 894924 |
+| `expt_b7` |   -    | V0 + O7 + O8 | - | 978634 |
 
-Query-rewrite optimizations:
+Optimizations:
 
 - O1 (T3): fetch the customer's 20 most recent orders first, then join only
   their items, filtered by merchant. Avoids the repartition join.
@@ -40,6 +44,9 @@ Query-rewrite optimizations:
   unchanged.
 - O4 (T1): check, reserve and insert all items with one statement each.
 - O5: single-statement transactions (T2-T6, T8, T9) run in autocommit.
+- O6: Index on orders by (merchant_id, customer_id, created_at DESC) to improve T3 selection query
+- O7: Index on inventory by product_id to improve T7 selection queries
+- O8: Run workload on `read committed` isolation level
 
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
