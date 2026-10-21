@@ -22,6 +22,10 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
 | `expt_a99` | Task 1 (extra) | Serializable baseline, workload A | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990809 |
 | `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_a101` | Task 2 | S0 + O1 (placeholder number) | T3 (vs `expt_a99`) | in progress |
+| `expt_a102` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | in progress |
+| `expt_a103` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | in progress |
+| `expt_a104` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | in progress |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -31,6 +35,10 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
 | `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_b101` | Task 4 | S0 + O1 (placeholder number) | T3 (vs `expt_b99`) | in progress |
+| `expt_b102` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | in progress |
+| `expt_b103` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | in progress |
+| `expt_b104` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | in progress |
 
 Query-rewrite optimizations:
 
@@ -102,6 +110,25 @@ The barrier can't leave `G` held: T6 is read-only at REPEATABLE READ and holds
 no other lock, so nothing between taking and releasing `G` can fail with an
 error pgbench retries. Any other failure aborts the client, and closing its
 connection releases `G`.
+
+### Serializable optimizations
+
+`expt_a101`-`a104` and `expt_b101`-`b104` apply our query rewrites on top of the
+serializable baseline, one per step (S0 is `expt_a99`/`expt_b99`). Each
+rewritten transaction keeps the baseline's locks, because no rewrite changes
+which merchants' rows a transaction touches.
+
+- Kept: O1 (T3), O2 (T4), O3 (T7) and O4 (T1). With locks, O3 no longer avoids
+  serialization conflicts (there are none), but it still shortens T7 and so the
+  time T7 holds its two merchant locks.
+- Dropped: O5 (autocommit). A lock and its statement must run in one
+  transaction.
+- Dropped: O3a. It only showed where serialization conflicts came from.
+- Not added: stored procedures. pgbench runs on the coordinator node, so they
+  would save only local round trips. A coordinator-side procedure still opens a
+  transaction on each worker. Running the procedure on the worker (Citus
+  function delegation) would move the locks off the coordinator, breaking the
+  protocol.
 
 ### Rules when building on these folders
 
