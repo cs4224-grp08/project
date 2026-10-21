@@ -20,7 +20,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
-| `expt_a99` | Task 1 (extra) | Serializable baseline, workload A (placeholder number) | T1-T9 (locks only) | in progress |
+| `expt_a99` | Task 1 (extra) | Serializable baseline, workload A (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -28,7 +28,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
-| `expt_b99` | Task 3 (extra) | Serializable baseline, workload B (placeholder number) | T1-T9 (locks only) | in progress |
+| `expt_b99` | Task 3 (extra) | Serializable baseline, workload B (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
 
 Query-rewrite optimizations:
 
@@ -53,7 +53,8 @@ snapshot and doesn't detect conflicts that span nodes. So the provided baseline
 isn't serializable across the cluster.
 
 `expt_a99` and `expt_b99` (placeholder numbers) are the provided baseline
-(same schema, distribution and SQL) made serializable with strict two-phase
+(same schema and distribution; the SQL gains only the locks, T5's merchant
+lookup and T6's snapshot barrier) made serializable with strict two-phase
 locking on the coordinator. Build optimizations on these folders so every
 design we report stays serializable. The full argument is in the
 Serializability tab of the team plan doc.
@@ -66,7 +67,7 @@ Serializability tab of the team plan doc.
   - `(1, 0)`: `G`, the orders that T6 reads across all merchants.
 - Each transaction takes all its locks in its first statement after `BEGIN`,
   before touching any table, and holds them until `COMMIT`
-  (`pg_advisory_xact_lock`).
+  (`pg_advisory_xact_lock`). T6 is the one exception (snapshot barrier below).
 - A lock is shared (`pg_advisory_xact_lock_shared`) if the transaction only
   reads that merchant's rows, and exclusive if it writes any of them.
 - Locks are taken in a fixed order: `G` first, then merchants ascending (`least`
@@ -85,7 +86,7 @@ Serializability tab of the team plan doc.
 | T3, T4 | `(2, m)` shared |
 | T5 | `(2, m)` exclusive; `m` is first read from `orders` (`merchant_id` never changes) |
 | T6 | `G` exclusive, only while opening its snapshots (snapshot barrier) |
-| T7 | `(2, m1)` and `(2, m2)` exclusive, ascending; a product's merchant is `1 + (product_id - 1) % NUM_MERCHANTS`, as T9 uses |
+| T7 | `(2, m1)` and `(2, m2)` exclusive, ascending (one lock if both products have the same merchant); a product's merchant is `1 + (product_id - 1) % NUM_MERCHANTS`, as T9 uses |
 
 **T6 snapshot barrier.** T6 reads every merchant's recent orders, and only T1
 writes what it reads. (T5 changes `order_status`, which T6 doesn't read.) T6
@@ -93,14 +94,26 @@ runs at REPEATABLE READ over one connection per worker. It holds `G` only while
 one statement opens a snapshot on every worker, then releases `G` and runs its
 query on those snapshots. So T1 waits only for the barrier, not for T6's whole
 query.
+The barrier can't leave `G` held: T6 is read-only at REPEATABLE READ and holds
+no other lock, so nothing between taking and releasing `G` can fail with an
+error pgbench retries. Any other failure aborts the client, and closing its
+connection releases `G`.
 
 ### Rules when building on these folders
 
-1. Every transaction, read-only ones included, keeps its lock statement as the
-   first statement after `BEGIN`. If a rewrite changes which merchants'
-   rows a transaction reads or writes, update its locks by the rules above.
-2. No autocommit: a transaction's lock and its statements must run in one
-   transaction (`BEGIN … COMMIT`, or a stored procedure that does both).
+1. Every transaction except T6, read-only ones included, keeps its lock
+   statement as the first statement after `BEGIN`. If a rewrite changes which
+   merchants' rows a transaction reads or writes, update its locks by the rules
+   above.
+   - T5 may read its order's `merchant_id` before `BEGIN`, because
+     `merchant_id` never changes.
+   - T6 keeps its barrier in this order: `BEGIN ISOLATION LEVEL REPEATABLE
+     READ`, the two `SET LOCAL` settings (one connection per worker),
+     `pg_advisory_unlock_all()`, `pg_advisory_lock(1, 0)`, the statement that
+     opens a snapshot on every worker, then `pg_advisory_unlock(1, 0)`.
+2. No autocommit, except T5's merchant lookup: a transaction's lock and its
+   statements must run in one transaction (`BEGIN … COMMIT`, or a stored
+   procedure that does both).
 3. Never change a row's `merchant_id`. Every row of a new table must belong to
    one merchant, unless nothing writes the table after loading.
 4. Keep `PG_ISOLATION_LEVEL=read committed` in `run.sh`.
