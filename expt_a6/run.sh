@@ -11,7 +11,6 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-#SBATCH --nodelist=xcnc[2-6]
 # IMPORTANT - replace this with your email
 #SBATCH --mail-user=e0969283@u.nus.edu
 
@@ -92,7 +91,10 @@ BASELINE_DURATION="${BASELINE_DURATION:-120}"
 POST_ADAPT_DURATION="${POST_ADAPT_DURATION:-120}"
 HOT_MERCHANT_LIMIT="${HOT_MERCHANT_LIMIT:-4}"
 ADAPTATION_TIMEOUT="${ADAPTATION_TIMEOUT:-300}"
-SHARD_TRANSFER_MODE="${SHARD_TRANSFER_MODE:-auto}"
+# Avoid the logical-replication apply conflicts seen during online shard splits.
+# This blocks affected writes during isolation and movement; override with auto
+# only when explicitly testing the online transfer path.
+SHARD_TRANSFER_MODE="${SHARD_TRANSFER_MODE:-block_writes}"
 
 PROGRESS_INTERVAL="${PROGRESS_INTERVAL:-10}"
 LOG_SAMPLE_RATE="${LOG_SAMPLE_RATE:-1.0}" # must not change this value
@@ -1290,7 +1292,7 @@ SELECT merchant_id, order_count, rank FROM ranked ORDER BY rank;")" || {
                 fi
 
                 operation_start="$(now_epoch_ms)"
-                workload_log "isolation_start" "migration" "$merchant" "$count" "" "" "" "" "" "" "" "" "" "started" "cascade=all_colocated_tables"
+                workload_log "isolation_start" "migration" "$merchant" "$count" "" "" "" "" "" "" "" "" "" "started" "cascade=all_colocated_tables mode=$SHARD_TRANSFER_MODE"
                 remaining_ms=$((remaining * 1000))
                 output="$(PGOPTIONS="-c statement_timeout=$remaining_ms" psqlx -A -t -c "SELECT isolate_tenant_to_new_shard('customers', $merchant, 'CASCADE', '$SHARD_TRANSFER_MODE');")" || {
                         operation_end="$(now_epoch_ms)"

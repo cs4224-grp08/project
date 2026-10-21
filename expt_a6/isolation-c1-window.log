@@ -1,0 +1,1241 @@
+
+===== slurm-results/job-933014/xcnc2-postgresql.log =====
+2026-10-11 20:57:30.745 +08 [521185] LOG:  performing non-blocking isolate_tenant_to_new_shard 
+2026-10-11 20:57:30.745 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 20:57:30.766 +08 [521185] LOG:  creating child shards for isolate_tenant_to_new_shard
+2026-10-11 20:57:30.766 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 20:57:30.960 +08 [521185] LOG:  creating replication artifacts (publications, replication slots, subscriptions for isolate_tenant_to_new_shard
+2026-10-11 20:57:30.960 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 20:57:31.394 +08 [521185] LOG:  performing copy for isolate_tenant_to_new_shard
+2026-10-11 20:57:31.394 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 20:57:36.279 +08 [521185] LOG:  replicating changes for isolate_tenant_to_new_shard
+2026-10-11 20:57:36.279 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 20:57:46.332 +08 [521185] LOG:  The LSN of the target subscriptions on node xcnc3:5440 has increased from 0/0 to 0/7BF77858 at 2026-10-11 20:57:46.332037+08 where the source LSN is 0/8464FBD0 
+2026-10-11 20:57:46.332 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+2026-10-11 21:02:30.727 +08 [521185] ERROR:  canceling statement due to statement timeout
+2026-10-11 21:02:30.727 +08 [521185] STATEMENT:  SELECT isolate_tenant_to_new_shard('customers', 86, 'CASCADE', 'auto');
+
+===== slurm-results/job-933014/xcnc3-postgresql.log =====
+2026-10-11 20:57:31.015 +08 [507587] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:31.015 +08 [507587] DETAIL:  There are no running transactions.
+2026-10-11 20:57:31.015 +08 [507587] STATEMENT:  CREATE_REPLICATION_SLOT citus_shard_split_slot_1_10_1 LOGICAL citus EXPORT_SNAPSHOT;
+2026-10-11 20:57:31.016 +08 [507587] LOG:  exported logical decoding snapshot: "00000402-00000002-1" with 0 transaction IDs
+2026-10-11 20:57:31.016 +08 [507587] STATEMENT:  CREATE_REPLICATION_SLOT citus_shard_split_slot_1_10_1 LOGICAL citus EXPORT_SNAPSHOT;
+2026-10-11 20:57:31.409 +08 [507606] LOG:  performing copy from shard public.customers_102029 to [public.customers_102169 (nodeId: 1), public.customers_102170 (nodeId: 1), public.customers_102171 (nodeId: 1)]
+2026-10-11 20:57:31.409 +08 [507606] STATEMENT:  SELECT pg_catalog.worker_split_copy(102029, 'merchant_id', ARRAY[ROW(102169, 536870912, 540818264, 1)::pg_catalog.split_copy_info,ROW(102170, 540818265, 540818265, 1)::pg_catalog.split_copy_info,ROW(102171, 540818266, 671088639, 1)::pg_catalog.split_copy_info]);
+2026-10-11 20:57:31.423 +08 [507607] LOG:  performing copy from shard public.products_102061 to [public.products_102172 (nodeId: 1), public.products_102173 (nodeId: 1), public.products_102174 (nodeId: 1)]
+2026-10-11 20:57:31.423 +08 [507607] STATEMENT:  SELECT pg_catalog.worker_split_copy(102061, 'merchant_id', ARRAY[ROW(102172, 536870912, 540818264, 1)::pg_catalog.split_copy_info,ROW(102173, 540818265, 540818265, 1)::pg_catalog.split_copy_info,ROW(102174, 540818266, 671088639, 1)::pg_catalog.split_copy_info]);
+2026-10-11 20:57:31.425 +08 [507608] LOG:  performing copy from shard public.inventory_102093 to [public.inventory_102175 (nodeId: 1), public.inventory_102176 (nodeId: 1), public.inventory_102177 (nodeId: 1)]
+2026-10-11 20:57:31.425 +08 [507608] STATEMENT:  SELECT pg_catalog.worker_split_copy(102093, 'merchant_id', ARRAY[ROW(102175, 536870912, 540818264, 1)::pg_catalog.split_copy_info,ROW(102176, 540818265, 540818265, 1)::pg_catalog.split_copy_info,ROW(102177, 540818266, 671088639, 1)::pg_catalog.split_copy_info]);
+2026-10-11 20:57:31.436 +08 [507609] LOG:  performing copy from shard public.orders_102125 to [public.orders_102178 (nodeId: 1), public.orders_102179 (nodeId: 1), public.orders_102180 (nodeId: 1)]
+2026-10-11 20:57:31.436 +08 [507609] STATEMENT:  SELECT pg_catalog.worker_split_copy(102125, 'merchant_id', ARRAY[ROW(102178, 536870912, 540818264, 1)::pg_catalog.split_copy_info,ROW(102179, 540818265, 540818265, 1)::pg_catalog.split_copy_info,ROW(102180, 540818266, 671088639, 1)::pg_catalog.split_copy_info]);
+2026-10-11 20:57:31.780 +08 [507608] LOG:  performing copy from shard public.order_items_102157 to [public.order_items_102181 (nodeId: 1), public.order_items_102182 (nodeId: 1), public.order_items_102183 (nodeId: 1)]
+2026-10-11 20:57:31.780 +08 [507608] STATEMENT:  SELECT pg_catalog.worker_split_copy(102157, 'merchant_id', ARRAY[ROW(102181, 536870912, 540818264, 1)::pg_catalog.split_copy_info,ROW(102182, 540818265, 540818265, 1)::pg_catalog.split_copy_info,ROW(102183, 540818266, 671088639, 1)::pg_catalog.split_copy_info]);
+2026-10-11 20:57:36.301 +08 [507759] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:36.321 +08 [507760] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:57:36.321 +08 [507760] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:57:36.321 +08 [507760] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:36.321 +08 [507760] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:36.321 +08 [507760] DETAIL:  There are no running transactions.
+2026-10-11 20:57:36.321 +08 [507760] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:37.177 +08 [507761] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:37.178 +08 [507761] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:57:37.178 +08 [507761] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:57:37.178 +08 [507761] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:57:37.178 +08 [507759] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:57:37.178 +08 [507759] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:57:37.178 +08 [507760] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:57:37.178 +08 [507760] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25E250
+2026-10-11 20:57:37.178 +08 [507760] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:37.182 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 507761) exited with exit code 1
+2026-10-11 20:57:37.184 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 507759) exited with exit code 1
+2026-10-11 20:57:41.307 +08 [507897] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:41.326 +08 [507898] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:57:41.326 +08 [507898] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:57:41.326 +08 [507898] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:41.326 +08 [507898] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:41.326 +08 [507898] DETAIL:  There are no running transactions.
+2026-10-11 20:57:41.326 +08 [507898] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:42.093 +08 [507900] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:42.095 +08 [507900] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:57:42.095 +08 [507900] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:57:42.095 +08 [507900] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:57:42.095 +08 [507897] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:57:42.095 +08 [507897] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:57:42.095 +08 [507898] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:57:42.095 +08 [507898] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3A70F0
+2026-10-11 20:57:42.095 +08 [507898] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:42.099 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 507900) exited with exit code 1
+2026-10-11 20:57:42.101 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 507897) exited with exit code 1
+2026-10-11 20:57:46.303 +08 [508054] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:46.309 +08 [508055] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:57:46.309 +08 [508055] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:57:46.309 +08 [508055] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:46.309 +08 [508055] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:46.309 +08 [508055] DETAIL:  There are no running transactions.
+2026-10-11 20:57:46.309 +08 [508055] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:47.049 +08 [508059] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:47.053 +08 [508059] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:57:47.053 +08 [508059] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:57:47.053 +08 [508059] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:57:47.054 +08 [508054] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:57:47.054 +08 [508054] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:57:47.057 +08 [508055] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:57:47.057 +08 [508055] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3FF9E0
+2026-10-11 20:57:47.057 +08 [508055] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:47.063 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508059) exited with exit code 1
+2026-10-11 20:57:47.067 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508054) exited with exit code 1
+2026-10-11 20:57:51.311 +08 [508194] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:51.329 +08 [508195] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:57:51.329 +08 [508195] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:57:51.329 +08 [508195] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:51.329 +08 [508195] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:51.329 +08 [508195] DETAIL:  There are no running transactions.
+2026-10-11 20:57:51.329 +08 [508195] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:52.267 +08 [508196] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:52.271 +08 [508196] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:57:52.271 +08 [508196] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:57:52.271 +08 [508196] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:57:52.271 +08 [508194] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:57:52.271 +08 [508194] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:57:52.274 +08 [508195] LOG:  could not send data to client: Broken pipe
+2026-10-11 20:57:52.274 +08 [508195] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25E250
+2026-10-11 20:57:52.274 +08 [508195] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:52.275 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508196) exited with exit code 1
+2026-10-11 20:57:52.278 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508194) exited with exit code 1
+2026-10-11 20:57:56.312 +08 [508349] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:56.319 +08 [508350] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:57:56.319 +08 [508350] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:57:56.319 +08 [508350] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:56.319 +08 [508350] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:57:56.319 +08 [508350] DETAIL:  There are no running transactions.
+2026-10-11 20:57:56.319 +08 [508350] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:56.931 +08 [508354] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:57:56.939 +08 [508354] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:57:56.939 +08 [508354] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:57:56.939 +08 [508354] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:57:56.945 +08 [508349] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:57:56.945 +08 [508349] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:57:56.948 +08 [508350] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:57:56.948 +08 [508350] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C34A5C0
+2026-10-11 20:57:56.948 +08 [508350] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:57:56.957 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508354) exited with exit code 1
+2026-10-11 20:57:56.961 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508349) exited with exit code 1
+2026-10-11 20:58:01.319 +08 [508502] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:01.335 +08 [508503] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:01.335 +08 [508503] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:01.335 +08 [508503] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:01.335 +08 [508503] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:01.335 +08 [508503] DETAIL:  There are no running transactions.
+2026-10-11 20:58:01.335 +08 [508503] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:02.158 +08 [508504] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:02.159 +08 [508504] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:02.159 +08 [508504] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:02.159 +08 [508504] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:02.159 +08 [508502] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:02.159 +08 [508502] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:02.159 +08 [508503] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:02.159 +08 [508503] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25C9C0
+2026-10-11 20:58:02.159 +08 [508503] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:02.165 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508502) exited with exit code 1
+2026-10-11 20:58:02.165 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508504) exited with exit code 1
+2026-10-11 20:58:06.319 +08 [508636] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:06.329 +08 [508637] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:06.329 +08 [508637] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:06.329 +08 [508637] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:06.329 +08 [508637] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:06.329 +08 [508637] DETAIL:  There are no running transactions.
+2026-10-11 20:58:06.329 +08 [508637] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:07.063 +08 [508673] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:07.065 +08 [508673] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:07.065 +08 [508673] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:07.065 +08 [508673] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:07.066 +08 [508636] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:07.066 +08 [508636] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:07.069 +08 [508637] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:07.069 +08 [508637] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C345C30
+2026-10-11 20:58:07.069 +08 [508637] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:07.071 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508673) exited with exit code 1
+2026-10-11 20:58:07.073 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508636) exited with exit code 1
+2026-10-11 20:58:11.324 +08 [508778] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:11.334 +08 [508782] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:11.334 +08 [508782] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:11.334 +08 [508782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:11.334 +08 [508782] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:11.334 +08 [508782] DETAIL:  There are no running transactions.
+2026-10-11 20:58:11.334 +08 [508782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:12.089 +08 [508844] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:12.091 +08 [508844] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:12.091 +08 [508844] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:12.091 +08 [508844] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:12.091 +08 [508778] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:12.091 +08 [508778] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:12.091 +08 [508782] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:12.091 +08 [508782] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C258070
+2026-10-11 20:58:12.091 +08 [508782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:12.095 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508844) exited with exit code 1
+2026-10-11 20:58:12.099 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508778) exited with exit code 1
+2026-10-11 20:58:16.331 +08 [508945] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:16.348 +08 [508946] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:16.348 +08 [508946] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:16.348 +08 [508946] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:16.348 +08 [508946] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:16.348 +08 [508946] DETAIL:  There are no running transactions.
+2026-10-11 20:58:16.348 +08 [508946] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:17.102 +08 [508965] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:17.103 +08 [508965] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:17.103 +08 [508965] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:17.103 +08 [508965] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:17.104 +08 [508945] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:17.104 +08 [508945] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:17.105 +08 [508946] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:17.105 +08 [508946] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25C9C0
+2026-10-11 20:58:17.105 +08 [508946] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:17.107 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 508965) exited with exit code 1
+2026-10-11 20:58:17.112 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 508945) exited with exit code 1
+2026-10-11 20:58:21.331 +08 [509098] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:21.339 +08 [509099] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:21.339 +08 [509099] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:21.339 +08 [509099] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:21.339 +08 [509099] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:21.339 +08 [509099] DETAIL:  There are no running transactions.
+2026-10-11 20:58:21.339 +08 [509099] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:22.087 +08 [509158] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:22.088 +08 [509158] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:22.088 +08 [509158] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:22.088 +08 [509158] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:22.089 +08 [509098] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:22.089 +08 [509098] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:22.089 +08 [509099] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:22.089 +08 [509099] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C184B08
+2026-10-11 20:58:22.089 +08 [509099] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:22.093 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509158) exited with exit code 1
+2026-10-11 20:58:22.097 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509098) exited with exit code 1
+2026-10-11 20:58:26.333 +08 [509316] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:26.340 +08 [509317] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:26.340 +08 [509317] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:26.340 +08 [509317] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:26.340 +08 [509317] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:26.340 +08 [509317] DETAIL:  There are no running transactions.
+2026-10-11 20:58:26.340 +08 [509317] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:27.007 +08 [509351] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:27.009 +08 [509351] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:27.009 +08 [509351] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:27.009 +08 [509351] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:27.009 +08 [509316] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:27.009 +08 [509316] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:27.009 +08 [509317] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:27.009 +08 [509317] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C570E30
+2026-10-11 20:58:27.009 +08 [509317] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:27.013 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509351) exited with exit code 1
+2026-10-11 20:58:27.016 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509316) exited with exit code 1
+2026-10-11 20:58:31.337 +08 [509352] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:31.345 +08 [509353] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:31.345 +08 [509353] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:31.345 +08 [509353] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:31.345 +08 [509353] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:31.345 +08 [509353] DETAIL:  There are no running transactions.
+2026-10-11 20:58:31.345 +08 [509353] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:32.076 +08 [509363] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:32.078 +08 [509363] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:32.078 +08 [509363] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:32.078 +08 [509363] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:32.082 +08 [509352] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:32.082 +08 [509352] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:32.082 +08 [509353] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:32.082 +08 [509353] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C34BE20
+2026-10-11 20:58:32.082 +08 [509353] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:32.088 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509363) exited with exit code 1
+2026-10-11 20:58:32.096 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509352) exited with exit code 1
+2026-10-11 20:58:36.345 +08 [509512] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:36.363 +08 [509513] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:36.363 +08 [509513] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:36.363 +08 [509513] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:36.363 +08 [509513] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:36.363 +08 [509513] DETAIL:  There are no running transactions.
+2026-10-11 20:58:36.363 +08 [509513] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:37.201 +08 [509514] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:37.203 +08 [509514] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:37.203 +08 [509514] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:37.203 +08 [509514] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:37.203 +08 [509512] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:37.203 +08 [509512] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:37.205 +08 [509513] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:37.205 +08 [509513] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C6BD548
+2026-10-11 20:58:37.205 +08 [509513] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:37.207 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509514) exited with exit code 1
+2026-10-11 20:58:37.212 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509512) exited with exit code 1
+2026-10-11 20:58:41.350 +08 [509677] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:41.367 +08 [509678] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:41.367 +08 [509678] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:41.367 +08 [509678] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:41.367 +08 [509678] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:41.367 +08 [509678] DETAIL:  There are no running transactions.
+2026-10-11 20:58:41.367 +08 [509678] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:42.074 +08 [509682] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:42.078 +08 [509682] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:42.078 +08 [509682] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:42.078 +08 [509682] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:42.079 +08 [509677] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:42.079 +08 [509677] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:42.084 +08 [509678] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:42.084 +08 [509678] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25C9C0
+2026-10-11 20:58:42.084 +08 [509678] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:42.090 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509682) exited with exit code 1
+2026-10-11 20:58:42.092 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509677) exited with exit code 1
+2026-10-11 20:58:46.353 +08 [509830] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:46.370 +08 [509831] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:46.370 +08 [509831] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:46.370 +08 [509831] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:46.370 +08 [509831] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:46.370 +08 [509831] DETAIL:  There are no running transactions.
+2026-10-11 20:58:46.370 +08 [509831] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:47.437 +08 [509832] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:47.441 +08 [509832] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:47.441 +08 [509832] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:47.441 +08 [509832] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:47.442 +08 [509830] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:47.442 +08 [509830] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:47.445 +08 [509831] LOG:  could not send data to client: Broken pipe
+2026-10-11 20:58:47.445 +08 [509831] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C2567E8
+2026-10-11 20:58:47.445 +08 [509831] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:47.452 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509832) exited with exit code 1
+2026-10-11 20:58:47.458 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509830) exited with exit code 1
+2026-10-11 20:58:51.356 +08 [509980] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:51.373 +08 [509981] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:51.373 +08 [509981] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:51.373 +08 [509981] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:51.373 +08 [509981] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:51.373 +08 [509981] DETAIL:  There are no running transactions.
+2026-10-11 20:58:51.373 +08 [509981] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:52.174 +08 [509982] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:52.176 +08 [509982] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:52.176 +08 [509982] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:52.176 +08 [509982] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:52.176 +08 [509980] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:52.176 +08 [509980] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:52.176 +08 [509981] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:52.176 +08 [509981] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C1F82C0
+2026-10-11 20:58:52.176 +08 [509981] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:52.181 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 509980) exited with exit code 1
+2026-10-11 20:58:52.181 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 509982) exited with exit code 1
+2026-10-11 20:58:56.363 +08 [510174] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:56.381 +08 [510175] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:58:56.381 +08 [510175] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:58:56.381 +08 [510175] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:56.382 +08 [510175] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:58:56.382 +08 [510175] DETAIL:  There are no running transactions.
+2026-10-11 20:58:56.382 +08 [510175] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:57.259 +08 [510182] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:58:57.260 +08 [510182] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:58:57.260 +08 [510182] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:58:57.260 +08 [510182] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:58:57.261 +08 [510174] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:58:57.261 +08 [510174] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:58:57.264 +08 [510175] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:58:57.264 +08 [510175] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31B658
+2026-10-11 20:58:57.264 +08 [510175] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:58:57.269 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510174) exited with exit code 1
+2026-10-11 20:58:57.269 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510182) exited with exit code 1
+2026-10-11 20:59:01.362 +08 [510311] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:01.367 +08 [510312] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:01.367 +08 [510312] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:01.367 +08 [510312] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:01.367 +08 [510312] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:01.367 +08 [510312] DETAIL:  There are no running transactions.
+2026-10-11 20:59:01.367 +08 [510312] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:02.202 +08 [510316] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:02.206 +08 [510316] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:02.206 +08 [510316] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:02.206 +08 [510316] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:02.207 +08 [510311] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:02.207 +08 [510311] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:02.210 +08 [510312] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:02.210 +08 [510312] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39DDF0
+2026-10-11 20:59:02.210 +08 [510312] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:02.213 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510316) exited with exit code 1
+2026-10-11 20:59:02.217 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510311) exited with exit code 1
+2026-10-11 20:59:06.369 +08 [510450] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:06.389 +08 [510451] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:06.389 +08 [510451] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:06.389 +08 [510451] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:06.389 +08 [510451] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:06.389 +08 [510451] DETAIL:  There are no running transactions.
+2026-10-11 20:59:06.389 +08 [510451] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:07.153 +08 [510455] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:07.157 +08 [510455] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:07.157 +08 [510455] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:07.157 +08 [510455] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:07.158 +08 [510450] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:07.158 +08 [510450] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:07.161 +08 [510451] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:07.161 +08 [510451] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31CEE0
+2026-10-11 20:59:07.161 +08 [510451] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:07.167 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510450) exited with exit code 1
+2026-10-11 20:59:07.167 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510455) exited with exit code 1
+2026-10-11 20:59:11.373 +08 [510590] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:11.391 +08 [510591] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:11.391 +08 [510591] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:11.391 +08 [510591] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:11.391 +08 [510591] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:11.391 +08 [510591] DETAIL:  There are no running transactions.
+2026-10-11 20:59:11.391 +08 [510591] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:12.057 +08 [510592] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:12.058 +08 [510592] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:12.058 +08 [510592] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:12.058 +08 [510592] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:12.058 +08 [510590] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:12.058 +08 [510590] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:12.059 +08 [510591] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:12.059 +08 [510591] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3A8968
+2026-10-11 20:59:12.059 +08 [510591] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:12.063 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510592) exited with exit code 1
+2026-10-11 20:59:12.065 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510590) exited with exit code 1
+2026-10-11 20:59:16.381 +08 [510729] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:16.399 +08 [510730] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:16.399 +08 [510730] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:16.399 +08 [510730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:16.399 +08 [510730] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:16.399 +08 [510730] DETAIL:  There are no running transactions.
+2026-10-11 20:59:16.399 +08 [510730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:17.209 +08 [510735] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:17.211 +08 [510735] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:17.211 +08 [510735] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:17.211 +08 [510735] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:17.211 +08 [510729] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:17.211 +08 [510729] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:17.214 +08 [510730] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:17.214 +08 [510730] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C316D18
+2026-10-11 20:59:17.214 +08 [510730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:17.217 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510735) exited with exit code 1
+2026-10-11 20:59:17.223 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510729) exited with exit code 1
+2026-10-11 20:59:21.380 +08 [510864] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:21.389 +08 [510865] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:21.389 +08 [510865] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:21.389 +08 [510865] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:21.389 +08 [510865] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:21.389 +08 [510865] DETAIL:  There are no running transactions.
+2026-10-11 20:59:21.389 +08 [510865] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:22.173 +08 [510915] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:22.175 +08 [510915] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:22.175 +08 [510915] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:22.175 +08 [510915] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:22.175 +08 [510864] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:22.175 +08 [510864] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:22.176 +08 [510865] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:22.176 +08 [510865] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39DDF0
+2026-10-11 20:59:22.176 +08 [510865] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:22.180 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 510915) exited with exit code 1
+2026-10-11 20:59:22.189 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 510864) exited with exit code 1
+2026-10-11 20:59:26.388 +08 [511016] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:26.410 +08 [511017] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:26.410 +08 [511017] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:26.410 +08 [511017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:26.410 +08 [511017] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:26.410 +08 [511017] DETAIL:  There are no running transactions.
+2026-10-11 20:59:26.410 +08 [511017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:27.199 +08 [511065] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:27.200 +08 [511065] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:27.200 +08 [511065] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:27.200 +08 [511065] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:27.202 +08 [511016] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:27.202 +08 [511016] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:27.203 +08 [511017] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:27.203 +08 [511017] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3FC688
+2026-10-11 20:59:27.203 +08 [511017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:27.204 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511065) exited with exit code 1
+2026-10-11 20:59:27.211 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511016) exited with exit code 1
+2026-10-11 20:59:31.384 +08 [501761] WARNING:  out of background worker slots
+2026-10-11 20:59:31.384 +08 [501761] HINT:  You might need to increase "max_worker_processes".
+2026-10-11 20:59:36.397 +08 [511361] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:36.415 +08 [511362] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:36.415 +08 [511362] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:36.415 +08 [511362] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:36.415 +08 [511362] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:36.415 +08 [511362] DETAIL:  There are no running transactions.
+2026-10-11 20:59:36.415 +08 [511362] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:37.356 +08 [511363] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:37.361 +08 [511363] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:37.361 +08 [511363] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:37.361 +08 [511363] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:37.363 +08 [511361] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:37.363 +08 [511361] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:37.366 +08 [511362] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:37.366 +08 [511362] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C2567E8
+2026-10-11 20:59:37.366 +08 [511362] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:37.373 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511361) exited with exit code 1
+2026-10-11 20:59:37.373 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511363) exited with exit code 1
+2026-10-11 20:59:41.401 +08 [511501] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:41.422 +08 [511502] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:41.422 +08 [511502] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:41.422 +08 [511502] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:41.422 +08 [511502] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:41.422 +08 [511502] DETAIL:  There are no running transactions.
+2026-10-11 20:59:41.422 +08 [511502] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:42.304 +08 [511503] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:42.312 +08 [511503] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:42.312 +08 [511503] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:42.312 +08 [511503] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:42.314 +08 [511501] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:42.314 +08 [511501] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:42.314 +08 [511502] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:42.314 +08 [511502] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31B658
+2026-10-11 20:59:42.314 +08 [511502] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:42.322 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511503) exited with exit code 1
+2026-10-11 20:59:42.327 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511501) exited with exit code 1
+2026-10-11 20:59:46.400 +08 [511635] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:46.407 +08 [511636] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:46.407 +08 [511636] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:46.407 +08 [511636] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:46.407 +08 [511636] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:46.407 +08 [511636] DETAIL:  There are no running transactions.
+2026-10-11 20:59:46.407 +08 [511636] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:47.095 +08 [511669] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:47.096 +08 [511669] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:47.096 +08 [511669] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:47.096 +08 [511669] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:47.097 +08 [511635] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:47.097 +08 [511635] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:47.097 +08 [511636] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:47.097 +08 [511636] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25B150
+2026-10-11 20:59:47.097 +08 [511636] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:47.101 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511669) exited with exit code 1
+2026-10-11 20:59:47.105 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511635) exited with exit code 1
+2026-10-11 20:59:51.407 +08 [511786] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:51.425 +08 [511787] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:51.425 +08 [511787] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:51.425 +08 [511787] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:51.425 +08 [511787] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:51.425 +08 [511787] DETAIL:  There are no running transactions.
+2026-10-11 20:59:51.425 +08 [511787] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:52.183 +08 [511788] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:52.184 +08 [511788] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:52.184 +08 [511788] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:52.184 +08 [511788] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:52.184 +08 [511786] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:52.184 +08 [511786] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:52.188 +08 [511787] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:52.188 +08 [511787] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25C9C0
+2026-10-11 20:59:52.188 +08 [511787] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:52.195 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511786) exited with exit code 1
+2026-10-11 20:59:52.195 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511788) exited with exit code 1
+2026-10-11 20:59:56.405 +08 [511925] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:56.416 +08 [511926] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 20:59:56.416 +08 [511926] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 20:59:56.416 +08 [511926] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:56.416 +08 [511926] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 20:59:56.416 +08 [511926] DETAIL:  There are no running transactions.
+2026-10-11 20:59:56.416 +08 [511926] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:57.070 +08 [511949] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 20:59:57.073 +08 [511949] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 20:59:57.073 +08 [511949] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 20:59:57.073 +08 [511949] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 20:59:57.074 +08 [511925] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 20:59:57.074 +08 [511925] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 20:59:57.074 +08 [511926] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 20:59:57.074 +08 [511926] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C319DE8
+2026-10-11 20:59:57.074 +08 [511926] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 20:59:57.081 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 511949) exited with exit code 1
+2026-10-11 20:59:57.083 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 511925) exited with exit code 1
+2026-10-11 21:00:01.408 +08 [512079] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:01.420 +08 [512081] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:01.420 +08 [512081] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:01.420 +08 [512081] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:01.421 +08 [512081] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:01.421 +08 [512081] DETAIL:  There are no running transactions.
+2026-10-11 21:00:01.421 +08 [512081] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:02.208 +08 [512153] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:02.210 +08 [512153] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:02.210 +08 [512153] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:02.210 +08 [512153] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:02.210 +08 [512079] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:02.210 +08 [512079] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:02.210 +08 [512081] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:02.210 +08 [512081] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39AD00
+2026-10-11 21:00:02.210 +08 [512081] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:02.215 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512153) exited with exit code 1
+2026-10-11 21:00:02.218 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512079) exited with exit code 1
+2026-10-11 21:00:06.411 +08 [512280] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:06.418 +08 [512281] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:06.418 +08 [512281] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:06.418 +08 [512281] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:06.418 +08 [512281] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:06.418 +08 [512281] DETAIL:  There are no running transactions.
+2026-10-11 21:00:06.418 +08 [512281] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:07.176 +08 [512342] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:07.177 +08 [512342] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:07.177 +08 [512342] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:07.177 +08 [512342] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:07.178 +08 [512280] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:07.178 +08 [512280] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:07.178 +08 [512281] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:07.178 +08 [512281] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31B658
+2026-10-11 21:00:07.178 +08 [512281] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:07.185 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512342) exited with exit code 1
+2026-10-11 21:00:07.189 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512280) exited with exit code 1
+2026-10-11 21:00:11.416 +08 [512467] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:11.423 +08 [512468] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:11.423 +08 [512468] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:11.423 +08 [512468] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:11.423 +08 [512468] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:11.423 +08 [512468] DETAIL:  There are no running transactions.
+2026-10-11 21:00:11.423 +08 [512468] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:12.260 +08 [512499] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:12.261 +08 [512499] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:12.261 +08 [512499] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:12.261 +08 [512499] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:12.261 +08 [512467] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:12.261 +08 [512467] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:12.266 +08 [512468] LOG:  could not send data to client: Broken pipe
+2026-10-11 21:00:12.266 +08 [512468] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25FAB8
+2026-10-11 21:00:12.266 +08 [512468] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:12.270 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512467) exited with exit code 1
+2026-10-11 21:00:12.270 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512499) exited with exit code 1
+2026-10-11 21:00:16.420 +08 [512556] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:16.426 +08 [512557] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:16.426 +08 [512557] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:16.426 +08 [512557] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:16.426 +08 [512557] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:16.426 +08 [512557] DETAIL:  There are no running transactions.
+2026-10-11 21:00:16.426 +08 [512557] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:17.093 +08 [512598] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:17.095 +08 [512598] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:17.095 +08 [512598] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:17.095 +08 [512598] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:17.095 +08 [512556] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:17.095 +08 [512556] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:17.095 +08 [512557] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:17.095 +08 [512557] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C2567E8
+2026-10-11 21:00:17.095 +08 [512557] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:17.100 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512598) exited with exit code 1
+2026-10-11 21:00:17.103 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512556) exited with exit code 1
+2026-10-11 21:00:21.424 +08 [512709] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:21.433 +08 [512710] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:21.433 +08 [512710] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:21.433 +08 [512710] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:21.433 +08 [512710] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:21.433 +08 [512710] DETAIL:  There are no running transactions.
+2026-10-11 21:00:21.433 +08 [512710] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:22.102 +08 [512735] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:22.105 +08 [512735] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:22.105 +08 [512735] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:22.105 +08 [512735] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:22.105 +08 [512709] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:22.105 +08 [512709] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:22.105 +08 [512710] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:22.105 +08 [512710] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31CEE0
+2026-10-11 21:00:22.105 +08 [512710] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:22.112 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512735) exited with exit code 1
+2026-10-11 21:00:22.113 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512709) exited with exit code 1
+2026-10-11 21:00:26.431 +08 [512859] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:26.451 +08 [512860] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:26.451 +08 [512860] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:26.451 +08 [512860] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:26.451 +08 [512860] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:26.451 +08 [512860] DETAIL:  There are no running transactions.
+2026-10-11 21:00:26.451 +08 [512860] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:27.141 +08 [512876] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:27.143 +08 [512876] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:27.143 +08 [512876] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:27.143 +08 [512876] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:27.143 +08 [512859] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:27.143 +08 [512859] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:27.143 +08 [512860] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:27.143 +08 [512860] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25E250
+2026-10-11 21:00:27.143 +08 [512860] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:27.147 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 512876) exited with exit code 1
+2026-10-11 21:00:27.151 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 512859) exited with exit code 1
+2026-10-11 21:00:31.432 +08 [513000] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:31.440 +08 [513002] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:31.440 +08 [513002] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:31.440 +08 [513002] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:31.440 +08 [513002] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:31.440 +08 [513002] DETAIL:  There are no running transactions.
+2026-10-11 21:00:31.440 +08 [513002] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:32.217 +08 [513063] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:32.219 +08 [513063] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:32.219 +08 [513063] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:32.219 +08 [513063] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:32.219 +08 [513000] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:32.219 +08 [513000] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:32.220 +08 [513002] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:32.220 +08 [513002] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C261338
+2026-10-11 21:00:32.220 +08 [513002] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:32.226 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513000) exited with exit code 1
+2026-10-11 21:00:32.226 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513063) exited with exit code 1
+2026-10-11 21:00:36.439 +08 [513198] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:36.446 +08 [513201] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:36.446 +08 [513201] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:36.446 +08 [513201] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:36.446 +08 [513201] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:36.446 +08 [513201] DETAIL:  There are no running transactions.
+2026-10-11 21:00:36.446 +08 [513201] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:37.226 +08 [513261] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:37.229 +08 [513261] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:37.229 +08 [513261] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:37.229 +08 [513261] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:37.229 +08 [513198] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:37.229 +08 [513198] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:37.229 +08 [513201] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:37.229 +08 [513201] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C348D30
+2026-10-11 21:00:37.229 +08 [513201] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:37.233 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513261) exited with exit code 1
+2026-10-11 21:00:37.238 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513198) exited with exit code 1
+2026-10-11 21:00:41.438 +08 [513395] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:41.446 +08 [513396] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:41.446 +08 [513396] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:41.446 +08 [513396] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:41.446 +08 [513396] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:41.446 +08 [513396] DETAIL:  There are no running transactions.
+2026-10-11 21:00:41.446 +08 [513396] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:42.227 +08 [513430] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:42.231 +08 [513430] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:42.231 +08 [513430] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:42.231 +08 [513430] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:42.232 +08 [513395] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:42.232 +08 [513395] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:42.237 +08 [513396] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:42.237 +08 [513396] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39A178
+2026-10-11 21:00:42.237 +08 [513396] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:42.238 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513395) exited with exit code 1
+2026-10-11 21:00:42.239 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513430) exited with exit code 1
+2026-10-11 21:00:46.442 +08 [513585] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:46.453 +08 [513587] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:46.453 +08 [513587] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:46.453 +08 [513587] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:46.453 +08 [513587] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:46.453 +08 [513587] DETAIL:  There are no running transactions.
+2026-10-11 21:00:46.453 +08 [513587] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:46.968 +08 [513594] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:46.970 +08 [513594] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:46.970 +08 [513594] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:46.970 +08 [513594] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:46.970 +08 [513585] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:46.970 +08 [513585] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:46.970 +08 [513587] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:46.970 +08 [513587] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C5115D0
+2026-10-11 21:00:46.970 +08 [513587] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:46.975 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513594) exited with exit code 1
+2026-10-11 21:00:46.977 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513585) exited with exit code 1
+2026-10-11 21:00:51.446 +08 [513729] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:51.452 +08 [513730] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:51.452 +08 [513730] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:51.452 +08 [513730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:51.452 +08 [513730] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:51.452 +08 [513730] DETAIL:  There are no running transactions.
+2026-10-11 21:00:51.452 +08 [513730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:52.152 +08 [513732] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:52.160 +08 [513732] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:52.160 +08 [513732] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:52.160 +08 [513732] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:52.160 +08 [513729] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:52.160 +08 [513729] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:52.163 +08 [513730] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:52.163 +08 [513730] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39C580
+2026-10-11 21:00:52.163 +08 [513730] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:52.167 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513732) exited with exit code 1
+2026-10-11 21:00:52.172 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513729) exited with exit code 1
+2026-10-11 21:00:56.453 +08 [513865] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:56.473 +08 [513866] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:00:56.473 +08 [513866] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:00:56.473 +08 [513866] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:56.473 +08 [513866] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:00:56.473 +08 [513866] DETAIL:  There are no running transactions.
+2026-10-11 21:00:56.473 +08 [513866] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:57.429 +08 [513868] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:00:57.431 +08 [513868] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:00:57.431 +08 [513868] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:00:57.431 +08 [513868] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:00:57.431 +08 [513865] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:00:57.431 +08 [513865] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:00:57.431 +08 [513866] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:00:57.431 +08 [513866] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C57C3F0
+2026-10-11 21:00:57.431 +08 [513866] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:00:57.435 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 513868) exited with exit code 1
+2026-10-11 21:00:57.438 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 513865) exited with exit code 1
+2026-10-11 21:01:01.460 +08 [514019] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:01.473 +08 [514020] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:01.473 +08 [514020] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:01.473 +08 [514020] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:01.473 +08 [514020] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:01.473 +08 [514020] DETAIL:  There are no running transactions.
+2026-10-11 21:01:01.473 +08 [514020] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:02.289 +08 [514021] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:02.291 +08 [514021] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:02.291 +08 [514021] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:02.291 +08 [514021] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:02.291 +08 [514019] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:02.291 +08 [514019] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:02.291 +08 [514020] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:02.291 +08 [514020] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25B150
+2026-10-11 21:01:02.291 +08 [514020] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:02.296 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514019) exited with exit code 1
+2026-10-11 21:01:02.296 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514021) exited with exit code 1
+2026-10-11 21:01:06.462 +08 [514186] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:06.479 +08 [514187] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:06.479 +08 [514187] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:06.479 +08 [514187] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:06.479 +08 [514187] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:06.479 +08 [514187] DETAIL:  There are no running transactions.
+2026-10-11 21:01:06.479 +08 [514187] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:07.351 +08 [514191] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:07.352 +08 [514191] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:07.352 +08 [514191] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:07.352 +08 [514191] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:07.352 +08 [514186] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:07.352 +08 [514186] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:07.353 +08 [514187] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:07.353 +08 [514187] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C1F82C0
+2026-10-11 21:01:07.353 +08 [514187] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:07.359 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514191) exited with exit code 1
+2026-10-11 21:01:07.360 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514186) exited with exit code 1
+2026-10-11 21:01:11.461 +08 [514324] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:11.469 +08 [514325] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:11.469 +08 [514325] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:11.469 +08 [514325] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:11.469 +08 [514325] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:11.469 +08 [514325] DETAIL:  There are no running transactions.
+2026-10-11 21:01:11.469 +08 [514325] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:12.176 +08 [514341] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:12.177 +08 [514341] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:12.177 +08 [514341] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:12.177 +08 [514341] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:12.180 +08 [514324] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:12.180 +08 [514324] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:12.181 +08 [514325] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:12.181 +08 [514325] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31CEE0
+2026-10-11 21:01:12.181 +08 [514325] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:12.185 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514341) exited with exit code 1
+2026-10-11 21:01:12.187 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514324) exited with exit code 1
+2026-10-11 21:01:16.468 +08 [514475] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:16.484 +08 [514476] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:16.484 +08 [514476] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:16.484 +08 [514476] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:16.484 +08 [514476] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:16.484 +08 [514476] DETAIL:  There are no running transactions.
+2026-10-11 21:01:16.484 +08 [514476] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:17.059 +08 [514480] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:17.060 +08 [514480] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:17.060 +08 [514480] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:17.060 +08 [514480] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:17.060 +08 [514475] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:17.060 +08 [514475] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:17.061 +08 [514476] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:17.061 +08 [514476] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C50E200
+2026-10-11 21:01:17.061 +08 [514476] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:17.064 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514480) exited with exit code 1
+2026-10-11 21:01:17.067 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514475) exited with exit code 1
+2026-10-11 21:01:21.469 +08 [514615] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:21.475 +08 [514616] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:21.475 +08 [514616] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:21.475 +08 [514616] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:21.475 +08 [514616] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:21.475 +08 [514616] DETAIL:  There are no running transactions.
+2026-10-11 21:01:21.475 +08 [514616] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:22.427 +08 [514648] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:22.431 +08 [514648] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:22.431 +08 [514648] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:22.431 +08 [514648] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:22.436 +08 [514615] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:22.436 +08 [514615] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:22.436 +08 [514616] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:22.436 +08 [514616] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C401410
+2026-10-11 21:01:22.436 +08 [514616] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:22.443 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514648) exited with exit code 1
+2026-10-11 21:01:22.449 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514615) exited with exit code 1
+2026-10-11 21:01:26.479 +08 [514781] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:26.498 +08 [514782] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:26.498 +08 [514782] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:26.498 +08 [514782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:26.498 +08 [514782] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:26.498 +08 [514782] DETAIL:  There are no running transactions.
+2026-10-11 21:01:26.498 +08 [514782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:27.077 +08 [514787] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:27.079 +08 [514787] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:27.079 +08 [514787] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:27.079 +08 [514787] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:27.079 +08 [514781] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:27.079 +08 [514781] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:27.079 +08 [514782] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:27.079 +08 [514782] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C621F60
+2026-10-11 21:01:27.079 +08 [514782] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:27.083 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514787) exited with exit code 1
+2026-10-11 21:01:27.087 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514781) exited with exit code 1
+2026-10-11 21:01:31.479 +08 [514961] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:31.487 +08 [514962] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:31.487 +08 [514962] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:31.487 +08 [514962] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:31.488 +08 [514962] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:31.488 +08 [514962] DETAIL:  There are no running transactions.
+2026-10-11 21:01:31.488 +08 [514962] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:32.200 +08 [514968] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:32.201 +08 [514968] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:32.201 +08 [514968] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:32.201 +08 [514968] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:32.202 +08 [514961] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:32.202 +08 [514961] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:32.203 +08 [514962] LOG:  could not send data to client: Broken pipe
+2026-10-11 21:01:32.203 +08 [514962] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31CEE0
+2026-10-11 21:01:32.203 +08 [514962] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:32.210 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 514968) exited with exit code 1
+2026-10-11 21:01:32.214 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 514961) exited with exit code 1
+2026-10-11 21:01:36.487 +08 [515101] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:36.506 +08 [515102] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:36.506 +08 [515102] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:36.506 +08 [515102] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:36.506 +08 [515102] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:36.506 +08 [515102] DETAIL:  There are no running transactions.
+2026-10-11 21:01:36.506 +08 [515102] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:37.265 +08 [515107] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:37.274 +08 [515107] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:37.274 +08 [515107] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:37.274 +08 [515107] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:37.274 +08 [515101] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:37.274 +08 [515101] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:37.276 +08 [515102] LOG:  could not send data to client: Broken pipe
+2026-10-11 21:01:37.276 +08 [515102] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25E250
+2026-10-11 21:01:37.276 +08 [515102] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:37.286 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515101) exited with exit code 1
+2026-10-11 21:01:37.290 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515107) exited with exit code 1
+2026-10-11 21:01:41.484 +08 [515235] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:41.491 +08 [515236] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:41.491 +08 [515236] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:41.491 +08 [515236] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:41.491 +08 [515236] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:41.491 +08 [515236] DETAIL:  There are no running transactions.
+2026-10-11 21:01:41.491 +08 [515236] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:41.973 +08 [515237] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:41.975 +08 [515237] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:41.975 +08 [515237] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:41.975 +08 [515237] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:41.975 +08 [515235] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:41.975 +08 [515235] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:41.975 +08 [515236] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:41.975 +08 [515236] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C50C7C8
+2026-10-11 21:01:41.975 +08 [515236] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:41.979 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515237) exited with exit code 1
+2026-10-11 21:01:41.982 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515235) exited with exit code 1
+2026-10-11 21:01:46.488 +08 [515241] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:46.493 +08 [515242] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:46.493 +08 [515242] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:46.493 +08 [515242] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:46.494 +08 [515242] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:46.494 +08 [515242] DETAIL:  There are no running transactions.
+2026-10-11 21:01:46.494 +08 [515242] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:46.970 +08 [515243] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:46.972 +08 [515243] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:46.972 +08 [515243] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:46.972 +08 [515243] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:46.972 +08 [515241] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:46.972 +08 [515241] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:46.972 +08 [515242] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:46.972 +08 [515242] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C50AD88
+2026-10-11 21:01:46.972 +08 [515242] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:46.976 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515243) exited with exit code 1
+2026-10-11 21:01:46.978 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515241) exited with exit code 1
+2026-10-11 21:01:51.494 +08 [515414] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:51.502 +08 [515415] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:51.502 +08 [515415] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:51.502 +08 [515415] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:51.502 +08 [515415] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:51.502 +08 [515415] DETAIL:  There are no running transactions.
+2026-10-11 21:01:51.502 +08 [515415] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:52.245 +08 [515440] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:52.251 +08 [515440] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:52.251 +08 [515440] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:52.251 +08 [515440] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:52.252 +08 [515414] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:52.252 +08 [515414] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:52.255 +08 [515415] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:52.255 +08 [515415] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C31B658
+2026-10-11 21:01:52.255 +08 [515415] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:52.258 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515440) exited with exit code 1
+2026-10-11 21:01:52.264 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515414) exited with exit code 1
+2026-10-11 21:01:56.494 +08 [515574] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:56.502 +08 [515575] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:01:56.502 +08 [515575] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:01:56.502 +08 [515575] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:56.502 +08 [515575] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:01:56.502 +08 [515575] DETAIL:  There are no running transactions.
+2026-10-11 21:01:56.502 +08 [515575] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:57.433 +08 [515580] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:01:57.434 +08 [515580] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:01:57.434 +08 [515580] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:01:57.434 +08 [515580] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:01:57.436 +08 [515574] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:01:57.436 +08 [515574] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:01:57.438 +08 [515575] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:01:57.438 +08 [515575] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25C9C0
+2026-10-11 21:01:57.438 +08 [515575] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:01:57.443 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515580) exited with exit code 1
+2026-10-11 21:01:57.445 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515574) exited with exit code 1
+2026-10-11 21:02:01.506 +08 [515713] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:01.522 +08 [515714] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:01.522 +08 [515714] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:01.522 +08 [515714] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:01.522 +08 [515714] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:01.522 +08 [515714] DETAIL:  There are no running transactions.
+2026-10-11 21:02:01.522 +08 [515714] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:02.396 +08 [515715] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:02.397 +08 [515715] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:02.397 +08 [515715] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:02.397 +08 [515715] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:02.398 +08 [515713] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:02.398 +08 [515713] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:02.398 +08 [515714] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:02.398 +08 [515714] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C348D30
+2026-10-11 21:02:02.398 +08 [515714] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:02.403 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515713) exited with exit code 1
+2026-10-11 21:02:02.403 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515715) exited with exit code 1
+2026-10-11 21:02:06.501 +08 [515847] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:06.506 +08 [515848] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:06.506 +08 [515848] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:06.506 +08 [515848] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:06.507 +08 [515848] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:06.507 +08 [515848] DETAIL:  There are no running transactions.
+2026-10-11 21:02:06.507 +08 [515848] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:07.228 +08 [515868] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:07.229 +08 [515868] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:07.229 +08 [515868] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:07.229 +08 [515868] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:07.229 +08 [515847] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:07.229 +08 [515847] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:07.232 +08 [515848] LOG:  could not send data to client: Broken pipe
+2026-10-11 21:02:07.232 +08 [515848] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C258070
+2026-10-11 21:02:07.232 +08 [515848] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:07.235 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 515868) exited with exit code 1
+2026-10-11 21:02:07.235 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 515847) exited with exit code 1
+2026-10-11 21:02:11.506 +08 [516016] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:11.524 +08 [516017] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:11.524 +08 [516017] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:11.524 +08 [516017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:11.524 +08 [516017] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:11.524 +08 [516017] DETAIL:  There are no running transactions.
+2026-10-11 21:02:11.524 +08 [516017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:12.387 +08 [516018] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:12.394 +08 [516018] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:12.394 +08 [516018] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:12.394 +08 [516018] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:12.394 +08 [516016] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:12.394 +08 [516016] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:12.396 +08 [516017] LOG:  could not send data to client: Broken pipe
+2026-10-11 21:02:12.396 +08 [516017] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C319DE8
+2026-10-11 21:02:12.396 +08 [516017] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:12.402 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516018) exited with exit code 1
+2026-10-11 21:02:12.406 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516016) exited with exit code 1
+2026-10-11 21:02:16.511 +08 [516157] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:16.529 +08 [516158] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:16.529 +08 [516158] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:16.529 +08 [516158] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:16.529 +08 [516158] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:16.529 +08 [516158] DETAIL:  There are no running transactions.
+2026-10-11 21:02:16.529 +08 [516158] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:17.421 +08 [516159] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:17.423 +08 [516159] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:17.423 +08 [516159] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:17.423 +08 [516159] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:17.424 +08 [516157] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:17.424 +08 [516157] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:17.427 +08 [516158] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:17.427 +08 [516158] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39AD00
+2026-10-11 21:02:17.427 +08 [516158] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:17.430 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516159) exited with exit code 1
+2026-10-11 21:02:17.431 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516157) exited with exit code 1
+2026-10-11 21:02:21.512 +08 [516292] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:21.521 +08 [516293] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:21.521 +08 [516293] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:21.521 +08 [516293] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:21.521 +08 [516293] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:21.521 +08 [516293] DETAIL:  There are no running transactions.
+2026-10-11 21:02:21.521 +08 [516293] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:22.219 +08 [516336] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:22.221 +08 [516336] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:22.221 +08 [516336] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:22.221 +08 [516336] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:22.221 +08 [516292] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:22.221 +08 [516292] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:22.221 +08 [516293] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:22.221 +08 [516293] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C39A178
+2026-10-11 21:02:22.221 +08 [516293] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:22.226 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516336) exited with exit code 1
+2026-10-11 21:02:22.228 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516292) exited with exit code 1
+2026-10-11 21:02:26.522 +08 [516439] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:26.541 +08 [516440] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:26.541 +08 [516440] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:26.541 +08 [516440] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:26.541 +08 [516440] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:26.541 +08 [516440] DETAIL:  There are no running transactions.
+2026-10-11 21:02:26.541 +08 [516440] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:27.313 +08 [516441] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:27.315 +08 [516441] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:27.315 +08 [516441] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:27.315 +08 [516441] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:27.315 +08 [516439] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:27.315 +08 [516439] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:27.315 +08 [516440] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:27.315 +08 [516440] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C25B150
+2026-10-11 21:02:27.315 +08 [516440] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:27.321 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516441) exited with exit code 1
+2026-10-11 21:02:27.323 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516439) exited with exit code 1
+2026-10-11 21:02:31.529 +08 [516578] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:31.546 +08 [516579] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:31.546 +08 [516579] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:31.546 +08 [516579] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:31.546 +08 [516579] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:31.546 +08 [516579] DETAIL:  There are no running transactions.
+2026-10-11 21:02:31.546 +08 [516579] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:32.381 +08 [516580] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:32.383 +08 [516580] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:32.383 +08 [516580] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:32.383 +08 [516580] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:32.383 +08 [516578] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:32.383 +08 [516578] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:32.383 +08 [516579] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:32.383 +08 [516579] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3A70F0
+2026-10-11 21:02:32.383 +08 [516579] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:32.386 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516580) exited with exit code 1
+2026-10-11 21:02:32.389 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516578) exited with exit code 1
+2026-10-11 21:02:36.525 +08 [516714] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:36.534 +08 [516715] LOG:  starting logical decoding for slot "citus_shard_split_slot_1_10_1"
+2026-10-11 21:02:36.534 +08 [516715] DETAIL:  Streaming transactions committing after 0/7BF77858, reading WAL from 0/7BF77820.
+2026-10-11 21:02:36.534 +08 [516715] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:36.534 +08 [516715] LOG:  logical decoding found consistent point at 0/7BF77820
+2026-10-11 21:02:36.534 +08 [516715] DETAIL:  There are no running transactions.
+2026-10-11 21:02:36.534 +08 [516715] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:37.193 +08 [516751] LOG:  logical replication apply worker for subscription "citus_shard_split_subscription_10_1" has started
+2026-10-11 21:02:37.195 +08 [516751] ERROR:  conflict detected on relation "public.orders_102180": conflict=insert_exists
+2026-10-11 21:02:37.195 +08 [516751] DETAIL:  Key already exists in unique index "orders_pkey_102180", modified in transaction 1174.
+	Key (order_id, merchant_id)=(5000047, 38); existing local row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794); remote row (5000047, 38, 674038, PENDING, 3991.10, 2026-10-11 20:55:30.085794).
+2026-10-11 21:02:37.195 +08 [516751] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+2026-10-11 21:02:37.195 +08 [516714] ERROR:  logical replication parallel apply worker exited due to error
+2026-10-11 21:02:37.195 +08 [516714] CONTEXT:  processing remote data for replication origin "pg_18413" during message type "INSERT" for replication target relation "public.orders_102180" in transaction 1174
+	logical replication parallel apply worker
+2026-10-11 21:02:37.195 +08 [516715] LOG:  could not send data to client: Connection reset by peer
+2026-10-11 21:02:37.195 +08 [516715] CONTEXT:  slot "citus_shard_split_slot_1_10_1", output plugin "citus", in the stream_change callback, associated LSN 0/7C3474A8
+2026-10-11 21:02:37.195 +08 [516715] STATEMENT:  START_REPLICATION SLOT "citus_shard_split_slot_1_10_1" LOGICAL 0/0 (proto_version '4', streaming 'parallel', origin 'any', publication_names '"citus_shard_split_publication_1_10_1"', binary 'true')
+2026-10-11 21:02:37.203 +08 [501751] LOG:  background worker "logical replication apply worker" (PID 516714) exited with exit code 1
+2026-10-11 21:02:37.203 +08 [501751] LOG:  background worker "logical replication parallel worker" (PID 516751) exited with exit code 1
+
+===== slurm-results/job-933014/xcnc4-postgresql.log =====
+
+===== slurm-results/job-933014/xcnc5-postgresql.log =====
+
+===== slurm-results/job-933014/xcnc6-postgresql.log =====

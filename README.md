@@ -20,6 +20,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
+| `expt_a6` |   -    | V0 + O6 | - | 982707 |
+| `expt_a7` |   -    | V0 + O7 | - | 932491 |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -27,6 +29,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
+| `expt_b7` |    -   | V0 + O7 | - | 892609 |
 
 Query-rewrite optimizations:
 
@@ -40,6 +43,8 @@ Query-rewrite optimizations:
   unchanged.
 - O4 (T1): check, reserve and insert all items with one statement each.
 - O5: single-statement transactions (T2-T6, T8, T9) run in autocommit.
+- O6: Dynamic partitioning of isolating a hot merchant to a new shard once detected by a background pgbench job
+- O7: Horizontal partitioning of all tables on `merchant_id` instead of `table_id`
 
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
