@@ -1,5 +1,5 @@
--- Serializable baseline: this transaction first takes coordinator advisory locks
--- and holds them until commit (see README, "Serializable baseline").
+-- Serializable baseline: T6 is the exception to "lock first, hold until commit"
+-- (see README, "Serializable baseline"): it holds G only for the barrier below.
 -- Keys: (1, 0) is G, the orders read by T6; (2, m) is merchant m.
 -- Snapshot barrier: hold G only while opening one REPEATABLE READ snapshot per
 -- worker (one connection per worker), then release it and read from those

@@ -17,8 +17,12 @@
 \set dest_merchant_id 1 + ((:dest_product_id - 1) % :NUM_MERCHANTS)
 
 BEGIN;
+\if :source_merchant_id = :dest_merchant_id
+SELECT pg_advisory_xact_lock(2, (:source_merchant_id)::int);
+\else
 SELECT pg_advisory_xact_lock(2, least(:source_merchant_id, :dest_merchant_id)::int),
        pg_advisory_xact_lock(2, greatest(:source_merchant_id, :dest_merchant_id)::int);
+\endif
 
 SELECT EXISTS(
   SELECT 1 FROM inventory
