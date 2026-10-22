@@ -20,7 +20,9 @@
 \set order_total 0.0
 
 BEGIN;
-SELECT pg_advisory_xact_lock_shared(1, 0), pg_advisory_xact_lock(2, (:merchant_id)::int);
+-- one statement per lock, so G is taken first (see README)
+SELECT pg_advisory_xact_lock_shared(1, 0);
+SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
 -- retrieve customer information
 SELECT CASE WHEN EXISTS (

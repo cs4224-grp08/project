@@ -20,8 +20,9 @@ BEGIN;
 \if :source_merchant_id = :dest_merchant_id
 SELECT pg_advisory_xact_lock(2, (:source_merchant_id)::int);
 \else
-SELECT pg_advisory_xact_lock(2, least(:source_merchant_id, :dest_merchant_id)::int),
-       pg_advisory_xact_lock(2, greatest(:source_merchant_id, :dest_merchant_id)::int);
+-- one statement per lock, so they are taken in this order (see README)
+SELECT pg_advisory_xact_lock(2, least(:source_merchant_id, :dest_merchant_id)::int);
+SELECT pg_advisory_xact_lock(2, greatest(:source_merchant_id, :dest_merchant_id)::int);
 \endif
 
 SELECT EXISTS(
