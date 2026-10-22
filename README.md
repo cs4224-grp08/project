@@ -20,7 +20,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a3` | Task 2 | V2 + O4 | T1, T3, T4 | 883773 |
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
-| `expt_a99` | Task 1 (extra) | Serializable baseline, workload A (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
+| `expt_a99` | Task 1 (extra) | Serializable baseline, workload A | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990809 |
 | `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
@@ -29,7 +29,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b4` | Task 4 | V3 + O5 | T2, T3, T4, T5, T6, T7, T8, T9 | 883776 |
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
-| `expt_b99` | Task 3 (extra) | Serializable baseline, workload B (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
+| `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
 | `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 
 Query-rewrite optimizations:
@@ -54,7 +54,7 @@ Citus enforces SERIALIZABLE only within each worker: it has no distributed
 snapshot and doesn't detect conflicts that span nodes. So the provided baseline
 isn't serializable across the cluster.
 
-`expt_a99` and `expt_b99` (placeholder numbers) are the provided baseline
+`expt_a99` and `expt_b99` are the provided baseline
 (same schema and distribution; the SQL gains only the locks, T5's merchant
 lookup and T6's snapshot barrier) made serializable with strict two-phase
 locking on the coordinator. Build optimizations on these folders so every
