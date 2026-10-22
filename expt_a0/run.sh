@@ -6,14 +6,14 @@
 #SBATCH --output=citus-%j.out
 #SBATCH --error=citus-%j.err
 #SBATCH --partition=normal
-#SBATCH --time=03:00:00
+#SBATCH --time=00:30:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
 
 # IMPORTANT - replace this with your email
-#SBATCH --mail-user=alice_and_bob@u.nus.edu
+#SBATCH --mail-user=e0969283@u.nus.edu
 
 set -euo pipefail
 
