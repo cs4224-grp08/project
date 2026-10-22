@@ -21,6 +21,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
 | `expt_a99` | Task 1 (extra) | Serializable baseline, workload A (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
+| `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -29,6 +30,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B (placeholder number) | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | in progress |
+| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 
 Query-rewrite optimizations:
 
@@ -136,13 +138,25 @@ Develop and test on the Local Cluster; benchmark on the Remote Cluster.
 
 ### Overview
 
-1. Copy the experiment you build on to the next free `expt_wN`, and add it to the
+1. Copy the experiment you build on to your next free `expt_wN` (see
+   [Experiment numbers](#experiment-numbers)), and add it to the
    [Experiments](#experiments) table. Keep `RESULT_ROOT` at its default.
 2. Test each change on the [Local Cluster](#local-cluster) until it runs.
 3. Open a pull request; the [GitHub Cluster](#github-cluster) runs each experiment.
 4. Once each experiment passes, benchmark on the [Remote Cluster](#remote-cluster).
 5. [Compare runs](#comparing-runs) for the report.
 6. Copy each experiment's reported job into `citus_project_team_08/` for the submission.
+
+### Experiment numbers
+
+From 101, numbers are assigned round-robin:
+
+| Developer | Numbers |
+| --- | --- |
+| Don | 101, 111, 121, … |
+| Kotaro | 102, 112, 122, … |
+| Chris | 103, 113, 123, … |
+| Tim | 104, 114, 124, … |
 
 ### Setup
 
