@@ -67,13 +67,15 @@ Serializability tab of the team plan doc.
   - `(2, m)`: merchant `m`. Covers every row of merchant `m` in every table,
     including ranges over them (e.g. T3's order history).
   - `(1, 0)`: `G`, the orders that T6 reads across all merchants.
-- Each transaction takes all its locks in its first statement after `BEGIN`,
-  before touching any table, and holds them until `COMMIT`
+- Each transaction takes all its locks right after `BEGIN`, one statement per
+  lock, before touching any table, and holds them until `COMMIT`
   (`pg_advisory_xact_lock`). T6 is the one exception (snapshot barrier below).
 - A lock is shared (`pg_advisory_xact_lock_shared`) if the transaction only
   reads that merchant's rows, and exclusive if it writes any of them.
-- Locks are taken in a fixed order: `G` first, then merchants ascending (`least`
-  and `greatest` for two merchants). That rules out deadlocks.
+- Locks are taken in a fixed order: `G` first, then merchants ascending (`least`,
+  then `greatest`, for two merchants). That rules out deadlocks. Each lock has
+  its own statement because PostgreSQL doesn't define the order in which it
+  evaluates the expressions within one statement.
 - Citus releases the coordinator's locks only after every worker has committed,
   so the next transaction to hold a lock sees all committed changes.
 - Data statements run at read committed (`PG_ISOLATION_LEVEL` in `run.sh`), so
@@ -104,7 +106,7 @@ connection releases `G`.
 ### Rules when building on these folders
 
 1. Every transaction except T6, read-only ones included, keeps its lock
-   statement as the first statement after `BEGIN`. If a rewrite changes which
+   statements, one per lock, as the first statements after `BEGIN`. If a rewrite changes which
    merchants' rows a transaction reads or writes, update its locks by the rules
    above.
    - T5 may read its order's `merchant_id` before `BEGIN`, because
