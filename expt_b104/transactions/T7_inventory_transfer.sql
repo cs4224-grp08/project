@@ -1,3 +1,6 @@
+-- Serializable baseline: this transaction first takes coordinator advisory locks
+-- and holds them until commit (see README, "Serializable baseline").
+-- Keys: (1, 0) is G, the orders read by T6; (2, m) is merchant m.
 \if :DEBUG_MODE
 \set source_product_id :DEBUG_T7_SOURCE_PRODUCT_ID
 \set dest_product_id :DEBUG_T7_DEST_PRODUCT_ID
@@ -9,8 +12,18 @@
 \endif
 
 \set transfer_ok 1
+-- a product's merchant (as the provided T9 also uses)
+\set source_merchant_id 1 + ((:source_product_id - 1) % :NUM_MERCHANTS)
+\set dest_merchant_id 1 + ((:dest_product_id - 1) % :NUM_MERCHANTS)
 
 BEGIN;
+\if :source_merchant_id = :dest_merchant_id
+SELECT pg_advisory_xact_lock(2, (:source_merchant_id)::int);
+\else
+-- one statement per lock, so they are taken in this order (see README)
+SELECT pg_advisory_xact_lock(2, least(:source_merchant_id, :dest_merchant_id)::int);
+SELECT pg_advisory_xact_lock(2, greatest(:source_merchant_id, :dest_merchant_id)::int);
+\endif
 
 SELECT EXISTS(
   SELECT 1 FROM inventory

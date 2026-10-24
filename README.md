@@ -25,10 +25,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a101` | Task 2 | S0 + O1 | T3 (vs `expt_a99`) | 991556 |
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
-| `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a6` |   -    | V0 + O6 | - | 932991 |
-| `expt_a6` |   -    | V0 + O6 + O8| - | 977150 |
-| `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
+| `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601| `expt_a6` |   -    | V0 + O6 | - | 932991 |
+| `expt_a104` |   -    | V0 + O6 | - | 1008191 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
 | `expt_b3` | Task 4 | V2 + O2 | T3, T4, T7 | 883774 |
@@ -41,8 +39,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
-| `expt_b7` |   -    | V0 + O7 | - | 894924 |
-| `expt_b7` |   -    | V0 + O7 + O8 | - | 978634 |
+| `expt_b104` |   -    | V0 + O7 | - | 1009192 |
+
 
 Optimizations:
 
@@ -58,7 +56,7 @@ Optimizations:
 - O5: single-statement transactions (T2-T6, T8, T9) run in autocommit.
 - O6: Index on orders by (merchant_id, customer_id, created_at DESC) to improve T3 selection query
 - O7: Index on inventory by product_id to improve T7 selection queries
-- O8: Run workload on `read committed` isolation level
+
 
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.

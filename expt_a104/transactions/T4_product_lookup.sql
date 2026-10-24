@@ -1,3 +1,6 @@
+-- Serializable baseline: this transaction first takes coordinator advisory locks
+-- and holds them until commit (see README, "Serializable baseline").
+-- Keys: (1, 0) is G, the orders read by T6; (2, m) is merchant m.
 \if :DEBUG_MODE
 \set merchant_id :DEBUG_MERCHANT_ID
 \else
@@ -12,6 +15,7 @@
 \endif
 
 BEGIN;
+SELECT pg_advisory_xact_lock_shared(2, (:merchant_id)::int);
 
 SELECT
   p.product_id,

@@ -20,7 +20,7 @@ set -euo pipefail
 TEAM_ID=${TEAM_ID:-8}
 
 ################# PostgreSQL environment variables
-PGPORT=$((10#${TEAM_ID} + 5433))
+PGPORT=$((10#${TEAM_ID} + 5432))
 PGUSER="${SLURM_JOB_USER:-${USER}}"
 
 DATA_ROOT=/tmp/${PGUSER}/citus-${SLURM_JOB_ID}
