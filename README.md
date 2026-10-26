@@ -26,8 +26,8 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a6` |   -    | V0 + O6 | - | 982707 |
-| `expt_a7` |   -    | V0 + O7 | - | 932491 |
+| `expt_a114` |   -    | V0 + O7 | - | 1010583 |
+| `expt_a124` |   -    | V0 + O6 | - | 1017526 |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -41,7 +41,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
-| `expt_b7` |    -   | V0 + O7 | - | 892609 |
+| `expt_b114` |    -   | V0 + O7 | - | 1015922 |
 
 Query-rewrite optimizations:
 
