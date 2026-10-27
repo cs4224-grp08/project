@@ -1,3 +1,6 @@
+-- Serializable baseline: this transaction first takes coordinator advisory locks
+-- and holds them until commit (see README, "Serializable baseline").
+-- Keys: (1, 0) is G, the orders read by T6; (2, m) is merchant m.
 \if :DEBUG_MODE
 \set merchant_id :DEBUG_MERCHANT_ID
 \else
@@ -15,11 +18,31 @@
 
 \set order_ok 1
 \set order_total 0.0
+-- Defaults keep the final five-row VALUES list valid when item_count is below 5.
+\set product_id_1 0
+\set product_id_2 0
+\set product_id_3 0
+\set product_id_4 0
+\set product_id_5 0
+\set qty_1 0
+\set qty_2 0
+\set qty_3 0
+\set qty_4 0
+\set qty_5 0
+\set item1_price 0.0
+\set item2_price 0.0
+\set item3_price 0.0
+\set item4_price 0.0
+\set item5_price 0.0
+\set item1_order_item_id 0
+\set item2_order_item_id 0
+\set item3_order_item_id 0
+\set item4_order_item_id 0
+\set item5_order_item_id 0
 
 BEGIN;
--- G=(1,0) is shared by order writers and exclusive to T6's snapshot barrier.
+-- one statement per lock, so G is taken first (see README)
 SELECT pg_advisory_xact_lock_shared(1, 0);
--- (2,m) exclusively protects all rows belonging to merchant m.
 SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
 -- retrieve customer information
@@ -55,215 +78,422 @@ VALUES(
 \endif
 
 \if :order_ok
+\if :item_count >= 1
 
-WITH generated_items AS MATERIALIZED (
-
-    SELECT
-        i AS item_no,
-        (:merchant_id)::bigint AS merchant_id,
-        (:new_order_id)::bigint AS order_id,
-
-        -- ----------------------------------------------------
-        -- Product ID
-        -- ----------------------------------------------------
-        :merchant_id + random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS)) * :NUM_MERCHANTS AS product_id,
-
-        -- ----------------------------------------------------
-        -- Quantity
-        -- ----------------------------------------------------
-        random(:MIN_ORDER_QTY,:MAX_ORDER_QTY)::integer AS quantity
-
-    FROM generate_series(1,(:item_count)::integer) AS i
-),
-
-
--- ============================================================
--- Look up ALL products once
--- ============================================================
-
-item_details AS (
-
-    SELECT
-        gi.item_no,
-        gi.merchant_id,
-        gi.order_id,
-        gi.product_id,
-        gi.quantity,
-        p.price AS price
-
-    FROM generated_items gi
-
-    JOIN products p
-      ON p.merchant_id = gi.merchant_id
-     AND p.product_id = gi.product_id
-),
-
-
--- ============================================================
--- Combine quantities for duplicate products
--- ============================================================
-
-required_inventory AS (
-    SELECT
-        merchant_id,
-        product_id,
-        SUM(quantity) AS required_quantity,
-        SUM(quantity * price) AS product_total
-    FROM item_details
-    GROUP BY
-        merchant_id, product_id
-),
-
-
--- ============================================================
--- Reserve ALL required inventory
--- ============================================================
-
-reserved_inventory AS (
-    UPDATE inventory inv
-
-    SET
-        quantity = inv.quantity - ri.required_quantity,
-        updated_at = CURRENT_TIMESTAMP
-
-    FROM required_inventory ri
-
-    WHERE inv.merchant_id = ri.merchant_id
-      AND inv.inventory_id = ri.product_id
-      AND inv.quantity >= ri.required_quantity
-
-    RETURNING
-        inv.merchant_id,
-        inv.inventory_id
-),
-
-
--- ============================================================
--- Validate the complete order
--- ============================================================
-
-validation AS (
-    SELECT
-        (SELECT COUNT(*) FROM item_details) = :item_count AS products_valid,
-        (SELECT COUNT(*) FROM required_inventory) =  (SELECT COUNT(*) FROM reserved_inventory) AS inventory_valid,
-        (SELECT SUM(product_total) FROM required_inventory)::numeric(12,2) AS order_total
-),
-
-
--- ============================================================
--- Insert the SAME item_details that were validated
--- ============================================================
-
-inserted_items AS (
-    INSERT INTO order_items (
-        order_item_id,
-        merchant_id,
-        order_id,
-        product_id,
-        quantity,
-        unit_price
-    )
-    SELECT
-        nextval('benchmark_order_item_id_seq'),
-        id.merchant_id,
-        id.order_id,
-        id.product_id,
-        id.quantity,
-        id.price
-    FROM item_details id
-    WHERE EXISTS (
-        SELECT 1
-        FROM validation
-        WHERE products_valid
-          AND inventory_valid
-    )
-    RETURNING order_item_id, merchant_id, order_id, product_id, quantity, unit_price
-),
-
-
--- ============================================================
--- Maintain the customer-keyed order-history projection
--- ============================================================
-
-inserted_history AS (
-    INSERT INTO customer_order_history (
-        customer_id,
-        order_item_id,
-        merchant_id,
-        order_id,
-        order_status,
-        total_amount,
-        created_at,
-        product_id,
-        quantity,
-        unit_price
-    )
-    SELECT
-        (:customer_id)::bigint,
-        ii.order_item_id,
-        ii.merchant_id,
-        ii.order_id,
-        'PENDING'::text,
-        v.order_total,
-        CURRENT_TIMESTAMP,
-        ii.product_id,
-        ii.quantity,
-        ii.unit_price
-    FROM inserted_items ii
-    CROSS JOIN validation v
-    RETURNING order_item_id
-)
-
-
--- ============================================================
--- Return result to psql
--- ============================================================
-
-SELECT
-    CASE
-        WHEN products_valid
-         AND inventory_valid
-        THEN 1
-        ELSE 0
-    END AS order_ok, order_total
-FROM validation
-
-\gset t1_
-
-
--- ============================================================
--- Update order total only if entire order succeeded
--- ============================================================
-
-\if :t1_order_ok
-
-UPDATE orders
-SET total_amount = (:t1_order_total)::numeric(12,2)
-WHERE order_id = (:new_order_id)::bigint;
-
-
--- ============================================================
--- Commit successful order
--- ============================================================
-
-COMMIT;
-
+\if :DEBUG_MODE
+\set product_id_1 :DEBUG_PRODUCT_ID_1
+\set qty_1 :DEBUG_QTY_1
 \else
-
--- ============================================================
--- Product missing OR insufficient inventory
--- ============================================================
-
-ROLLBACK;
-
+\set product_slot_1 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+\set product_id_1 :merchant_id + (:product_slot_1 * :NUM_MERCHANTS)
+\set qty_1 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
 \endif
 
+SELECT
+  CASE WHEN EXISTS (
+    SELECT 1
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_1)::bigint
+  ) THEN 1 ELSE 0 END AS product_ok,
+  COALESCE((
+    SELECT price
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_1)::bigint
+    LIMIT 1
+  ), 0.00)::numeric(12,2) AS price
+\gset item1_
+
+\if :item1_product_ok
+WITH reserved AS (
+  UPDATE inventory
+  SET quantity = quantity - (:qty_1)::integer,
+      updated_at = CURRENT_TIMESTAMP
+  WHERE inventory_id = (:product_id_1)::bigint
+    AND merchant_id = (:merchant_id)::bigint
+    AND product_id = (:product_id_1)::bigint
+    AND quantity >= (:qty_1)::integer
+  RETURNING 1
+)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+            THEN 1 ELSE 0 END AS stock_ok
+\gset item1_
+
+\if :item1_stock_ok
+SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+\gset item1_
+
+-- insert into order_items for item 1
+INSERT INTO order_items(
+  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+)
+VALUES(
+  (:item1_order_item_id)::bigint,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  (:product_id_1)::bigint,
+  (:qty_1)::integer,
+  :item1_price
+);
+
+\set order_total :order_total + (:qty_1 * :item1_price)
 \else
+\set order_ok 0
+\endif
+-- \endif for \if :item1_stock_ok
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item1_product_ok
 
--- ============================================================
--- Customer does not exist
--- ============================================================
+\endif
+-- \endif for \if :item_count >= 1
+\endif
+-- \endif for \if :order_ok
 
+
+\if :order_ok
+\if :item_count >= 2
+
+\if :DEBUG_MODE
+\set product_id_2 :DEBUG_PRODUCT_ID_2
+\set qty_2 :DEBUG_QTY_2
+\else
+\set product_slot_2 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+\set product_id_2 :merchant_id + (:product_slot_2 * :NUM_MERCHANTS)
+\set qty_2 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+\endif
+
+SELECT
+  CASE WHEN EXISTS (
+    SELECT 1
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_2)::bigint
+  ) THEN 1 ELSE 0 END AS product_ok,
+  COALESCE((
+    SELECT price
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_2)::bigint
+    LIMIT 1
+  ), 0.00)::numeric(12,2) AS price
+\gset item2_
+
+\if :item2_product_ok
+WITH reserved AS (
+  UPDATE inventory
+  SET quantity = quantity - (:qty_2)::integer,
+      updated_at = CURRENT_TIMESTAMP
+  WHERE inventory_id = (:product_id_2)::bigint
+    AND merchant_id = (:merchant_id)::bigint
+    AND product_id = (:product_id_2)::bigint
+    AND quantity >= (:qty_2)::integer
+  RETURNING 1
+)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+            THEN 1 ELSE 0 END AS stock_ok
+\gset item2_
+
+\if :item2_stock_ok
+SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+\gset item2_
+
+-- insert into order_items for item 2
+INSERT INTO order_items(
+  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+)
+VALUES(
+  (:item2_order_item_id)::bigint,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  (:product_id_2)::bigint,
+  (:qty_2)::integer,
+  :item2_price
+);
+
+\set order_total :order_total + (:qty_2 * :item2_price)
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item2_stock_ok
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item2_product_ok
+
+\endif
+-- \endif for \if :item_count >= 2
+\endif
+-- \endif for \if :order_ok
+
+\if :order_ok
+\if :item_count >= 3
+
+\if :DEBUG_MODE
+\set product_id_3 :DEBUG_PRODUCT_ID_3
+\set qty_3 :DEBUG_QTY_3
+\else
+\set product_slot_3 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+\set product_id_3 :merchant_id + (:product_slot_3 * :NUM_MERCHANTS)
+\set qty_3 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+\endif
+
+SELECT
+  CASE WHEN EXISTS (
+    SELECT 1
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_3)::bigint
+  ) THEN 1 ELSE 0 END AS product_ok,
+  COALESCE((
+    SELECT price
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_3)::bigint
+    LIMIT 1
+  ), 0.00)::numeric(12,2) AS price
+\gset item3_
+
+\if :item3_product_ok
+WITH reserved AS (
+  UPDATE inventory
+  SET quantity = quantity - (:qty_3)::integer,
+      updated_at = CURRENT_TIMESTAMP
+  WHERE inventory_id = (:product_id_3)::bigint
+    AND merchant_id = (:merchant_id)::bigint
+    AND product_id = (:product_id_3)::bigint
+    AND quantity >= (:qty_3)::integer
+  RETURNING 1
+)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+            THEN 1 ELSE 0 END AS stock_ok
+\gset item3_
+
+\if :item3_stock_ok
+SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+\gset item3_
+
+-- insert into order_items for item 3
+INSERT INTO order_items(
+  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+)
+VALUES(
+  (:item3_order_item_id)::bigint,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  (:product_id_3)::bigint,
+  (:qty_3)::integer,
+  :item3_price
+);
+
+\set order_total :order_total + (:qty_3 * :item3_price)
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item3_stock_ok
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item3_product_ok
+
+\endif
+-- \endif for \if :item_count >= 3
+\endif
+-- \endif for \if :order_ok
+
+\if :order_ok
+\if :item_count >= 4
+
+\if :DEBUG_MODE
+\set product_id_4 :DEBUG_PRODUCT_ID_4
+\set qty_4 :DEBUG_QTY_4
+\else
+\set product_slot_4 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+\set product_id_4 :merchant_id + (:product_slot_4 * :NUM_MERCHANTS)
+\set qty_4 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+\endif
+
+SELECT
+  CASE WHEN EXISTS (
+    SELECT 1
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_4)::bigint
+  ) THEN 1 ELSE 0 END AS product_ok,
+  COALESCE((
+    SELECT price
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_4)::bigint
+    LIMIT 1
+  ), 0.00)::numeric(12,2) AS price
+\gset item4_
+
+\if :item4_product_ok
+WITH reserved AS (
+  UPDATE inventory
+  SET quantity = quantity - (:qty_4)::integer,
+      updated_at = CURRENT_TIMESTAMP
+  WHERE inventory_id = (:product_id_4)::bigint
+    AND merchant_id = (:merchant_id)::bigint
+    AND product_id = (:product_id_4)::bigint
+    AND quantity >= (:qty_4)::integer
+  RETURNING 1
+)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+            THEN 1 ELSE 0 END AS stock_ok
+\gset item4_
+
+\if :item4_stock_ok
+SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+\gset item4_
+
+-- insert into order_items for item 4
+INSERT INTO order_items(
+  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+)
+VALUES(
+  (:item4_order_item_id)::bigint,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  (:product_id_4)::bigint,
+  (:qty_4)::integer,
+  :item4_price
+);
+
+\set order_total :order_total + (:qty_4 * :item4_price)
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item4_stock_ok
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item4_product_ok
+
+\endif
+-- \endif for \if :item_count >= 4
+\endif
+-- \endif for \if :order_ok
+
+\if :order_ok
+\if :item_count >= 5
+
+\if :DEBUG_MODE
+\set product_id_5 :DEBUG_PRODUCT_ID_5
+\set qty_5 :DEBUG_QTY_5
+\else
+\set product_slot_5 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+\set product_id_5 :merchant_id + (:product_slot_5 * :NUM_MERCHANTS)
+\set qty_5 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+\endif
+
+SELECT
+  CASE WHEN EXISTS (
+    SELECT 1
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_5)::bigint
+  ) THEN 1 ELSE 0 END AS product_ok,
+  COALESCE((
+    SELECT price
+    FROM products
+    WHERE merchant_id = (:merchant_id)::bigint
+      AND product_id = (:product_id_5)::bigint
+    LIMIT 1
+  ), 0.00)::numeric(12,2) AS price
+\gset item5_
+
+\if :item5_product_ok
+WITH reserved AS (
+  UPDATE inventory
+  SET quantity = quantity - (:qty_5)::integer,
+      updated_at = CURRENT_TIMESTAMP
+  WHERE inventory_id = (:product_id_5)::bigint
+    AND merchant_id = (:merchant_id)::bigint
+    AND product_id = (:product_id_5)::bigint
+    AND quantity >= (:qty_5)::integer
+  RETURNING 1
+)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+            THEN 1 ELSE 0 END AS stock_ok
+\gset item5_
+
+\if :item5_stock_ok
+SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+\gset item5_
+
+-- insert into order_items for item 5
+INSERT INTO order_items(
+  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+)
+VALUES(
+  (:item5_order_item_id)::bigint,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  (:product_id_5)::bigint,
+  (:qty_5)::integer,
+  :item5_price
+);
+
+\set order_total :order_total + (:qty_5 * :item5_price)
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item5_stock_ok
+\else
+\set order_ok 0
+\endif
+-- \endif for \if :item5_product_ok
+
+\endif
+-- \endif for \if :item_count >= 5
+\endif
+-- \endif for \if :order_ok
+
+-- update total_amount for orders
+\if :order_ok
+UPDATE orders
+SET total_amount = (:order_total)::numeric(12,2)
+WHERE order_id = (:new_order_id)::bigint;
+
+-- Maintain the customer-keyed order-history projection only after every item
+-- has been validated and the final order total is known.
+INSERT INTO customer_order_history (
+  customer_id,
+  order_item_id,
+  merchant_id,
+  order_id,
+  order_status,
+  total_amount,
+  created_at,
+  product_id,
+  quantity,
+  unit_price
+)
+SELECT
+  (:customer_id)::bigint,
+  item.order_item_id,
+  (:merchant_id)::bigint,
+  (:new_order_id)::bigint,
+  'PENDING'::text,
+  (:order_total)::numeric(12,2),
+  CURRENT_TIMESTAMP,
+  item.product_id,
+  item.quantity,
+  item.unit_price
+FROM (VALUES
+  (1, (:item1_order_item_id)::bigint, (:product_id_1)::bigint, (:qty_1)::integer, (:item1_price)::numeric(12,2)),
+  (2, (:item2_order_item_id)::bigint, (:product_id_2)::bigint, (:qty_2)::integer, (:item2_price)::numeric(12,2)),
+  (3, (:item3_order_item_id)::bigint, (:product_id_3)::bigint, (:qty_3)::integer, (:item3_price)::numeric(12,2)),
+  (4, (:item4_order_item_id)::bigint, (:product_id_4)::bigint, (:qty_4)::integer, (:item4_price)::numeric(12,2)),
+  (5, (:item5_order_item_id)::bigint, (:product_id_5)::bigint, (:qty_5)::integer, (:item5_price)::numeric(12,2))
+) AS item(item_no, order_item_id, product_id, quantity, unit_price)
+WHERE item.item_no <= (:item_count)::integer;
+
+COMMIT;
+\else
 ROLLBACK;
-
 \endif
