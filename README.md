@@ -18,6 +18,12 @@ Locked experiment variants
   `merchant_id` and uses `(merchant_id, product_id)` as its primary lookup
   index; the workload no longer creates or reads separate product/inventory
   tables.
+- `expt_a11_locked`: workload-A vertical partition of the merged product data.
+  Frequently accessed and updated fields (`price`, `quantity`, and
+  `updated_at`) live in `product_stock`, while descriptive fields
+  (`product_name` and `category`) live in `product_catalog`. Both tables are
+  distributed and colocated by `merchant_id`; T1/T2/T7/T9 access only the hot
+  stock table and T4 performs a colocated join.
 
 The original experiment folders are unchanged.
 
