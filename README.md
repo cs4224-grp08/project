@@ -133,6 +133,25 @@ locks, because no rewrite changes which merchants' rows a transaction touches.
   function delegation) would move the locks off the coordinator, breaking the
   protocol.
 
+### Combining query rewrites with merchant partitioning (O8)
+
+`expt_a134` (A) and `expt_b124` (B) combine the existing transaction
+rewrites with static partitioning and colocation of all five transactional
+tables by `merchant_id`.
+
+- Retain T1's batched product checks, stock reservation and item insertion.
+- T3: join on both merchant and order IDs; add
+  `orders(merchant_id, customer_id, created_at DESC)` for recent-order lookup.
+- T4: replace the materialized inventory CTE with a direct colocated join.
+- T5: resolve the merchant through `order_routing`, distributed by `order_id`,
+  then update using both IDs to avoid lookup and update fan-out.
+- T7: add merchant predicates to prune the batched update to the relevant shards.
+
+The existing advisory locks and T6 snapshot barrier are retained.
+`order_routing` is populated and reset with the initial orders; T5 skips IDs
+missing from this mapping. Both workloads use identical transaction SQL
+with their respective workload weights.
+
 ### Rules when building on these folders
 
 1. Every transaction except T6, read-only ones included, keeps its lock
