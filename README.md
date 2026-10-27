@@ -26,6 +26,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
+| `expt_a134` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1024985 | 
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -39,6 +40,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
+| `expt_b124` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1025276 | 
 
 Query-rewrite optimizations:
 
@@ -52,6 +54,7 @@ Query-rewrite optimizations:
   unchanged.
 - O4 (T1): check, reserve and insert all items with one statement each.
 - O5: single-statement transactions (T2-T6, T8, T9) run in autocommit.
+- O8: Combine query rewrites with horizontal partitioning
 
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
