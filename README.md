@@ -18,7 +18,8 @@ Locked experiment variants
   `merchant_id` and uses `(merchant_id, product_id)` as its primary lookup
   index; the workload no longer creates or reads separate product/inventory
   tables.
-- `expt_a11_locked`: workload-A vertical partition of the merged product data.
+- `expt_a11_locked` and `expt_b11_locked`: workload-A/B vertical partitions of
+  the merged product data.
   Frequently accessed and updated fields (`price`, `quantity`, and
   `updated_at`) live in `product_stock`, while descriptive fields
   (`product_name` and `category`) live in `product_catalog`. Both tables are
