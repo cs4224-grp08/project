@@ -26,7 +26,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a134` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1024985 | 
+| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -40,7 +40,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
-| `expt_b124` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1025276 | 
+| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
 
 Query-rewrite optimizations:
 
@@ -135,7 +135,7 @@ locks, because no rewrite changes which merchants' rows a transaction touches.
 
 ### Combining query rewrites with merchant partitioning (O8)
 
-`expt_a134` (A) and `expt_b124` (B) combine the existing transaction
+`expt_a204` (A) and `expt_b204` (B) combine the existing transaction
 rewrites with static partitioning and colocation of all five transactional
 tables by `merchant_id`.
 

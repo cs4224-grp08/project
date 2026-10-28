@@ -17,6 +17,13 @@ FROM order_routing
 WHERE order_id = (:order_id)::bigint
 \gset
 
+\if :t5_merchant_id = 0
+SELECT coalesce(max(merchant_id), 0) AS t5_merchant_id
+FROM orders
+WHERE order_id = (:order_id)::bigint
+\gset
+\endif
+
 \if :t5_merchant_id > 0
 BEGIN;
 SELECT pg_advisory_xact_lock(2, (:t5_merchant_id)::int);
