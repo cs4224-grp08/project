@@ -23,8 +23,11 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a99` | Task 1 (extra) | Serializable baseline, workload A | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990809 |
 | `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 | `expt_a101` | Task 2 | S0 + O1 | T3 (vs `expt_a99`) | 991556 |
+| `expt_a102` | Task 2 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_a99`) | 1027046 |
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
+| `expt_a112` | Task 2 | S0 with merged product and inventory data | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1024889 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
+| `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
 | `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
@@ -37,10 +40,20 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
 | `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 | `expt_b101` | Task 4 | S0 + O1 | T3 (vs `expt_b99`) | 991604 |
+| `expt_b102` | Task 4 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
+| `expt_b112` | Task 4 | `expt_b99` with merged product and inventory data | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1024890 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
+| `expt_b122` | Task 4 | `expt_b99` with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1027056 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
+
+The denormalization experiments also change schema creation and data loading in
+`run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
+distributed by `customer_id`; `expt_a112`/`expt_b112` replace `products` and
+`inventory` with `product_inventory`, distributed by `merchant_id`; and
+`expt_a122`/`expt_b122` replace those tables with colocated `product_stock` and
+`product_catalog` tables, distributed by `merchant_id`.
 
 Query-rewrite optimizations:
 
@@ -158,8 +171,8 @@ with their respective workload weights.
    statements, one per lock, as the first statements after `BEGIN`. If a rewrite changes which
    merchants' rows a transaction reads or writes, update its locks by the rules
    above.
-   - T5 may read its order's `merchant_id` before `BEGIN`, because
-     `merchant_id` never changes.
+   - T5 may read its order's `merchant_id` and `customer_id` before `BEGIN`,
+     because neither value ever changes.
    - T6 keeps its barrier in this order: `BEGIN ISOLATION LEVEL REPEATABLE
      READ`, the two `SET LOCAL` settings (one connection per worker),
      `pg_advisory_unlock_all()`, `pg_advisory_lock(1, 0)`, the statement that
