@@ -11,7 +11,6 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-#SBATCH --constraint=xcnc
 
 # IMPORTANT - replace this with your email
 #SBATCH --mail-user=e0969283@u.nus.edu
@@ -19,7 +18,7 @@
 set -euo pipefail
 
 # IMPORTANT: replace 99 with your project team number (e.g., 1, 2, ..., 20) to ensure a unique PGPORT number for each team
-TEAM_ID=${TEAM_ID:-76}
+TEAM_ID=${TEAM_ID:-8}
 
 ################# PostgreSQL environment variables
 PGPORT=$((10#${TEAM_ID} + 5432))
