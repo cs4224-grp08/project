@@ -39,7 +39,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
 | `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
 | `expt_b101` | Task 4 | S0 + O1 | T3 (vs `expt_b99`) | 991604 |
-| `expt_b102` | Task 4 | `expt_b99` + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
+| `expt_b102` | Task 4 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b112` | Task 4 | `expt_b99` with merged product and inventory data | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1024890 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
