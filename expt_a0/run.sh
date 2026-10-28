@@ -11,10 +11,9 @@
 # don't run on nodes with arm processor / ubuntu 26.04
 # temporarily exclude xcnc13 as server is problematic
 #SBATCH --exclude=xcng0,xcng1,xgpj0,xcnh[0-3],xcnc13
-#SBATCH --nodelist=xcnc[39-43]
 
 # IMPORTANT - replace this with your email
-#SBATCH --mail-user=e0969283@u.nus.edu
+#SBATCH --mail-user=e0323256@u.nus.edu
 
 set -euo pipefail
 
@@ -58,9 +57,7 @@ PG_SHARED_BUFFERS="${PG_SHARED_BUFFERS:-1GB}"
 PG_WORK_MEM="${PG_WORK_MEM:-32MB}"
 PG_MAINTENANCE_WORK_MEM="${PG_MAINTENANCE_WORK_MEM:-256MB}"
 PG_MAX_CONNECTIONS="${PG_MAX_CONNECTIONS:-1000}"
-# Coordinator advisory locks provide the workload's serial order. Data
-# statements use a fresh snapshot after their lock has been granted.
-PG_ISOLATION_LEVEL=${PG_ISOLATION_LEVEL:-read committed}
+PG_ISOLATION_LEVEL=${PG_ISOLATION_LEVEL:-serializable}
 
 PG_MAX_WAL_SIZE="${PG_MAX_WAL_SIZE:-16GB}"
 PG_MIN_WAL_SIZE="${PG_MIN_WAL_SIZE:-2GB}"

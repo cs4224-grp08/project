@@ -17,7 +17,6 @@
 
 
 BEGIN;
-SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
 UPDATE customers
 SET email = 'Customer-' || :new_email_number || '@acme.com'

@@ -17,10 +17,6 @@
 \set order_total 0.0
 
 BEGIN;
--- G=(1,0) is shared by order writers and exclusive to T6's snapshot barrier.
-SELECT pg_advisory_xact_lock_shared(1, 0);
--- (2,m) exclusively protects all rows belonging to merchant m.
-SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
 -- retrieve customer information
 SELECT CASE WHEN EXISTS (

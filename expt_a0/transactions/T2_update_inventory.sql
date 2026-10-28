@@ -14,13 +14,13 @@
 \endif
 
 BEGIN;
-SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
-UPDATE product_inventory
+UPDATE inventory
 SET quantity = quantity + (:inventory_change)::integer,
     updated_at = CURRENT_TIMESTAMP
-WHERE product_id = (:product_id)::bigint
+WHERE inventory_id = (:product_id)::bigint
   AND merchant_id = (:merchant_id)::bigint
+  AND product_id = (:product_id)::bigint
   AND quantity + (:inventory_change)::integer >= 0;
 
 COMMIT;

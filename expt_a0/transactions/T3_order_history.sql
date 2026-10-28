@@ -12,7 +12,6 @@
 \endif
 
 BEGIN;
-SELECT pg_advisory_xact_lock_shared(2, (:merchant_id)::int);
 
 SELECT
   o.order_id,

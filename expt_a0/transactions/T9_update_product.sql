@@ -10,7 +10,6 @@
 \set price_increase random(1, 10)
 
 BEGIN;
-SELECT pg_advisory_xact_lock(2, (:merchant_id)::int);
 
 UPDATE products
 SET price = price + (:price_increase)::numeric(12,2)
