@@ -29,6 +29,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
+| `expt_a202` | Task 2 | `expt_a102` denormalization + O2 + adapted O4 + O3 | T1, T3, T4, T5, T7 (vs `expt_a99`) | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -45,6 +46,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b122` | Task 4 | `expt_b99` with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1027056 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
+| `expt_b202` | Task 4 | `expt_b102` denormalization + O3 + O2 + adapted O4 | T1, T3, T4, T5, T7 (vs `expt_b99`) | not run |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
