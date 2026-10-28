@@ -26,6 +26,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
+| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -39,6 +40,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
+| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
 
 Query-rewrite optimizations:
 
@@ -52,6 +54,7 @@ Query-rewrite optimizations:
   unchanged.
 - O4 (T1): check, reserve and insert all items with one statement each.
 - O5: single-statement transactions (T2-T6, T8, T9) run in autocommit.
+- O8: Combine query rewrites with horizontal partitioning
 
 `expt_a0` and `expt_b0` are the provided scripts with `TEAM_ID=8` and the
 notification email set; they differ only in `WORKLOAD`.
@@ -129,6 +132,25 @@ locks, because no rewrite changes which merchants' rows a transaction touches.
   transaction on each worker. Running the procedure on the worker (Citus
   function delegation) would move the locks off the coordinator, breaking the
   protocol.
+
+### Combining query rewrites with merchant partitioning (O8)
+
+`expt_a204` (A) and `expt_b204` (B) combine the existing transaction
+rewrites with static partitioning and colocation of all five transactional
+tables by `merchant_id`.
+
+- Retain T1's batched product checks, stock reservation and item insertion.
+- T3: join on both merchant and order IDs; add
+  `orders(merchant_id, customer_id, created_at DESC)` for recent-order lookup.
+- T4: replace the materialized inventory CTE with a direct colocated join.
+- T5: resolve the merchant through `order_routing`, distributed by `order_id`,
+  then update using both IDs to avoid lookup and update fan-out.
+- T7: add merchant predicates to prune the batched update to the relevant shards.
+
+The existing advisory locks and T6 snapshot barrier are retained.
+`order_routing` is populated and reset with the initial orders; T5 skips IDs
+missing from this mapping. Both workloads use identical transaction SQL
+with their respective workload weights.
 
 ### Rules when building on these folders
 
