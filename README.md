@@ -30,6 +30,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
 | `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
+| `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -47,6 +48,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b122` | Task 4 | `expt_b99` with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1027056 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
+| `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
@@ -164,6 +166,32 @@ The existing advisory locks and T6 snapshot barrier are retained.
 `order_routing` is populated and reset with the initial orders; T5 skips IDs
 missing from this mapping. Both workloads use identical transaction SQL
 with their respective workload weights.
+
+### Vertical partitioning (VP)
+
+Each VP experiment applies one paper's algorithm, in isolation, to
+`expt_a204`/`expt_b204`. The algorithms run offline in
+`scripts/vertical_partitioning` (Go, standard library only); their output
+decides which columns each table holds. Each package and command is numbered
+like its paper in `docs/vertical_partitioning`, between the survey (0) and the
+benchmark that compares the algorithms (4, Jindal et al. 2013). Every fragment
+keeps its record's primary key and `merchant_id`, is distributed by
+`merchant_id` and colocated with `customers`, so a record is reassembled on one
+worker and the rules below still hold.
+
+```
+cd scripts/vertical_partitioning
+go test ./...
+go run ./cmd/1_navathe -workload A     # or B
+```
+
+- VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`/`expt_b103`:
+  attribute affinity weighted by records accessed, clustered by the Bond
+  Energy Algorithm (McCormick et al. 1972), then split repeatedly in two while
+  `z = CL·CU − CI²` is positive (phase 1, non-overlapping; SHIFT and CLUSTER
+  don't change the result). Both workloads give `orders {customer_id,
+  total_amount, created_at} | order_statuses {order_status}`; every other
+  table stays whole. T1 inserts the status, T3 joins it and T5 updates it.
 
 ### Rules when building on these folders
 
