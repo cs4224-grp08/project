@@ -32,6 +32,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
 | `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | not run |
 | `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | not run |
+| `expt_a123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a204`) | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -51,6 +52,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
 | `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
 | `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
+| `expt_b123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b204`) | not run |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
@@ -186,6 +188,7 @@ cd scripts/vertical_partitioning
 go test ./...
 go run ./cmd/1_navathe -workload A     # or B
 go run ./cmd/2_hillclimb -workload A   # or B
+go run ./cmd/3_autopart -workload A    # or B
 ```
 
 - VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`/`expt_b103`:
@@ -206,6 +209,20 @@ go run ./cmd/2_hillclimb -workload A   # or B
   every other table stays whole. T1 inserts both fragments, T3 joins them (its
   composite index becomes `orders (merchant_id, customer_id)`) and T6 scans
   `order_created_at`, joining `orders` for the totals.
+- VP3, Papadomanolakis and Ailamaki (2004, AutoPart), `expt_a123`/`expt_b123`:
+  atomic fragments (attributes always used by the same transactions), greedily
+  extended into composite fragments, then merged pairwise, minimising each
+  transaction's scanned attributes plus a cost `J` per extra fragment joined,
+  with no replication. `J = 18.76` attribute scans is calibrated, as in the
+  paper, from PostgreSQL's optimizer (`3_autopart/join_cost_calibration.sql`,
+  full scans of shard-sized fragments; key lookups cost the same at any width,
+  so they cannot calibrate the per-attribute scan cost, and their `J = 6.23`
+  would also split `products` into `{product_name, category} | {price,
+  quantity, updated_at}`). Both workloads give `customers {customer_name,
+  created_at} | customer_emails {email}`; every other table stays whole. T8
+  updates `customer_emails` and T1's existence check no longer names `email`.
+  Categorical partitioning does not apply: no transaction filters on a
+  categorical attribute.
 
 ### Rules when building on these folders
 
