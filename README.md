@@ -21,7 +21,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
 | `expt_a99` | Task 1 (extra) | Serializable baseline, workload A | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990809 |
-| `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | 996399 |
 | `expt_a101` | Task 2 | S0 + O1 | T3 (vs `expt_a99`) | 991556 |
 | `expt_a102` | Task 2 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_a99`) | 1027046 |
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
@@ -29,12 +29,13 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841; 1038687 (xcnd whole-node, for VP1-VP3) |
+| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841; 1038687 (xcnd whole-node, for VP1-VP3; running) |
 | `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | 1037237 (xcnd whole-node) |
 | `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | 1037238 (xcnd whole-node) |
 | `expt_a123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a204`) | 1037239 (xcnd whole-node) |
-| `expt_a205` | - | `expt_a204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_a204`) | not run |
-| `expt_a206` | - | `expt_a205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a205`) | not run |
+| `expt_a205` | - | `expt_a204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_a204`) | 1038829 (running) |
+| `expt_a206` | - | `expt_a205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a205`) | 1038830 (queued) |
+| `expt_a207` | Task 2 | `expt_a205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a205`) | 1038978 (queued) |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -43,7 +44,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
-| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | none complete (995868 cancelled after 32 clients) |
 | `expt_b101` | Task 4 | S0 + O1 | T3 (vs `expt_b99`) | 991604 |
 | `expt_b102` | Task 4 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
@@ -55,8 +56,9 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
 | `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
 | `expt_b123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b204`) | not run |
-| `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | not run |
-| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | not run |
+| `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | 1038831 (queued) |
+| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | 1038832 (queued) |
+| `expt_b207` | Task 4 | `expt_b205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b205`) | 1038979 (queued) |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
