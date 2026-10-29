@@ -4,6 +4,8 @@ import (
 	"math/rand/v2"
 	"slices"
 	"testing"
+
+	"github.com/cs4224-grp08/project/scripts/vertical_partitioning/workload"
 )
 
 const (
@@ -126,7 +128,7 @@ func nonEmpty(fragments [][]int, queryAccessSets []QueryAccessSet) [][]int {
 	var usedFragments [][]int
 	for _, fragment := range fragments {
 		for _, queryAccessSet := range queryAccessSets {
-			if len(intersection(fragment, queryAccessSet.QueryAttributes)) > 0 {
+			if len(workload.AttributeIntersection(fragment, queryAccessSet.QueryAttributes)) > 0 {
 				usedFragments = append(usedFragments, fragment)
 				break
 			}

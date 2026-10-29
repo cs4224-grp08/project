@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"slices"
-	"strings"
 
 	autopart "github.com/cs4224-grp08/project/scripts/vertical_partitioning/3_autopart"
 	"github.com/cs4224-grp08/project/scripts/vertical_partitioning/workload"
@@ -34,10 +33,7 @@ func main() {
 
 	for _, entity := range workload.Entities {
 		attributes := entity.NonKeyAttributes()
-		attributeBytes := make([]float64, len(attributes))
-		for attributeIndex, attribute := range attributes {
-			attributeBytes[attributeIndex] = attribute.AttributeBytes
-		}
+		attributeBytes := entity.NonKeyAttributeBytes()
 
 		queryAccessSets := autopart.QueryAccessSets(entity, attributes, *workloadName)
 		atomicFragments := autopart.AtomicFragments(queryAccessSets, len(attributes))
@@ -47,8 +43,8 @@ func main() {
 			*scanScalingFactor, *fragmentJoinCost, *replicationBudget)
 		fmt.Println("\nQuery access sets")
 		printQueryAccessSets(queryAccessSets, attributes)
-		fmt.Printf("\nAtomic fragments  %10.6g  %s\n", autopart.WorkloadCost(queryAccessSets, atomicFragments, partitioningParameters), fragmentNames(atomicFragments, attributes))
-		fmt.Printf("Fragments         %10.6g  %s\n", autopart.WorkloadCost(queryAccessSets, fragments, partitioningParameters), fragmentNames(fragments, attributes))
+		fmt.Printf("\nAtomic fragments  %10.6g  %s\n", autopart.WorkloadCost(queryAccessSets, atomicFragments, partitioningParameters), workload.FragmentNames(atomicFragments, attributes))
+		fmt.Printf("Fragments         %10.6g  %s\n", autopart.WorkloadCost(queryAccessSets, fragments, partitioningParameters), workload.FragmentNames(fragments, attributes))
 	}
 }
 
@@ -70,17 +66,4 @@ func printQueryAccessSets(queryAccessSets []autopart.QueryAccessSet, attributes 
 		}
 		fmt.Println()
 	}
-}
-
-func fragmentNames(fragments [][]int, attributes []workload.Attribute) string {
-	fragmentNames := make([]string, len(fragments))
-	for fragmentIndex, fragment := range fragments {
-		attributeNames := make([]string, len(fragment))
-		for fragmentPosition, attribute := range fragment {
-			attributeNames[fragmentPosition] = attributes[attribute].AttributeName
-		}
-		fragmentNames[fragmentIndex] = "{" + strings.Join(attributeNames, ", ") + "}"
-	}
-
-	return strings.Join(fragmentNames, " ")
 }

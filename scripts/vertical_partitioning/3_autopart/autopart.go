@@ -112,7 +112,7 @@ func generateCompositeFragments(queryAccessSets []QueryAccessSet, atomicFragment
 	var compositeFragments [][]int
 	for _, selectedFragment := range selectedFragments {
 		for _, extension := range slices.Concat(atomicFragments, selectedFragments) {
-			compositeFragment := union(selectedFragment, extension)
+			compositeFragment := workload.AttributeUnion(selectedFragment, extension)
 			if len(compositeFragment) == len(selectedFragment) ||
 				slices.ContainsFunc(compositeFragments, func(fragment []int) bool { return slices.Equal(fragment, compositeFragment) }) ||
 				len(queryExtent(queryAccessSets, atomicFragments, compositeFragment)) < minimumQueryExtent {
@@ -131,7 +131,7 @@ func queryExtent(queryAccessSets []QueryAccessSet, atomicFragments [][]int, frag
 	for queryIndex, queryAccessSet := range queryAccessSets {
 		referencesEveryComponent := true
 		for _, atomicFragment := range atomicFragments {
-			if isSubset(atomicFragment, fragment) && len(intersection(atomicFragment, queryAccessSet.QueryAttributes)) == 0 {
+			if workload.IsAttributeSubset(atomicFragment, fragment) && len(workload.AttributeIntersection(atomicFragment, queryAccessSet.QueryAttributes)) == 0 {
 				referencesEveryComponent = false
 				break
 			}
@@ -147,7 +147,7 @@ func queryExtent(queryAccessSets []QueryAccessSet, atomicFragments [][]int, frag
 func addFragment(schema [][]int, fragment []int) [][]int {
 	var extendedSchema [][]int
 	for _, schemaFragment := range schema {
-		if !isSubset(schemaFragment, fragment) {
+		if !workload.IsAttributeSubset(schemaFragment, fragment) {
 			extendedSchema = append(extendedSchema, schemaFragment)
 		}
 	}
@@ -161,7 +161,7 @@ func pairwiseMerging(queryAccessSets []QueryAccessSet, schema [][]int, partition
 		bestSchema, bestCost := [][]int(nil), schemaCost
 		for firstFragment := range schema {
 			for secondFragment := firstFragment + 1; secondFragment < len(schema); secondFragment++ {
-				mergedSchema := addFragment(schema, union(schema[firstFragment], schema[secondFragment]))
+				mergedSchema := addFragment(schema, workload.AttributeUnion(schema[firstFragment], schema[secondFragment]))
 				if mergedCost := WorkloadCost(queryAccessSets, mergedSchema, partitioningParameters); mergedCost < bestCost {
 					bestSchema, bestCost = mergedSchema, mergedCost
 				}
@@ -187,7 +187,7 @@ func WorkloadCost(queryAccessSets []QueryAccessSet, schema [][]int, partitioning
 func queryCost(queryAccessSet QueryAccessSet, schema [][]int, partitioningParameters PartitioningParameters) float64 {
 	var relevantFragments [][]int
 	for _, fragment := range schema {
-		if len(intersection(fragment, queryAccessSet.QueryAttributes)) > 0 {
+		if len(workload.AttributeIntersection(fragment, queryAccessSet.QueryAttributes)) > 0 {
 			relevantFragments = append(relevantFragments, fragment)
 		}
 	}
@@ -201,12 +201,12 @@ func queryCost(queryAccessSet QueryAccessSet, schema [][]int, partitioningParame
 			if planMask&(1<<fragmentIndex) == 0 {
 				continue
 			}
-			coveredAttributes = union(coveredAttributes, fragment)
+			coveredAttributes = workload.AttributeUnion(coveredAttributes, fragment)
 			scanCost += partitioningParameters.ScanScalingFactor * float64(len(fragment))
 			planFragments++
 		}
 
-		if isSubset(queryAccessSet.QueryAttributes, coveredAttributes) {
+		if workload.IsAttributeSubset(queryAccessSet.QueryAttributes, coveredAttributes) {
 			joinCost := float64(planFragments-1) * partitioningParameters.FragmentJoinCost
 			cheapestPlan = min(cheapestPlan, scanCost+joinCost)
 		}
@@ -222,7 +222,7 @@ func replicatedBytes(schema [][]int, attributeBytes []float64) float64 {
 		for _, attribute := range fragment {
 			storedBytes += attributeBytes[attribute]
 		}
-		storedAttributes = union(storedAttributes, fragment)
+		storedAttributes = workload.AttributeUnion(storedAttributes, fragment)
 	}
 
 	var distinctBytes float64
@@ -249,37 +249,4 @@ func cloneFragments(fragments [][]int) [][]int {
 	}
 
 	return clonedFragments
-}
-
-func union(firstAttributes, secondAttributes []int) []int {
-	unitedAttributes := slices.Clone(firstAttributes)
-	for _, attribute := range secondAttributes {
-		if !slices.Contains(unitedAttributes, attribute) {
-			unitedAttributes = append(unitedAttributes, attribute)
-		}
-	}
-	slices.Sort(unitedAttributes)
-
-	return unitedAttributes
-}
-
-func intersection(firstAttributes, secondAttributes []int) []int {
-	var sharedAttributes []int
-	for _, attribute := range firstAttributes {
-		if slices.Contains(secondAttributes, attribute) {
-			sharedAttributes = append(sharedAttributes, attribute)
-		}
-	}
-
-	return sharedAttributes
-}
-
-func isSubset(subsetAttributes, supersetAttributes []int) bool {
-	for _, attribute := range subsetAttributes {
-		if !slices.Contains(supersetAttributes, attribute) {
-			return false
-		}
-	}
-
-	return true
 }

@@ -18,8 +18,8 @@ func BondEnergyOrder(attributeMatrix [][]float64) []int {
 		bestGap, bestBondEnergy := 0, math.Inf(-1)
 		for gap := 0; gap <= len(attributeOrder); gap++ {
 			leftPosition, rightPosition := gap-1, gap
-			gapBondEnergy := positionBond(attributeMatrix, attributeOrder, leftPosition, newAttribute) +
-				positionBond(attributeMatrix, attributeOrder, rightPosition, newAttribute) -
+			gapBondEnergy := 2*positionBond(attributeMatrix, attributeOrder, leftPosition, newAttribute) +
+				2*positionBond(attributeMatrix, attributeOrder, rightPosition, newAttribute) -
 				2*adjacentBond(attributeMatrix, attributeOrder, leftPosition)
 			if gapBondEnergy > bestBondEnergy {
 				bestGap, bestBondEnergy = gap, gapBondEnergy

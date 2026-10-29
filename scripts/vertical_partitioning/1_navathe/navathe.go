@@ -80,10 +80,7 @@ func attributeAccess(access workload.EntityAccess, attributes []workload.Attribu
 }
 
 func AffinityMatrix(attributeUsages []AttributeUsage, attributeCount int) [][]float64 {
-	affinityMatrix := make([][]float64, attributeCount)
-	for row := range affinityMatrix {
-		affinityMatrix[row] = make([]float64, attributeCount)
-	}
+	affinityMatrix := newSquareMatrix(attributeCount)
 
 	for _, attributeUsage := range attributeUsages {
 		for _, firstAttribute := range attributeUsage.TransactionAttributes {
@@ -207,7 +204,7 @@ func partitionAccesses(fragmentUsages []AttributeUsage, upperFragment, lowerFrag
 func partitionCost(fragmentUsages []AttributeUsage, attributeBytes []float64, upperFragment, lowerFragment []int, costFactors CostFactors) float64 {
 	var sharedAttributes []int
 	if !slices.Equal(upperFragment, lowerFragment) {
-		sharedAttributes = intersection(upperFragment, lowerFragment)
+		sharedAttributes = workload.AttributeIntersection(upperFragment, lowerFragment)
 	}
 
 	var irrelevantBytes, fragmentAccesses float64
@@ -249,18 +246,18 @@ func accessedFragments(attributeUsage AttributeUsage, upperFragment, lowerFragme
 }
 
 func matchedFragments(attributeUsage AttributeUsage, upperFragment, lowerFragment []int) (matchesUpper, matchesLower bool) {
-	sharedAttributes := intersection(upperFragment, lowerFragment)
+	sharedAttributes := workload.AttributeIntersection(upperFragment, lowerFragment)
 	if attributeUsage.TransactionType == UpdateTransaction {
-		upperFragment, lowerFragment = difference(upperFragment, sharedAttributes), difference(lowerFragment, sharedAttributes)
+		upperFragment, lowerFragment = workload.AttributeDifference(upperFragment, sharedAttributes), workload.AttributeDifference(lowerFragment, sharedAttributes)
 	}
 
-	return isSubset(attributeUsage.TransactionAttributes, upperFragment), isSubset(attributeUsage.TransactionAttributes, lowerFragment)
+	return workload.IsAttributeSubset(attributeUsage.TransactionAttributes, upperFragment), workload.IsAttributeSubset(attributeUsage.TransactionAttributes, lowerFragment)
 }
 
 func relevantUsages(attributeUsages []AttributeUsage, fragment []int) []AttributeUsage {
 	var fragmentUsages []AttributeUsage
 	for _, attributeUsage := range attributeUsages {
-		fragmentAttributes := intersection(attributeUsage.TransactionAttributes, fragment)
+		fragmentAttributes := workload.AttributeIntersection(attributeUsage.TransactionAttributes, fragment)
 		if len(fragmentAttributes) == 0 {
 			continue
 		}
@@ -270,36 +267,4 @@ func relevantUsages(attributeUsages []AttributeUsage, fragment []int) []Attribut
 	}
 
 	return fragmentUsages
-}
-
-func intersection(firstAttributes, secondAttributes []int) []int {
-	var sharedAttributes []int
-	for _, attribute := range firstAttributes {
-		if slices.Contains(secondAttributes, attribute) {
-			sharedAttributes = append(sharedAttributes, attribute)
-		}
-	}
-
-	return sharedAttributes
-}
-
-func difference(firstAttributes, secondAttributes []int) []int {
-	var remainingAttributes []int
-	for _, attribute := range firstAttributes {
-		if !slices.Contains(secondAttributes, attribute) {
-			remainingAttributes = append(remainingAttributes, attribute)
-		}
-	}
-
-	return remainingAttributes
-}
-
-func isSubset(subsetAttributes, supersetAttributes []int) bool {
-	for _, attribute := range subsetAttributes {
-		if !slices.Contains(supersetAttributes, attribute) {
-			return false
-		}
-	}
-
-	return true
 }

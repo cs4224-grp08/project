@@ -1,7 +1,8 @@
 -- Optimizer costs for AutoPart's scan scaling factor (SR) and join cost (J):
 -- key lookups and full scans of fragments of one to six attributes, alone and
 -- joined in pairs, each fragment one shard of orders (5,000,000 rows / 32 shards)
-SET calibration.rows_per_shard = 156250;
+BEGIN;
+SET LOCAL calibration.rows_per_shard = 156250;
 
 CREATE TEMP TABLE fragment_plan_costs(plan_shape TEXT, fragment_attributes INT[], plan_cost NUMERIC);
 
@@ -99,3 +100,5 @@ FROM fit
 ORDER BY plan_shape;
 
 SELECT plan_shape, fragment_attributes, plan_cost FROM fragment_plan_costs ORDER BY plan_shape, cardinality(fragment_attributes), fragment_attributes;
+
+ROLLBACK;

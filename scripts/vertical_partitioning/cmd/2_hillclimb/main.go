@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"slices"
-	"strings"
 
 	hillclimb "github.com/cs4224-grp08/project/scripts/vertical_partitioning/2_hillclimb"
 	"github.com/cs4224-grp08/project/scripts/vertical_partitioning/workload"
@@ -24,10 +23,7 @@ func main() {
 
 	for _, entity := range workload.Entities {
 		attributes := entity.NonKeyAttributes()
-		attributeBytes := make([]float64, len(attributes))
-		for attributeIndex, attribute := range attributes {
-			attributeBytes[attributeIndex] = attribute.AttributeBytes
-		}
+		attributeBytes := entity.NonKeyAttributeBytes()
 
 		queryAccesses := hillclimb.QueryAccesses(entity, attributes, *workloadName)
 		hillClimbPartition := hillclimb.HillClimb(queryAccesses, attributeBytes, *cacheLineBytes)
@@ -36,8 +32,8 @@ func main() {
 		fmt.Printf("\n## %s (workload %s, cache line = %g bytes)\n", entity.EntityName, *workloadName, *cacheLineBytes)
 		fmt.Println("\nQuery access rates")
 		printQueryAccesses(queryAccesses, attributes)
-		fmt.Printf("\nHill-Climb  %12.6g  %s\n", hillclimb.PartitionCost(queryAccesses, attributeBytes, hillClimbPartition, *cacheLineBytes), groupNames(hillClimbPartition, attributes))
-		fmt.Printf("Naive       %12.6g  %s\n", hillclimb.PartitionCost(queryAccesses, attributeBytes, naivePartition, *cacheLineBytes), groupNames(naivePartition, attributes))
+		fmt.Printf("\nHill-Climb  %12.6g  %s\n", hillclimb.PartitionCost(queryAccesses, attributeBytes, hillClimbPartition, *cacheLineBytes), workload.FragmentNames(hillClimbPartition, attributes))
+		fmt.Printf("Naive       %12.6g  %s\n", hillclimb.PartitionCost(queryAccesses, attributeBytes, naivePartition, *cacheLineBytes), workload.FragmentNames(naivePartition, attributes))
 	}
 }
 
@@ -55,17 +51,4 @@ func printQueryAccesses(queryAccesses []hillclimb.QueryAccess, attributes []work
 		}
 		fmt.Println()
 	}
-}
-
-func groupNames(partition [][]int, attributes []workload.Attribute) string {
-	groupNames := make([]string, len(partition))
-	for groupIndex, group := range partition {
-		attributeNames := make([]string, len(group))
-		for groupPosition, attribute := range group {
-			attributeNames[groupPosition] = attributes[attribute].AttributeName
-		}
-		groupNames[groupIndex] = "{" + strings.Join(attributeNames, ", ") + "}"
-	}
-
-	return strings.Join(groupNames, " ")
 }

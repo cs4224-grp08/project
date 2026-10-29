@@ -42,10 +42,9 @@ func main() {
 
 	for _, entity := range workload.Entities {
 		attributes := entity.NonKeyAttributes()
-		attributeBytes := make([]float64, len(attributes))
+		attributeBytes := entity.NonKeyAttributeBytes()
 		allAttributes := make([]int, len(attributes))
-		for attributeIndex, attribute := range attributes {
-			attributeBytes[attributeIndex] = attribute.AttributeBytes
+		for attributeIndex := range allAttributes {
 			allAttributes[attributeIndex] = attributeIndex
 		}
 
@@ -61,8 +60,7 @@ func main() {
 		printMatrix(affinityMatrix, attributes, allAttributes)
 		fmt.Println("\nAffinity matrix in clustered order")
 		printMatrix(navathe.PermutedMatrix(affinityMatrix, clusteredOrder), attributes, clusteredOrder)
-		fmt.Println("\nFragments")
-		printFragments(fragments, attributes)
+		fmt.Printf("\nFragments  %s\n", workload.FragmentNames(fragments, attributes))
 	}
 }
 
@@ -120,15 +118,5 @@ func printMatrix(orderedMatrix [][]float64, attributes []workload.Attribute, att
 			fmt.Printf(" %14.6g", orderedMatrix[rowPosition][columnPosition])
 		}
 		fmt.Println()
-	}
-}
-
-func printFragments(fragments [][]int, attributes []workload.Attribute) {
-	for _, fragment := range fragments {
-		attributeNames := make([]string, len(fragment))
-		for fragmentPosition, attribute := range fragment {
-			attributeNames[fragmentPosition] = attributes[attribute].AttributeName
-		}
-		fmt.Printf("  {%s}\n", strings.Join(attributeNames, ", "))
 	}
 }

@@ -39,6 +39,33 @@ func TestAffinityMatrixMatchesFigure3a(t *testing.T) {
 	}
 }
 
+func TestClusteredOrderMatchesFigure3b(t *testing.T) {
+	wantClusteredMatrix := [][]float64{
+		{75, 75, 50, 25, 25, 25, 25, 0, 0, 0},
+		{75, 75, 50, 25, 25, 25, 25, 0, 0, 0},
+		{50, 50, 85, 60, 60, 25, 25, 0, 0, 0},
+		{25, 25, 60, 110, 110, 75, 75, 0, 0, 0},
+		{25, 25, 60, 110, 110, 75, 75, 0, 0, 0},
+		{25, 25, 25, 75, 75, 115, 115, 15, 15, 15},
+		{25, 25, 25, 75, 75, 115, 115, 15, 15, 15},
+		{0, 0, 0, 0, 0, 15, 15, 40, 40, 40},
+		{0, 0, 0, 0, 0, 15, 15, 40, 40, 40},
+		{0, 0, 0, 0, 0, 15, 15, 40, 40, 40},
+	}
+	attributeCount := len(tableOneAttributeBytes)
+	allAttributes := make([]int, attributeCount)
+	for attribute := range allAttributes {
+		allAttributes[attribute] = attribute
+	}
+
+	clusteredOrder := ClusteredOrder(tableOneAttributeUsages, allAttributes, attributeCount)
+	gotClusteredMatrix := PermutedMatrix(AffinityMatrix(tableOneAttributeUsages, attributeCount), clusteredOrder)
+
+	if !slices.EqualFunc(gotClusteredMatrix, wantClusteredMatrix, slices.Equal) {
+		t.Errorf("clustered order %v gives %v, want Figure 3b %v", clusteredOrder, gotClusteredMatrix, wantClusteredMatrix)
+	}
+}
+
 func TestNonOverlappingFragmentsMatchFigure9a(t *testing.T) {
 	gotFragments := sortedFragments(Fragments(tableOneAttributeUsages, tableOneAttributeBytes, PartitioningOptions{}))
 
