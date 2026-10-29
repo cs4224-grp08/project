@@ -29,12 +29,12 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 (xcnc), 1038687 (xcnd) | 
-| `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | 1037237 |
-| `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | 1037238 |
-| `expt_a123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a204`) | 1037239 |
-| `expt_a205` | - | `expt_a103` + T6 covering index on `orders (created_at)` + T3 index on `order_items (merchant_id, order_id)` | T1, T3, T5, T6 (vs `expt_a103`) | not run |
-| `expt_a206` | - | `expt_a204` + T6 covering index on `orders (created_at)` + T3 index on `order_items (merchant_id, order_id)` (no VP) | T3, T6 (vs `expt_a204`) | not run |
+| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841; 1038687 (xcnd whole-node, for VP1-VP3) |
+| `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | 1037237 (xcnd whole-node) |
+| `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | 1037238 (xcnd whole-node) |
+| `expt_a123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a204`) | 1037239 (xcnd whole-node) |
+| `expt_a205` | - | `expt_a204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_a204`) | not run |
+| `expt_a206` | - | `expt_a205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a205`) | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -51,12 +51,12 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b122` | Task 4 | `expt_b99` with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1027056 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
-| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 (xcnc), 1038689 (xcnd) | 
+| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 |
 | `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
 | `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
 | `expt_b123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b204`) | not run |
-| `expt_b205` | - | `expt_b103` + T6 covering index on `orders (created_at)` + T3 index on `order_items (merchant_id, order_id)` | T1, T3, T5, T6 (vs `expt_b103`) | not run |
-| `expt_b206` | - | `expt_b204` + T6 covering index on `orders (created_at)` + T3 index on `order_items (merchant_id, order_id)` (no VP) | T3, T6 (vs `expt_b204`) | not run |
+| `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | not run |
+| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | not run |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
@@ -227,6 +227,33 @@ go run ./cmd/3_autopart -workload A    # or B
   updates `customer_emails` and T1's existence check no longer names `email`.
   Categorical partitioning does not apply: no transaction filters on a
   categorical attribute.
+
+VP1-VP3 ran on xcnd with whole nodes (`CONSTRAINT=xcnd CPUS=24 MEM=56G`, so
+`THREADS=24`); compare them with `expt_a204` job 1038687, which ran the same
+way, not with job 1030841. Workload B was not run for VP1-VP3.
+
+### Indexes for T6 and T3, then VP1 (205, 206)
+
+Profiling `expt_a204` showed T6 (Global Sales) taking about 350 ms at one
+client, 62% (A) and 75% (B) of the run time: each shard scans every `orders`
+row to find those in the reporting window.
+
+- `expt_a205`/`expt_b205` = `expt_a204`/`expt_b204` + three `run.sh` changes;
+  no transaction changes:
+  - T6: `orders (created_at) INCLUDE (merchant_id, total_amount)`, a
+    covering index that answers T6 by an index-only scan.
+  - T3: `order_items (merchant_id, order_id)`, so T3 joins its 20 orders'
+    items directly.
+  - `VACUUM ANALYZE` instead of `ANALYZE` after loading, setting the
+    visibility map that index-only scans rely on.
+- `expt_a206`/`expt_b206` = `expt_a205`/`expt_b205` + VP1 (Navathe), the same
+  split as `expt_a103`: `order_status` moves to `order_statuses`. T6 never
+  reads the status, so the covering index is unchanged.
+
+`204 → 205` isolates the indexes and `205 → 206` isolates VP1 with the indexes
+in place (`204 → 103` isolates VP1 without them). 205 and 206 run with the
+default allocation on xcnc, like `expt_a0`, `expt_a99` and `expt_a204` job
+1030841, one job at a time so no two share a node (they would share `PGPORT`).
 
 ### Rules when building on these folders
 
