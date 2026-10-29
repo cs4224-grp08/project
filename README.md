@@ -31,6 +31,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
 | `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
 | `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | not run |
+| `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | not run |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -49,6 +50,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
 | `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
+| `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
@@ -183,6 +185,7 @@ worker and the rules below still hold.
 cd scripts/vertical_partitioning
 go test ./...
 go run ./cmd/1_navathe -workload A     # or B
+go run ./cmd/2_hillclimb -workload A   # or B
 ```
 
 - VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`/`expt_b103`:
@@ -192,6 +195,17 @@ go run ./cmd/1_navathe -workload A     # or B
   don't change the result). Both workloads give `orders {customer_id,
   total_amount, created_at} | order_statuses {order_status}`; every other
   table stays whole. T1 inserts the status, T3 joins it and T5 updates it.
+- VP2, Hankins and Patel (2003, Data Morphing's Hill-Climb),
+  `expt_a113`/`expt_b113`: starting from one group per attribute, repeatedly
+  merges the two groups whose merge most reduces cache misses (64-byte lines),
+  until no merge lowers the cost; ties keep fewer groups. An attribute's access
+  rate is the fraction of rows it is read on, so T6's scan of `created_at`
+  (every row) differs from its read of `total_amount` (orders in range). It
+  matches the paper's exhaustive Naive algorithm. Both workloads give `orders
+  {customer_id, order_status, total_amount} | order_created_at {created_at}`;
+  every other table stays whole. T1 inserts both fragments, T3 joins them (its
+  composite index becomes `orders (merchant_id, customer_id)`) and T6 scans
+  `order_created_at`, joining `orders` for the totals.
 
 ### Rules when building on these folders
 

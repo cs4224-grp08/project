@@ -23,6 +23,7 @@ type EntityAccess struct {
 	ReadAttributes     []string
 	WriteAttributes    []string
 	AccessedRecords    float64
+	ExaminedRecords    float64
 }
 
 type Transaction struct {
@@ -32,6 +33,7 @@ type Transaction struct {
 }
 
 const (
+	merchantCount        = 1_000
 	customerCount        = 1_000_000
 	productCount         = 500_000
 	orderCount           = 5_000_000
@@ -119,8 +121,8 @@ var Transactions = []Transaction{
 		TransactionName:    "T3",
 		TransactionWeights: map[string]float64{"A": 10, "B": 5},
 		TransactionAccesses: []EntityAccess{
-			{EntityName: "order", RestrictAttributes: []string{"customer_id", "created_at"}, ReadAttributes: []string{"order_status", "total_amount", "created_at"}, AccessedRecords: orderCount / customerCount},
-			{EntityName: "order_item", RestrictAttributes: []string{"order_id"}, ReadAttributes: []string{"product_id", "quantity", "unit_price"}, AccessedRecords: orderCount / customerCount * averageItemsPerOrder},
+			{EntityName: "order", RestrictAttributes: []string{"customer_id", "created_at"}, ReadAttributes: []string{"order_status", "total_amount", "created_at"}, AccessedRecords: orderCount / customerCount, ExaminedRecords: orderCount / customerCount},
+			{EntityName: "order_item", RestrictAttributes: []string{"order_id"}, ReadAttributes: []string{"product_id", "quantity", "unit_price"}, AccessedRecords: orderCount / customerCount * averageItemsPerOrder, ExaminedRecords: orderItemCount / merchantCount},
 		},
 	},
 	{
@@ -141,7 +143,7 @@ var Transactions = []Transaction{
 		TransactionName:    "T6",
 		TransactionWeights: map[string]float64{"A": 5, "B": 10},
 		TransactionAccesses: []EntityAccess{
-			{EntityName: "order", RestrictAttributes: []string{"created_at"}, ReadAttributes: []string{"total_amount"}, AccessedRecords: orderCount * salesReportDays / orderHistoryDays},
+			{EntityName: "order", RestrictAttributes: []string{"created_at"}, ReadAttributes: []string{"total_amount"}, AccessedRecords: orderCount * salesReportDays / orderHistoryDays, ExaminedRecords: orderCount},
 		},
 	},
 	{
