@@ -555,10 +555,18 @@ orders and items on both the merchant and the order ID, using the order-history 
 T5 receives only an order ID, so it first looks up the order's merchant in a small
 \texttt{order\_routing} table distributed by order ID. The routing table holds every
 order of the initial data, from which T5 draws its orders. T7 adds merchant predicates
-to its update. With each statement routed to one merchant's shards, T1 stops being the
-bottleneck: at 64 clients, its average latency falls from 1,982\,ms in \expt{a131} to
-59\,ms. What remains is T6, which now takes 94\% of all transaction time at 64 clients,
-against 23\% in \expt{a131}.
+to its update. At 64 clients, T1's average latency falls from 1,982\,ms in
+\expt{a131} to 59\,ms. T6 becomes the dominant cost, taking 94\% of summed
+transaction time, against 23\% in \expt{a131}.
+
+The combined design does not improve every metric relative to the rewrite-only
+design. At 64 clients, throughput rises from 67.27 to 75.72~TPS, but aggregate
+99th-percentile latency increases from 5.50 to 17.46\,s. The corresponding workload-B
+comparison also shows no incremental throughput benefit: \expt{b131} to \expt{b204}
+changes throughput from 39.98 to 38.16~TPS and aggregate 99th-percentile latency from
+16.73 to 18.55\,s. These observations motivate the subsequent optimization of T6,
+rather than establishing the combined design as uniformly better than its
+rewrite-only parent.
 
 \subsection{Covering Index}
 \label{sec:covering-index}
