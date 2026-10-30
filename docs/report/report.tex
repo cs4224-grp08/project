@@ -429,20 +429,22 @@ Step & T1a & T6 & T1b \\
 \end{tabular}
 \end{table}
 
-\paragraph{Cost of serializability.} One might expect locking to cost throughput.
-Experiments \expt{a1}--\expt{a5} applied the same query rewrites to the supplied
-baseline one at a time, without the locking protocol and with the supplied per-worker
-\texttt{SERIALIZABLE} isolation. \expt{a5} has all of them. It ran on the same five
-nodes as \expt{a131}, which has the same rewrites under the locking protocol
-(\cref{tab:task1}). \expt{a5} is 9\% faster at one client, and \expt{a131} is 4--6\%
-faster at 4 to 16 clients. At 32 and 64 clients, \expt{a131} is 43\% and 39\% faster.
-\expt{a5} retried 413 transactions, still failed 11 after three attempts, and lost a
-client at 16 clients to a failed distributed commit. \expt{a131} needed no retry at
-all. \expt{a5} also runs single-statement transactions without \texttt{BEGIN} and
-\texttt{COMMIT}, which saves round trips that the locking protocol cannot save. This
-comparison therefore pits our protocol against the unsafe alternative, rather than
-isolating the cost of the locks. With locks, conflicting transactions wait instead of
-aborting, and in these runs waiting was the cheaper outcome.
+\paragraph{Cost of serializability.} Experiments \expt{a1}--\expt{a5} apply the
+query rewrites one at a time to the supplied baseline, without coordinator locking
+and with per-worker \texttt{SERIALIZABLE} isolation. \expt{a5} includes all the
+rewrites. It ran on the same five nodes as \expt{a131}, which uses the same
+rewrites with coordinator locking (\cref{tab:task1}). \expt{a5} is 9\% faster at
+one client; \expt{a131} is 4--6\% faster at 4 to 16 clients, and 43\% and 39\%
+faster at 32 and 64 clients. \expt{a5} retried 413 transactions, failed 11 after
+three attempts, and lost a client at 16 clients to a failed distributed commit.
+\expt{a131} completed without retries.
+
+The configurations also differ in transaction handling. \expt{a5} runs
+single-statement transactions without \texttt{BEGIN} and \texttt{COMMIT}, saving
+round trips that the locking protocol requires. This comparison therefore does
+not isolate lock overhead: it compares our protocol with a configuration that
+lacks global serializability. Under contention, the locking configuration avoided
+the retries and failed commits seen in \expt{a5}.
 
 \paragraph{Where the time goes.} \expt{a99} completes every client count without a
 retry or an aborted client, and at one client it is as fast as \expt{a0} (2.05~TPS).
