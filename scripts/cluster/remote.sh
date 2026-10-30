@@ -6,7 +6,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/commands.sh"
 LOGIN_NODE=${CLUSTER_HOST:-cs5424}
 POLL_SECONDS=${POLL_SECONDS:-300}
 PROJECT_DIR=${PROJECT_DIR:-runs/$(git -C "$ROOT" symbolic-ref --short -q HEAD || git -C "$ROOT" rev-parse --short HEAD)}
-SSH_OPTIONS=(-o ControlMaster=auto -o "ControlPath=$HOME/.ssh/cm-%C" -o ControlPersist=15m -o ServerAliveInterval=30)
+SSH_OPTIONS=(-o ControlMaster=auto -o "ControlPath=${CLUSTER_CONTROL_PATH:-$HOME/.ssh/cm-%C}" -o ControlPersist=15m -o ServerAliveInterval=30)
 RSYNC_TRANSPORT="ssh ${SSH_OPTIONS[*]}"
 
 usage() {
@@ -37,7 +37,7 @@ on_login_node() {
 }
 
 sbatch_options() {
-	echo "--constraint=xcnc"
+	echo "--constraint=${CONSTRAINT:-xcnc} ${EXCLUSIVE:+--exclusive} ${CPUS:+--cpus-per-task=$CPUS} ${MEM:+--mem=$MEM} ${AFTER:+--dependency=afterany:$AFTER} ${NODELIST:+--nodelist=$NODELIST}"
 }
 
 cmd_shell() {
