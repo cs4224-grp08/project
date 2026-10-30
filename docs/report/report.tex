@@ -811,9 +811,10 @@ workload A, with T3.
 \section{Task 4: Optimized Design for Workload B}
 \label{sec:task4}
 
-We optimized workload B with the same steps as workload A, again in the order in which
-bottlenecks appeared. \Cref{tab:task4} summarizes the path. The subsections refer back
-to \cref{sec:task2} for each mechanism and report what differs under workload B's mix.
+Workload B uses the same optimizations as workload A, with the query rewrites
+ordered for its transaction mix. \Cref{tab:task4} summarizes the configurations;
+the mechanisms are described in \cref{sec:task2}. Here we discuss how their
+results differ under workload B.
 
 \begin{table}[t]
 \caption{Throughput (TPS) along the path from the serializable baseline to the final
