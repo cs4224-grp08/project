@@ -57,7 +57,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b114` | Task 4 | `expt_b99` with all five tables distributed and colocated by `merchant_id` | none; `run.sh` only (vs `expt_b99`) | 1030166 |
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 |
 | `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | 1038831 |
-| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | 1038832 |
+| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | 1042354 (xcnc[33-37], as `expt_b205`); 1038832 (xcnc[0-4]) |
 | `expt_b207` | Task 4 | `expt_b205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b205`) | 1038979 |
 
 The denormalization experiments also change schema creation and data loading in
@@ -256,6 +256,11 @@ row to find those in the reporting window.
 in place (`204 → 103` isolates VP1 without them). 205 and 206 run with the
 default allocation on xcnc, like `expt_a0`, `expt_a99` and `expt_a204` job
 1030841, one job at a time so no two share a node (they would share `PGPORT`).
+
+xcnc[0-4] run the same unchanged transactions about 1.5-2.5x faster than
+xcnc[33-37], so compare jobs only within one node set. `expt_b205`, `expt_b206`
+job 1042354, `expt_b207`, `expt_a206` and `expt_a207` ran on xcnc[33-37];
+`expt_a205` and `expt_b206` job 1038832 ran on xcnc[0-4].
 
 ### Rules when building on these folders
 
