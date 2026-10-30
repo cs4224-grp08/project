@@ -525,7 +525,7 @@ customer, so that T3 becomes a lookup on a single shard. In exchange, T1 and T5 
 keep the copy up to date. It removes the same bottleneck as the T3 rewrite. At 64
 clients, T3's average latency falls from 258\,s to 36\,ms, and throughput rises from
 1.34 to 17.4~TPS. \expt{a112} merges products and inventory into one table, and
-\expt{a122} splits product data into frequently and rarely accessed columns. Both put a
+\expt{a122} splits product data into hot and cold tables. Both put a
 product and its stock on the same shard, so T4's average latency at one client falls
 from 522\,ms to 3.1\,ms and 2.8\,ms. Neither touches T3, which still dominates, and both
 stay below 2.2~TPS at every client count. We continued with the query rewrite, which
