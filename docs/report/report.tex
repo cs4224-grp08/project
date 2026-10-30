@@ -934,15 +934,17 @@ costs. On workload A, where T1 is 36\% of the mix, it does not
 \subsection{Final Design for Workload B}
 \label{sec:final-b}
 
-The final design for workload B is \expt{b206}: the combined design with the covering
-index, the item index and Navathe's split of \texttt{orders}, under the locking
-protocol. We chose it over \expt{b205} because it has the highest throughput at 32 and
-64 clients, where T6 limits both designs, and because its gain there comes from T6, the
-transaction that the split speeds up. The gain is below our threshold, so \expt{b205}
-performs about as well. Compared with the serializable baseline, \expt{b206} is
-$18.6\times$ faster at one client and $138\times$ faster at 64 clients, and its
-99th-percentile latency at 64 clients falls from 294\,s to 0.97\,s. At no client count
-did it have a serialization failure, a retry or an aborted client. At 64 clients, T6
+We selected \expt{b206} for workload B: the combined design with the covering
+index, item index and Navathe's split of \texttt{orders}, under the locking
+protocol. It has the highest observed throughput at 32 and 64 clients, where T6
+limits both \expt{b205} and \expt{b206}, and the split reduces T6's average
+latency. The throughput gain is below our threshold, so \expt{b205} performs
+about as well.
+
+Compared with the serializable baseline, \expt{b206} is $18.6\times$ faster at
+one client and $138\times$ faster at 64 clients. Its 99th-percentile latency at
+64 clients falls from 294\,s to 0.97\,s. All tested client counts completed
+without serialization failures, retries or aborted clients. At 64 clients, T6
 still accounts for 45\% of transaction time, and T1 for 38\%.
 
 %% ================================================================ Section 6
