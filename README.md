@@ -21,7 +21,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a4` | Task 2 | V3 + O5 | T1, T2, T3, T4, T5, T6, T8, T9 | 883775 |
 | `expt_a5` | Task 2 | V4 + O3 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884051 |
 | `expt_a99` | Task 1 (extra) | Serializable baseline, workload A | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990809 |
-| `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_a100` | Task 1 (extra) | `expt_a99` with per-customer and per-product locks, `G` last | T1-T9 | 996399 |
 | `expt_a101` | Task 2 | S0 + O1 | T3 (vs `expt_a99`) | 991556 |
 | `expt_a102` | Task 2 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_a99`) | 1027046 |
 | `expt_a111` | Task 2 | S1 + O2 | T3, T4 (vs `expt_a99`) | 991557 |
@@ -29,7 +29,13 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_a121` | Task 2 | S2 + O4 | T1, T3, T4 (vs `expt_a99`) | 991600 |
 | `expt_a122` | Task 2 | S0 with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_a99`) | 1026655 |
 | `expt_a131` | Task 2 | S3 + O3 | T1, T3, T4, T7 (vs `expt_a99`) | 991601 |
-| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841 | 
+| `expt_a204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1030841; 1038687 (xcnd whole-node, for VP1-VP3; running) |
+| `expt_a103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a204`) | 1037237 (xcnd whole-node) |
+| `expt_a113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_a204`) | 1037238 (xcnd whole-node) |
+| `expt_a123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a204`) | 1037239 (xcnd whole-node) |
+| `expt_a205` | - | `expt_a204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_a204`) | 1038829 (running) |
+| `expt_a206` | - | `expt_a205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_a205`) | 1038830 (queued) |
+| `expt_a207` | Task 2 | `expt_a205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_a205`) | 1038978 (queued) |
 | `expt_b0` | Task 3 | Baseline design, workload B | none (baseline) | 882953 |
 | `expt_b1` | Task 4 | V0 + O1 | T3 | 883683 |
 | `expt_b2` | Task 4 | V1 + O3 | T3, T7 | 883685 |
@@ -38,7 +44,7 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
-| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run |
+| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | none complete (995868 cancelled after 32 clients) |
 | `expt_b101` | Task 4 | S0 + O1 | T3 (vs `expt_b99`) | 991604 |
 | `expt_b102` | Task 4 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
@@ -46,7 +52,13 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b121` | Task 4 | S2 + O2 | T3, T4, T7 (vs `expt_b99`) | 991608 |
 | `expt_b122` | Task 4 | `expt_b99` with hot/cold vertical product partitioning | T1, T2, T4, T7, T9 (vs `expt_b99`) | 1027056 |
 | `expt_b131` | Task 4 | S3 + O4 | T1, T3, T4, T7 (vs `expt_b99`) | 991609 |
-| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 | 
+| `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 |
+| `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
+| `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
+| `expt_b123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b204`) | not run |
+| `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | 1038831 (queued) |
+| `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | 1038832 (queued) |
+| `expt_b207` | Task 4 | `expt_b205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b205`) | 1038979 (queued) |
 
 The denormalization experiments also change schema creation and data loading in
 `run.sh`: `expt_a102`/`expt_b102` add a `customer_order_history` projection
@@ -164,6 +176,86 @@ The existing advisory locks and T6 snapshot barrier are retained.
 `order_routing` is populated and reset with the initial orders; T5 skips IDs
 missing from this mapping. Both workloads use identical transaction SQL
 with their respective workload weights.
+
+### Vertical partitioning (VP)
+
+Each VP experiment applies one paper's algorithm, in isolation, to
+`expt_a204`/`expt_b204`. The algorithms run offline in
+`scripts/vertical_partitioning` (Go, standard library only); their output
+decides which columns each table holds. Each package and command is numbered
+like its paper in `docs/vertical_partitioning`, between the survey (0) and the
+benchmark that compares the algorithms (4, Jindal et al. 2013). Every fragment
+keeps its record's primary key and `merchant_id`, is distributed by
+`merchant_id` and colocated with `customers`, so a record is reassembled on one
+worker and the rules below still hold.
+
+```
+cd scripts/vertical_partitioning
+go test ./...
+go run ./cmd/1_navathe -workload A     # or B
+go run ./cmd/2_hillclimb -workload A   # or B
+go run ./cmd/3_autopart -workload A    # or B
+```
+
+- VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`/`expt_b103`:
+  attribute affinity weighted by records accessed, clustered by the Bond
+  Energy Algorithm (McCormick et al. 1972), then split repeatedly in two while
+  `z = CL·CU − CI²` is positive (phase 1, non-overlapping; SHIFT and CLUSTER
+  don't change the result). Both workloads give `orders {customer_id,
+  total_amount, created_at} | order_statuses {order_status}`; every other
+  table stays whole. T1 inserts the status, T3 joins it and T5 updates it.
+- VP2, Hankins and Patel (2003, Data Morphing's Hill-Climb),
+  `expt_a113`/`expt_b113`: starting from one group per attribute, repeatedly
+  merges the two groups whose merge most reduces cache misses (64-byte lines),
+  until no merge lowers the cost; ties keep fewer groups. An attribute's access
+  rate is the fraction of rows it is read on, so T6's scan of `created_at`
+  (every row) differs from its read of `total_amount` (orders in range). It
+  matches the paper's exhaustive Naive algorithm. Both workloads give `orders
+  {customer_id, order_status, total_amount} | order_created_at {created_at}`;
+  every other table stays whole. T1 inserts both fragments, T3 joins them (its
+  composite index becomes `orders (merchant_id, customer_id)`) and T6 scans
+  `order_created_at`, joining `orders` for the totals.
+- VP3, Papadomanolakis and Ailamaki (2004, AutoPart), `expt_a123`/`expt_b123`:
+  atomic fragments (attributes always used by the same transactions), greedily
+  extended into composite fragments, then merged pairwise, minimising each
+  transaction's scanned attributes plus a cost `J` per extra fragment joined,
+  with no replication. `J = 18.76` attribute scans is calibrated, as in the
+  paper, from PostgreSQL's optimizer (`3_autopart/join_cost_calibration.sql`,
+  full scans of shard-sized fragments; key lookups cost the same at any width,
+  so they cannot calibrate the per-attribute scan cost, and their `J = 6.23`
+  would also split `products` into `{product_name, category} | {price,
+  quantity, updated_at}`). Both workloads give `customers {customer_name,
+  created_at} | customer_emails {email}`; every other table stays whole. T8
+  updates `customer_emails` and T1's existence check no longer names `email`.
+  Categorical partitioning does not apply: no transaction filters on a
+  categorical attribute.
+
+VP1-VP3 ran on xcnd with whole nodes (`CONSTRAINT=xcnd CPUS=24 MEM=56G`, so
+`THREADS=24`); compare them with `expt_a204` job 1038687, which ran the same
+way, not with job 1030841. Workload B was not run for VP1-VP3.
+
+### Indexes for T6 and T3, then VP1 (205, 206)
+
+Profiling `expt_a204` showed T6 (Global Sales) taking about 350 ms at one
+client, 62% (A) and 75% (B) of the run time: each shard scans every `orders`
+row to find those in the reporting window.
+
+- `expt_a205`/`expt_b205` = `expt_a204`/`expt_b204` + three `run.sh` changes;
+  no transaction changes:
+  - T6: `orders (created_at) INCLUDE (merchant_id, total_amount)`, a
+    covering index that answers T6 by an index-only scan.
+  - T3: `order_items (merchant_id, order_id)`, so T3 joins its 20 orders'
+    items directly.
+  - `VACUUM ANALYZE` instead of `ANALYZE` after loading, setting the
+    visibility map that index-only scans rely on.
+- `expt_a206`/`expt_b206` = `expt_a205`/`expt_b205` + VP1 (Navathe), the same
+  split as `expt_a103`: `order_status` moves to `order_statuses`. T6 never
+  reads the status, so the covering index is unchanged.
+
+`204 → 205` isolates the indexes and `205 → 206` isolates VP1 with the indexes
+in place (`204 → 103` isolates VP1 without them). 205 and 206 run with the
+default allocation on xcnc, like `expt_a0`, `expt_a99` and `expt_a204` job
+1030841, one job at a time so no two share a node (they would share `PGPORT`).
 
 ### Rules when building on these folders
 
