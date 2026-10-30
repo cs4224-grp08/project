@@ -398,7 +398,10 @@ changes the attributes that T6 reads (T5 changes the order status, which T6 does
 read), so T6 reports the order-data state established during the protected
 snapshot-initialization interval. Because T6 releases $G$ before it commits, the protocol as a whole is not
 strict 2PL. It is still serializable: every transaction other than T6 follows strict
-2PL, and T6 is equivalent to running alone at the barrier.
+2PL, and retained worker snapshots preserve T6's serial placement between preceding
+and subsequent T1 transactions. T6 must use the same initialized snapshot on every
+participating worker; PostgreSQL's \texttt{REPEATABLE READ} retains those snapshots
+after $G$ is released.
 
 \begin{table}[t]
 \caption{One schedule around the snapshot barrier. T1a commits before T6 takes $G$, and
