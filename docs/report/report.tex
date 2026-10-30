@@ -462,10 +462,9 @@ than locking, and the optimizations of \cref{sec:task2} target it.
 \section{Task 2: Optimized Design for Workload A}
 \label{sec:task2}
 
-We optimized workload A in the order in which bottlenecks appeared. Each subsection
-names the transaction that dominated the previous design, the change that targets it,
-and the measured effect. \Cref{tab:task2} summarizes the path from the serializable
-baseline to the final design.
+We addressed workload A's bottlenecks in sequence, changing the design as the
+previous bottleneck receded. \Cref{tab:task2} summarizes the configurations and
+throughput from the serializable baseline to the final design.
 
 \begin{table}[t]
 \caption{Throughput (TPS) along the path from the serializable baseline to the final
