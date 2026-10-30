@@ -395,8 +395,8 @@ READ}, takes $G$ exclusively (which waits for all running T1s to commit), opens 
 snapshot on each worker with a single statement, and releases $G$. It then computes the
 report from these snapshots while new orders proceed (\cref{tab:t6-snapshot-schedule}). Only T1
 changes the attributes that T6 reads (T5 changes the order status, which T6 does not
-read), so T6 returns exactly what it would return if it ran alone at the moment of the
-barrier. Because T6 releases $G$ before it commits, the protocol as a whole is not
+read), so T6 reports the order-data state established during the protected
+snapshot-initialization interval. Because T6 releases $G$ before it commits, the protocol as a whole is not
 strict 2PL. It is still serializable: every transaction other than T6 follows strict
 2PL, and T6 is equivalent to running alone at the barrier.
 
