@@ -956,17 +956,19 @@ short-duration exclusive lock for the global report, provided it. On the same no
 of the unsafe alternative at up to 16 clients and about 40\% faster at 32 and 64
 clients, where the unsafe alternative lost work to retries and failed commits.
 
-From there, we followed the bottleneck. T3 needed a rewrite, or a copy of the order
-history distributed by customer. T4 needed a lookup by inventory's distribution key. T1
-needed every table partitioned by merchant. That left T6, which scanned every order on
-every execution. The covering index removed that scan and gave the largest single
-gain: $8.3\times$ on workload A and $10.9\times$ on workload B at 64 clients.
+The expensive joins in T3 improved with either a query rewrite or an order-history
+table distributed by customer. T4 benefited from a lookup by inventory's
+distribution key, and merchant partitioning reduced T1's distributed work. T6 then
+became the main bottleneck, scanning every order on every execution. Replacing
+that scan with the covering index gave the largest single gain: $8.3\times$ on
+workload A and $10.9\times$ on workload B at 64 clients.
 
-Vertical partitioning taught us that a good split depends on the access path and on the
-mix. While T6 scanned \texttt{orders}, the classical algorithms proposed splits that
-changed little or hurt. Once the covering index existed, Navathe's split made T6 faster
-for a reason outside the algorithms' cost models, and it paid off only on the workload
-that places few orders.
+The vertical-partitioning results depended on the access path and workload mix.
+While T6 scanned \texttt{orders}, the proposed splits offered little benefit or
+reduced throughput. After the covering index was added, Navathe's split reduced
+T6's average latency through an effect outside the algorithms' cost models.
+Its extra insert for T1 offset that saving on workload A; the split benefited
+workload B, which places fewer orders.
 
 The final designs still spend most of their time in T1 on workload A, and in T6 and T1
 on workload B. Both keep the locking protocol, and neither retried a single transaction
