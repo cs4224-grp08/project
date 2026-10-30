@@ -46,7 +46,6 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b5` | Task 4 | V4 + O4 | T1, T2, T3, T4, T5, T6, T7, T8, T9 | 884052 |
 | `expt_b6` | Task 4 | V1 + O3a (alternative to `expt_b2`) | T3, T7 | 884053 |
 | `expt_b99` | Task 3 (extra) | Serializable baseline, workload B | T1-T9 (locks; T5 merchant lookup; T6 snapshot barrier) | 990813 |
-| `expt_b100` | Task 3 (extra) | `expt_b99` with per-customer and per-product locks, `G` last | T1-T9 | not run (an earlier run, 995868, was cancelled after 32 clients) |
 | `expt_b101` | Task 4 | S0 + O1 | T3 (vs `expt_b99`) | 991604 |
 | `expt_b102` | Task 4 | S0 + customer-keyed order-history projection | T1, T3, T5 (vs `expt_b99`) | 1027054 |
 | `expt_b111` | Task 4 | S1 + O3 | T3, T7 (vs `expt_b99`) | 991605 |
@@ -57,9 +56,6 @@ expt_b2/transactions/T7_inventory_transfer.sql` (the change itself).
 | `expt_b104` | Task 4 | `expt_b99` + `inventory (product_id)` index for T7's product lookups | none; `run.sh` only (vs `expt_b99`) | 1009192 |
 | `expt_b114` | Task 4 | `expt_b99` with all five tables distributed and colocated by `merchant_id` | none; `run.sh` only (vs `expt_b99`) | 1030166 |
 | `expt_b204` | - | S3 + O8 | T1, T3, T4, T5, T7 | 1031248 |
-| `expt_b103` | - | S3 + O8 + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b204`) | not run |
-| `expt_b113` | - | S3 + O8 + VP2 (Hankins & Patel 2003) | T1, T3, T6 (vs `expt_b204`) | not run |
-| `expt_b123` | - | S3 + O8 + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b204`) | not run |
 | `expt_b205` | - | `expt_b204` + T6 covering index + T3 index (see below) | none; `run.sh` only (vs `expt_b204`) | 1038831 |
 | `expt_b206` | - | `expt_b205` + VP1 (Navathe et al. 1984) | T1, T3, T5 (vs `expt_b205`) | 1038832 |
 | `expt_b207` | Task 4 | `expt_b205` + VP3 (Papadomanolakis & Ailamaki 2004) | T1, T8 (vs `expt_b205`) | 1038979 |
@@ -201,7 +197,7 @@ go run ./cmd/2_hillclimb -workload A   # or B
 go run ./cmd/3_autopart -workload A    # or B
 ```
 
-- VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`/`expt_b103`:
+- VP1, Navathe, Ceri, Wiederhold and Dou (1984), `expt_a103`:
   attribute affinity weighted by records accessed, clustered by the Bond
   Energy Algorithm (McCormick et al. 1972), then split repeatedly in two while
   `z = CL·CU − CI²` is positive (phase 1, non-overlapping; SHIFT and CLUSTER
@@ -209,7 +205,7 @@ go run ./cmd/3_autopart -workload A    # or B
   total_amount, created_at} | order_statuses {order_status}`; every other
   table stays whole. T1 inserts the status, T3 joins it and T5 updates it.
 - VP2, Hankins and Patel (2003, Data Morphing's Hill-Climb),
-  `expt_a113`/`expt_b113`: starting from one group per attribute, repeatedly
+  `expt_a113`: starting from one group per attribute, repeatedly
   merges the two groups whose merge most reduces cache misses (64-byte lines),
   until no merge lowers the cost; ties keep fewer groups. An attribute's access
   rate is the fraction of rows it is read on, so T6's scan of `created_at`
@@ -219,7 +215,7 @@ go run ./cmd/3_autopart -workload A    # or B
   every other table stays whole. T1 inserts both fragments, T3 joins them (its
   composite index becomes `orders (merchant_id, customer_id)`) and T6 scans
   `order_created_at`, joining `orders` for the totals.
-- VP3, Papadomanolakis and Ailamaki (2004, AutoPart), `expt_a123`/`expt_b123`:
+- VP3, Papadomanolakis and Ailamaki (2004, AutoPart), `expt_a123`:
   atomic fragments (attributes always used by the same transactions), greedily
   extended into composite fragments, then merged pairwise, minimising each
   transaction's scanned attributes plus a cost `J` per extra fragment joined,
@@ -236,7 +232,7 @@ go run ./cmd/3_autopart -workload A    # or B
 
 VP1-VP3 ran on xcnd with whole nodes (`CONSTRAINT=xcnd CPUS=24 MEM=56G`, so
 `THREADS=24`); compare them with `expt_a204` job 1038687, which ran the same
-way, not with job 1030841. Workload B was not run for VP1-VP3.
+way, not with job 1030841.
 
 ### Indexes for T6 and T3, then VP1 (205, 206)
 
