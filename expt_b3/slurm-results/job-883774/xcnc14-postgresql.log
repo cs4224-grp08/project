@@ -1,0 +1,245 @@
+2026-09-27 02:54:40.321 +08 [2764937] LOG:  There is no designated Main database.
+2026-09-27 02:54:40.321 +08 [2764937] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 02:54:40.321 +08 [2764937] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 02:54:40.505 +08 [2764937] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 02:54:40.505 +08 [2764937] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 02:54:40.505 +08 [2764937] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 02:54:40.574 +08 [2764937] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 02:54:40.646 +08 [2764944] LOG:  database system was shut down at 2026-09-27 02:54:35 +08
+2026-09-27 02:54:40.737 +08 [2764937] LOG:  database system is ready to accept connections
+2026-09-27 02:54:44.175 +08 [2764974] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 02:54:44.175 +08 [2764974] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:12:48.152 +08 [2764937] LOG:  received fast shutdown request
+2026-09-27 03:12:48.186 +08 [2764937] LOG:  aborting any active transactions
+2026-09-27 03:12:48.191 +08 [2764937] LOG:  background worker "logical replication launcher" (PID 2764947) exited with exit code 1
+2026-09-27 03:12:48.194 +08 [2764942] LOG:  shutting down
+2026-09-27 03:12:48.228 +08 [2764942] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:12:49.190 +08 [2764942] LOG:  checkpoint complete: wrote 1332 buffers (1.0%), wrote 6 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.664 s, sync=0.179 s, total=0.996 s; sync files=498, longest=0.138 s, average=0.001 s; distance=12896 kB, estimate=12896 kB; lsn=0/23F7010, redo lsn=0/23F7010
+2026-09-27 03:12:49.321 +08 [2764937] LOG:  database system is shut down
+2026-09-27 03:13:18.307 +08 [2769793] LOG:  There is no designated Main database.
+2026-09-27 03:13:18.307 +08 [2769793] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:13:18.307 +08 [2769793] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:13:18.492 +08 [2769793] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:13:18.492 +08 [2769793] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:13:18.492 +08 [2769793] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:13:18.557 +08 [2769793] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:13:18.663 +08 [2769800] LOG:  database system was shut down at 2026-09-27 03:12:49 +08
+2026-09-27 03:13:18.696 +08 [2769793] LOG:  database system is ready to accept connections
+2026-09-27 03:13:19.555 +08 [2769824] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:13:19.555 +08 [2769824] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:23:03.836 +08 [2771213] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 03:23:03.836 +08 [2771213] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 03:23:03.836 +08 [2771213] HINT:  The transaction might succeed if retried.
+2026-09-27 03:23:03.836 +08 [2771213] CONTEXT:  while executing command on xcnc27:5440
+2026-09-27 03:23:03.836 +08 [2771213] STATEMENT:  COMMIT;
+2026-09-27 03:25:42.861 +08 [2771213] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 03:25:42.861 +08 [2771213] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict out checking.
+2026-09-27 03:25:42.861 +08 [2771213] HINT:  The transaction might succeed if retried.
+2026-09-27 03:25:42.861 +08 [2771213] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 03:25:42.861 +08 [2771213] STATEMENT:  UPDATE orders
+	SET total_amount = (8207.2)::numeric(12,2)
+	WHERE order_id = (5001867)::bigint;
+2026-09-27 03:27:49.533 +08 [2769793] LOG:  received fast shutdown request
+2026-09-27 03:27:49.573 +08 [2769793] LOG:  aborting any active transactions
+2026-09-27 03:27:49.580 +08 [2769793] LOG:  background worker "logical replication launcher" (PID 2769803) exited with exit code 1
+2026-09-27 03:27:49.582 +08 [2769798] LOG:  shutting down
+2026-09-27 03:27:49.615 +08 [2769798] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:27:49.984 +08 [2769798] LOG:  checkpoint complete: wrote 171 buffers (0.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.078 s, sync=0.193 s, total=0.403 s; sync files=48, longest=0.165 s, average=0.005 s; distance=7492 kB, estimate=7492 kB; lsn=0/2B48380, redo lsn=0/2B48380
+2026-09-27 03:27:50.103 +08 [2769793] LOG:  database system is shut down
+2026-09-27 03:28:17.833 +08 [2772561] LOG:  There is no designated Main database.
+2026-09-27 03:28:17.833 +08 [2772561] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:28:17.833 +08 [2772561] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:28:18.012 +08 [2772561] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:28:18.013 +08 [2772561] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:28:18.013 +08 [2772561] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:28:18.076 +08 [2772561] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:28:18.148 +08 [2772585] LOG:  database system was shut down at 2026-09-27 03:27:49 +08
+2026-09-27 03:28:18.189 +08 [2772561] LOG:  database system is ready to accept connections
+2026-09-27 03:28:18.891 +08 [2772609] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:28:18.891 +08 [2772609] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:43:02.560 +08 [2772561] LOG:  received fast shutdown request
+2026-09-27 03:43:02.599 +08 [2772561] LOG:  aborting any active transactions
+2026-09-27 03:43:02.606 +08 [2772561] LOG:  background worker "logical replication launcher" (PID 2772588) exited with exit code 1
+2026-09-27 03:43:02.608 +08 [2772583] LOG:  shutting down
+2026-09-27 03:43:02.641 +08 [2772583] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:43:03.001 +08 [2772583] LOG:  checkpoint complete: wrote 149 buffers (0.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.116 s, sync=0.135 s, total=0.393 s; sync files=48, longest=0.110 s, average=0.003 s; distance=7260 kB, estimate=7260 kB; lsn=0/325F708, redo lsn=0/325F708
+2026-09-27 03:43:03.130 +08 [2772561] LOG:  database system is shut down
+2026-09-27 03:43:31.491 +08 [2773457] LOG:  There is no designated Main database.
+2026-09-27 03:43:31.491 +08 [2773457] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:43:31.491 +08 [2773457] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:43:31.678 +08 [2773457] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:43:31.678 +08 [2773457] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:43:31.678 +08 [2773457] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:43:31.743 +08 [2773457] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:43:31.849 +08 [2773464] LOG:  database system was shut down at 2026-09-27 03:43:02 +08
+2026-09-27 03:43:31.889 +08 [2773457] LOG:  database system is ready to accept connections
+2026-09-27 03:43:32.595 +08 [2773488] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:43:32.595 +08 [2773488] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:51:30.785 +08 [2773702] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 03:51:30.785 +08 [2773702] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict out checking.
+2026-09-27 03:51:30.785 +08 [2773702] HINT:  The transaction might succeed if retried.
+2026-09-27 03:51:30.785 +08 [2773702] CONTEXT:  while executing command on xcnc27:5440
+2026-09-27 03:51:30.785 +08 [2773702] STATEMENT:  WITH reserved AS (
+	  UPDATE inventory
+	  SET quantity = quantity - (5)::integer,
+	      updated_at = CURRENT_TIMESTAMP
+	  WHERE inventory_id = (435070)::bigint
+	    AND merchant_id = (70)::bigint
+	    AND product_id = (435070)::bigint
+	    AND quantity >= (5)::integer
+	  RETURNING 1
+	)
+	SELECT CASE WHEN EXISTS (SELECT 1 FROM reserved)
+	            THEN 1 ELSE 0 END AS stock_ok
+	
+2026-09-27 03:58:21.970 +08 [2773457] LOG:  received fast shutdown request
+2026-09-27 03:58:22.017 +08 [2773457] LOG:  aborting any active transactions
+2026-09-27 03:58:22.024 +08 [2773457] LOG:  background worker "logical replication launcher" (PID 2773467) exited with exit code 1
+2026-09-27 03:58:22.026 +08 [2773462] LOG:  shutting down
+2026-09-27 03:58:22.059 +08 [2773462] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:58:22.403 +08 [2773462] LOG:  checkpoint complete: wrote 154 buffers (0.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.097 s, sync=0.150 s, total=0.377 s; sync files=48, longest=0.121 s, average=0.004 s; distance=6957 kB, estimate=6957 kB; lsn=0/392AD80, redo lsn=0/392AD80
+2026-09-27 03:58:22.521 +08 [2773457] LOG:  database system is shut down
+2026-09-27 03:58:55.617 +08 [2774310] LOG:  There is no designated Main database.
+2026-09-27 03:58:55.617 +08 [2774310] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:58:55.617 +08 [2774310] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:58:55.805 +08 [2774310] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:58:55.805 +08 [2774310] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:58:55.805 +08 [2774310] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:58:55.861 +08 [2774310] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:58:55.925 +08 [2774317] LOG:  database system was shut down at 2026-09-27 03:58:22 +08
+2026-09-27 03:58:55.966 +08 [2774310] LOG:  database system is ready to accept connections
+2026-09-27 03:58:56.674 +08 [2774344] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:58:56.674 +08 [2774344] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 04:03:40.441 +08 [2774619] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:03:40.441 +08 [2774619] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 04:03:40.441 +08 [2774619] HINT:  The transaction might succeed if retried.
+2026-09-27 04:03:40.441 +08 [2774619] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:03:40.441 +08 [2774619] STATEMENT:  INSERT INTO order_items(
+	  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+	)
+	VALUES(
+	  (15000560)::bigint,
+	  (57)::bigint,
+	  (5000194)::bigint,
+	  (415057)::bigint,
+	  (4)::integer,
+	  364.83
+	);
+2026-09-27 04:05:27.402 +08 [2774791] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:05:27.402 +08 [2774791] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:05:27.402 +08 [2774791] HINT:  The transaction might succeed if retried.
+2026-09-27 04:05:27.402 +08 [2774791] CONTEXT:  while executing command on xcnc27:5440
+2026-09-27 04:05:27.402 +08 [2774791] STATEMENT:  COMMIT;
+2026-09-27 04:09:41.224 +08 [2774814] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:09:41.224 +08 [2774814] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:09:41.224 +08 [2774814] HINT:  The transaction might succeed if retried.
+2026-09-27 04:09:41.224 +08 [2774814] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:09:41.224 +08 [2774814] STATEMENT:  COMMIT;
+2026-09-27 04:13:52.088 +08 [2774310] LOG:  received fast shutdown request
+2026-09-27 04:13:52.132 +08 [2774310] LOG:  aborting any active transactions
+2026-09-27 04:13:52.139 +08 [2774310] LOG:  background worker "logical replication launcher" (PID 2774320) exited with exit code 1
+2026-09-27 04:13:52.139 +08 [2774315] LOG:  shutting down
+2026-09-27 04:13:52.165 +08 [2774315] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 04:13:52.517 +08 [2774315] LOG:  checkpoint complete: wrote 161 buffers (0.1%), wrote 8 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.096 s, sync=0.167 s, total=0.379 s; sync files=48, longest=0.114 s, average=0.004 s; distance=6763 kB, estimate=6763 kB; lsn=0/3FC5A68, redo lsn=0/3FC5A68
+2026-09-27 04:13:52.638 +08 [2774310] LOG:  database system is shut down
+2026-09-27 04:14:25.605 +08 [2775429] LOG:  There is no designated Main database.
+2026-09-27 04:14:25.605 +08 [2775429] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 04:14:25.605 +08 [2775429] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 04:14:25.809 +08 [2775429] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 04:14:25.809 +08 [2775429] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 04:14:25.810 +08 [2775429] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 04:14:25.859 +08 [2775429] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 04:14:25.949 +08 [2775436] LOG:  database system was shut down at 2026-09-27 04:13:52 +08
+2026-09-27 04:14:25.999 +08 [2775429] LOG:  database system is ready to accept connections
+2026-09-27 04:14:26.442 +08 [2775460] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 04:14:26.442 +08 [2775460] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 04:18:26.638 +08 [2775695] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:18:26.638 +08 [2775695] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 04:18:26.638 +08 [2775695] HINT:  The transaction might succeed if retried.
+2026-09-27 04:18:26.638 +08 [2775695] CONTEXT:  while executing command on xcnc26:5440
+2026-09-27 04:18:26.638 +08 [2775695] STATEMENT:  INSERT INTO order_items(
+	  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+	)
+	VALUES(
+	  (15000128)::bigint,
+	  (10)::bigint,
+	  (5000043)::bigint,
+	  (326010)::bigint,
+	  (2)::integer,
+	  732.90
+	);
+2026-09-27 04:18:31.992 +08 [2775672] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:18:31.992 +08 [2775672] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict in checking.
+2026-09-27 04:18:31.992 +08 [2775672] HINT:  The transaction might succeed if retried.
+2026-09-27 04:18:31.992 +08 [2775672] CONTEXT:  while executing command on xcnc28:5440
+2026-09-27 04:18:31.992 +08 [2775672] STATEMENT:  INSERT INTO order_items(
+	  order_item_id, merchant_id, order_id, product_id, quantity, unit_price
+	)
+	VALUES(
+	  (15000168)::bigint,
+	  (541)::bigint,
+	  (5000056)::bigint,
+	  (185541)::bigint,
+	  (2)::integer,
+	  992.79
+	);
+2026-09-27 04:18:41.967 +08 [2775647] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:18:41.967 +08 [2775647] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:18:41.967 +08 [2775647] HINT:  The transaction might succeed if retried.
+2026-09-27 04:18:41.967 +08 [2775647] CONTEXT:  while executing command on xcnc27:5440
+2026-09-27 04:18:41.967 +08 [2775647] STATEMENT:  COMMIT;
+2026-09-27 04:19:33.691 +08 [2775749] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:19:33.691 +08 [2775749] DETAIL:  Reason code: Canceled on identification as a pivot, during commit attempt.
+2026-09-27 04:19:33.691 +08 [2775749] HINT:  The transaction might succeed if retried.
+2026-09-27 04:19:33.691 +08 [2775749] CONTEXT:  while executing command on xcnc28:5440
+2026-09-27 04:19:33.691 +08 [2775749] STATEMENT:  COMMIT;
+2026-09-27 04:19:59.450 +08 [2775753] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:19:59.450 +08 [2775753] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict out checking.
+2026-09-27 04:19:59.450 +08 [2775753] HINT:  The transaction might succeed if retried.
+2026-09-27 04:19:59.450 +08 [2775753] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:19:59.450 +08 [2775753] STATEMENT:  UPDATE orders
+	SET total_amount = (7150.7)::numeric(12,2)
+	WHERE order_id = (5000331)::bigint;
+2026-09-27 04:20:21.343 +08 [2775763] WARNING:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:20:21.343 +08 [2775763] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:20:21.343 +08 [2775763] HINT:  The transaction might succeed if retried.
+2026-09-27 04:20:21.343 +08 [2775763] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:20:21.343 +08 [2775763] WARNING:  failed to commit transaction on xcnc25:5440
+2026-09-27 04:20:21.344 +08 [2775763] ERROR:  could not commit transaction for shard 102092 on at least one active node
+2026-09-27 04:20:21.344 +08 [2775763] STATEMENT:  COMMIT;
+2026-09-27 04:20:21.360 +08 [2775753] WARNING:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:20:21.360 +08 [2775753] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:20:21.360 +08 [2775753] HINT:  The transaction might succeed if retried.
+2026-09-27 04:20:21.360 +08 [2775753] CONTEXT:  while executing command on xcnc26:5440
+2026-09-27 04:20:21.360 +08 [2775753] WARNING:  failed to commit transaction on xcnc26:5440
+2026-09-27 04:20:21.413 +08 [2775753] ERROR:  could not commit transaction for shard 102097 on at least one active node
+2026-09-27 04:20:21.413 +08 [2775753] STATEMENT:  COMMIT;
+2026-09-27 04:20:35.166 +08 [2775756] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:20:35.166 +08 [2775756] DETAIL:  Reason code: Canceled on identification as a pivot, during commit attempt.
+2026-09-27 04:20:35.166 +08 [2775756] HINT:  The transaction might succeed if retried.
+2026-09-27 04:20:35.166 +08 [2775756] CONTEXT:  while executing command on xcnc27:5440
+2026-09-27 04:20:35.166 +08 [2775756] STATEMENT:  COMMIT;
+2026-09-27 04:21:40.607 +08 [2775766] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:21:40.607 +08 [2775766] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:21:40.607 +08 [2775766] HINT:  The transaction might succeed if retried.
+2026-09-27 04:21:40.607 +08 [2775766] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:21:40.607 +08 [2775766] STATEMENT:  COMMIT;
+2026-09-27 04:22:16.958 +08 [2775797] WARNING:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:22:16.958 +08 [2775797] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:22:16.958 +08 [2775797] HINT:  The transaction might succeed if retried.
+2026-09-27 04:22:16.958 +08 [2775797] CONTEXT:  while executing command on xcnc26:5440
+2026-09-27 04:22:16.959 +08 [2775797] WARNING:  failed to commit transaction on xcnc26:5440
+2026-09-27 04:22:16.959 +08 [2775797] ERROR:  could not commit transaction for shard 102049 on at least one active node
+2026-09-27 04:22:16.959 +08 [2775797] STATEMENT:  COMMIT;
+2026-09-27 04:26:00.627 +08 [2775772] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:26:00.627 +08 [2775772] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:26:00.627 +08 [2775772] HINT:  The transaction might succeed if retried.
+2026-09-27 04:26:00.627 +08 [2775772] CONTEXT:  while executing command on xcnc25:5440
+2026-09-27 04:26:00.627 +08 [2775772] STATEMENT:  COMMIT;
+2026-09-27 04:29:34.967 +08 [2775429] LOG:  received fast shutdown request
+2026-09-27 04:29:34.999 +08 [2775429] LOG:  aborting any active transactions
+2026-09-27 04:29:35.004 +08 [2775429] LOG:  background worker "logical replication launcher" (PID 2775439) exited with exit code 1
+2026-09-27 04:29:35.008 +08 [2775434] LOG:  shutting down
+2026-09-27 04:29:35.041 +08 [2775434] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 04:29:35.409 +08 [2775434] LOG:  checkpoint complete: wrote 174 buffers (0.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.115 s, sync=0.135 s, total=0.402 s; sync files=48, longest=0.111 s, average=0.003 s; distance=7176 kB, estimate=7176 kB; lsn=0/46C7A78, redo lsn=0/46C7A78
+2026-09-27 04:29:35.518 +08 [2775429] LOG:  database system is shut down
