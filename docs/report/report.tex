@@ -589,15 +589,15 @@ transaction time. At 64 clients, it accounts for 94\%, with an average latency o
 orders on each of the 32 shards, five million rows in total, although only about 8\% of
 them fall within the 30-day window.
 
-\paragraph{Covering index.} \expt{a205} adds the \emph{covering index}
-\texttt{orders(created\_at) INCLUDE (merchant\_id, total\_amount)}. A covering index
-stores every column that a query needs, so PostgreSQL can answer T6 with an
-\emph{index-only scan}: it reads only the index entries within the window and does not
-visit the table~\cite{pgindexonly}. There is one condition. An index entry does not
-record whether its row is visible to the current transaction, so PostgreSQL must still
-check the table, unless the page's bit in the \emph{visibility map} says that all its
-rows are visible to every transaction~\cite{pgvisibilitymap}. We therefore run
-\texttt{VACUUM ANALYZE} after loading, which sets these bits, instead of
+\paragraph{Covering index.} \expt{a205} adds
+\texttt{orders(created\_at) INCLUDE (merchant\_id, total\_amount)}. This
+\emph{covering index} contains every column T6 needs, allowing PostgreSQL to use
+an \emph{index-only scan} over the entries within the reporting window~\cite{pgindexonly}.
+Visibility checks can still require table reads, because index entries do not
+record whether a row is visible to the current transaction. PostgreSQL skips
+those reads only when the page's bit in the \emph{visibility map} marks all its
+rows as visible to every transaction~\cite{pgvisibilitymap}. We run
+\texttt{VACUUM ANALYZE} after loading to set these bits, rather than
 \texttt{ANALYZE} alone. \expt{a205} also adds the \emph{item index},
 \texttt{order\_items(merchant\_id, order\_id)}, for T3's item lookup.
 
