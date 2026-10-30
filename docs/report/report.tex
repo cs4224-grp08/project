@@ -520,7 +520,7 @@ eight clients.
 
 In parallel, we tested three denormalizations of the serializable baseline.
 \expt{a102} copies each order and its items into an order-history table distributed by
-customer, so that T3 becomes a lookup on a single shard. In exchange, T1 and T5 must
+customer,to eliminate the expensive distributed join in T3.  In exchange, T1 and T5 must
 keep the copy up to date. It removes the same bottleneck as the T3 rewrite. At 64
 clients, T3's average latency falls from 258\,s to 36\,ms, and throughput rises from
 1.34 to 17.4~TPS. \expt{a112} merges products and inventory into one table, and
