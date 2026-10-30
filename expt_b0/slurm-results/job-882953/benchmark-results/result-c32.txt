@@ -1,0 +1,572 @@
+# Command: /home/stuproj/cs08/pgsql/bin/pgbench --random-seed=42 --max-tries=3 -h xcnc0 -p 5440 -U cs08 -d project-882953 -n -c 32 -j 4 -T 600 -M simple -P 10 -r --failures-detailed -l --log-prefix=/home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/slurm-results/job-882953/benchmark-results/logs/pgbench-c32 --sampling-rate=1.0 -D DEBUG_MODE=0 -D NUM_MERCHANTS=1000 -D NUM_CUSTOMERS=1000000 -D NUM_PRODUCTS=500000 -D INITIAL_NUM_ORDERS=5000000 -D HOT_ORDER_PERCENT=50 -D HOT_MERCHANTS=100 -D MIN_ITEMS_PER_ORDER=1 -D MAX_ITEMS_PER_ORDER=5 -D MIN_ORDER_QTY=1 -D MAX_ORDER_QTY=5 -D INVENTORY_CHANGE_MIN=-5 -D INVENTORY_CHANGE_MAX=20 -D REPORT_DAYS=30 -D T7_MIN_TRANSFER_QTY=1 -D T7_MAX_TRANSFER_QTY=5 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T1_place_order.sql@10 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T2_update_inventory.sql@10 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T3_order_history.sql@5 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T4_product_lookup.sql@5 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T5_update_order_status.sql@10 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T6_global_sales.sql@10 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T7_inventory_transfer.sql@30 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T8_update_customer.sql@10 -f /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T9_update_product.sql@10
+pgbench: setting random seed to 42
+pgbench (18.6)
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc3:5440
+pgbench: error: client 5 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102078 on at least one active node
+progress: 10.0 s, 7.6 tps, lat 998.347 ms stddev 1717.167, 18 failed, 22 retried, 41 retries
+progress: 20.0 s, 5.6 tps, lat 2757.395 ms stddev 5222.491, 12 failed, 15 retried, 30 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc3:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 30.0 s, 3.4 tps, lat 2325.894 ms stddev 4636.939, 13 failed, 16 retried, 31 retries
+progress: 40.0 s, 2.1 tps, lat 5166.380 ms stddev 6549.861, 1 failed, 3 retried, 5 retries
+progress: 50.0 s, 1.8 tps, lat 5134.047 ms stddev 7675.632, 5 failed, 9 retried, 16 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc3:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 60.0 s, 3.7 tps, lat 2268.667 ms stddev 6288.289, 8 failed, 11 retried, 20 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 70.0 s, 1.2 tps, lat 682.348 ms stddev 579.470, 2 failed, 3 retried, 5 retries
+progress: 80.0 s, 1.6 tps, lat 4703.277 ms stddev 12089.255, 0 failed, 0 retried, 0 retries
+progress: 90.0 s, 1.2 tps, lat 7721.063 ms stddev 24463.350, 0 failed, 0 retried, 0 retries
+progress: 100.0 s, 3.0 tps, lat 3203.228 ms stddev 11207.973, 0 failed, 0 retried, 0 retries
+progress: 110.0 s, 0.0 tps, lat 0.000 ms stddev 0.000, 0 failed, 0 retried, 0 retries
+progress: 120.0 s, 0.3 tps, lat 38447.345 ms stddev 53732.712, 0 failed, 0 retried, 0 retries
+progress: 130.0 s, 1.9 tps, lat 49722.381 ms stddev 57354.104, 0 failed, 0 retried, 0 retries
+progress: 140.0 s, 4.1 tps, lat 6057.037 ms stddev 24707.595, 2 failed, 5 retried, 8 retries
+progress: 150.0 s, 2.0 tps, lat 21384.195 ms stddev 43234.547, 0 failed, 2 retried, 3 retries
+progress: 160.0 s, 1.7 tps, lat 22318.874 ms stddev 47528.770, 2 failed, 2 retried, 4 retries
+progress: 170.0 s, 2.4 tps, lat 5320.404 ms stddev 24329.857, 0 failed, 0 retried, 0 retries
+progress: 180.0 s, 4.4 tps, lat 12112.216 ms stddev 30078.464, 0 failed, 3 retried, 3 retries
+progress: 190.0 s, 5.2 tps, lat 14867.710 ms stddev 35025.503, 2 failed, 6 retried, 10 retries
+progress: 200.0 s, 3.8 tps, lat 8428.945 ms stddev 30111.937, 10 failed, 10 retried, 20 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc4:5440
+pgbench: error: client 10 script 6 aborted in command 39 query 0: ERROR:  could not commit transaction for shard 102095 on at least one active node
+progress: 210.0 s, 3.7 tps, lat 15799.927 ms stddev 35940.456, 8 failed, 9 retried, 18 retries
+progress: 220.0 s, 3.3 tps, lat 6023.423 ms stddev 16710.159, 11 failed, 14 retried, 27 retries
+progress: 230.0 s, 4.1 tps, lat 14636.415 ms stddev 30935.482, 6 failed, 10 retried, 19 retries
+progress: 240.0 s, 2.9 tps, lat 4871.296 ms stddev 11067.803, 4 failed, 9 retried, 16 retries
+progress: 250.0 s, 2.2 tps, lat 7548.747 ms stddev 14393.242, 4 failed, 6 retried, 11 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc4:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 260.0 s, 2.4 tps, lat 3840.717 ms stddev 7128.581, 2 failed, 6 retried, 10 retries
+progress: 270.0 s, 3.5 tps, lat 10257.692 ms stddev 21101.872, 4 failed, 6 retried, 10 retries
+progress: 280.0 s, 3.1 tps, lat 6530.929 ms stddev 14773.642, 6 failed, 8 retried, 15 retries
+progress: 290.0 s, 4.6 tps, lat 6643.629 ms stddev 19939.085, 5 failed, 6 retried, 12 retries
+progress: 300.0 s, 3.1 tps, lat 8459.848 ms stddev 19106.366, 8 failed, 12 retried, 21 retries
+progress: 310.0 s, 4.4 tps, lat 9357.175 ms stddev 21823.088, 7 failed, 11 retried, 20 retries
+progress: 320.0 s, 5.3 tps, lat 8662.534 ms stddev 21098.461, 8 failed, 11 retried, 20 retries
+progress: 330.0 s, 3.5 tps, lat 4550.047 ms stddev 11921.535, 10 failed, 12 retried, 22 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc4:5440
+pgbench: error: client 24 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102091 on at least one active node
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 340.0 s, 3.9 tps, lat 5477.762 ms stddev 14260.756, 11 failed, 17 retried, 29 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc2:5440
+pgbench: error: client 12 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102089 on at least one active node
+progress: 350.0 s, 2.8 tps, lat 4247.496 ms stddev 12119.316, 5 failed, 9 retried, 15 retries
+progress: 360.0 s, 2.2 tps, lat 6733.745 ms stddev 13968.364, 1 failed, 2 retried, 4 retries
+progress: 370.0 s, 3.9 tps, lat 8897.481 ms stddev 18184.340, 6 failed, 8 retried, 15 retries
+progress: 380.0 s, 2.3 tps, lat 3666.489 ms stddev 7487.127, 5 failed, 9 retried, 17 retries
+progress: 390.0 s, 4.3 tps, lat 7513.681 ms stddev 19659.963, 5 failed, 5 retried, 10 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: ERROR:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+another command is already in progress
+progress: 400.0 s, 4.0 tps, lat 9489.340 ms stddev 22513.690, 9 failed, 14 retried, 24 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc1:5440
+pgbench: error: client 3 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102092 on at least one active node
+progress: 410.0 s, 3.2 tps, lat 3708.497 ms stddev 11837.655, 7 failed, 10 retried, 18 retries
+progress: 420.0 s, 5.2 tps, lat 7453.336 ms stddev 18498.863, 10 failed, 12 retried, 23 retries
+progress: 430.0 s, 4.0 tps, lat 5164.506 ms stddev 14230.451, 9 failed, 13 retried, 25 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc3:5440
+pgbench: error: client 20 script 8 aborted in command 9 query 0: ERROR:  could not commit transaction for shard 102054 on at least one active node
+progress: 440.3 s, 5.0 tps, lat 6699.686 ms stddev 17161.089, 11 failed, 14 retried, 26 retries
+progress: 450.0 s, 6.5 tps, lat 2568.172 ms stddev 7542.395, 12 failed, 15 retried, 27 retries
+progress: 460.0 s, 3.8 tps, lat 3273.064 ms stddev 9434.776, 7 failed, 10 retried, 19 retries
+progress: 470.0 s, 5.6 tps, lat 5868.466 ms stddev 14100.099, 12 failed, 17 retried, 31 retries
+progress: 480.0 s, 3.9 tps, lat 2801.142 ms stddev 9412.170, 13 failed, 18 retried, 35 retries
+progress: 490.0 s, 4.4 tps, lat 4939.940 ms stddev 12903.802, 11 failed, 12 retried, 23 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc2:5440
+pgbench: error: client 13 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102089 on at least one active node
+progress: 500.0 s, 3.4 tps, lat 3155.234 ms stddev 10116.280, 14 failed, 18 retried, 33 retries
+progress: 510.0 s, 4.3 tps, lat 5243.267 ms stddev 15315.950, 9 failed, 14 retried, 26 retries
+progress: 520.5 s, 2.0 tps, lat 9122.687 ms stddev 18940.616, 3 failed, 6 retried, 10 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on identification as a pivot, during commit attempt.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc4:5440
+pgbench: error: client 26 script 6 aborted in command 39 query 0: ERROR:  could not commit transaction for shard 102075 on at least one active node
+progress: 530.0 s, 3.5 tps, lat 7482.113 ms stddev 14061.854, 4 failed, 9 retried, 14 retries
+progress: 540.0 s, 2.8 tps, lat 6264.240 ms stddev 15624.133, 4 failed, 7 retried, 12 retries
+progress: 550.0 s, 3.7 tps, lat 8335.377 ms stddev 19567.191, 4 failed, 6 retried, 11 retries
+progress: 560.0 s, 3.2 tps, lat 5868.376 ms stddev 11539.550, 4 failed, 8 retried, 14 retries
+progress: 570.0 s, 2.4 tps, lat 6370.445 ms stddev 12469.857, 5 failed, 8 retried, 13 retries
+progress: 580.0 s, 3.1 tps, lat 7740.551 ms stddev 18114.242, 3 failed, 5 retried, 9 retries
+WARNING:  could not serialize access due to read/write dependencies among transactions
+DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+HINT:  The transaction might succeed if retried.
+WARNING:  failed to commit transaction on xcnc2:5440
+pgbench: error: client 29 script 1 aborted in command 15 query 0: ERROR:  could not commit transaction for shard 102089 on at least one active node
+progress: 590.0 s, 1.3 tps, lat 2556.125 ms stddev 4262.979, 0 failed, 3 retried, 4 retries
+progress: 600.0 s, 2.9 tps, lat 13343.068 ms stddev 24287.186, 0 failed, 2 retried, 2 retries
+progress: 610.0 s, 0.5 tps, lat 17452.293 ms stddev 21634.164, 0 failed, 0 retried, 0 retries
+progress: 620.0 s, 0.6 tps, lat 50759.080 ms stddev 14872.769, 0 failed, 0 retried, 0 retries
+progress: 630.0 s, 0.2 tps, lat 61734.179 ms stddev 788.061, 0 failed, 0 retried, 0 retries
+progress: 640.0 s, 0.1 tps, lat 64025.014 ms stddev 0.005, 0 failed, 0 retried, 0 retries
+progress: 650.0 s, 0.5 tps, lat 66984.693 ms stddev 2247.923, 0 failed, 0 retried, 0 retries
+transaction type: multiple scripts
+scaling factor: 1
+query mode: simple
+number of clients: 32
+number of threads: 4
+maximum number of tries: 3
+duration: 600 s
+number of transactions actually processed: 2028
+number of failed transactions: 342 (14.430%)
+number of serialization failures: 342 (14.430%)
+number of deadlock failures: 0 (0.000%)
+number of transactions retried: 498 (21.013%)
+total number of retries: 906
+latency average = 7721.332 ms
+latency stddev = 21047.576 ms
+initial connection time = 52.165 ms
+tps = 3.088871 (without initial connection time)
+SQL script 1: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T1_place_order.sql
+ - weight: 10 (targets 10.0% of total)
+ - 241 transactions (10.2% of total)
+ - number of transactions actually processed: 240 (tps = 0.365547)
+ - number of failed transactions: 1 (0.415%)
+ - number of serialization failures: 1 (0.415%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 12 (4.979%)
+ - total number of retries: 14
+ - latency average = 536.610 ms
+ - latency stddev = 413.010 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set merchant_id :DEBUG_MERCHANT_ID
+         0.000           0          0 \else
+         0.004           0          0 \set merchant_id CASE WHEN random(1, 100) <= :HOT_ORDER_PERCENT THEN random(1, :HOT_MERCHANTS) ELSE random((:HOT_MERCHANTS + 1), :NUM_MERCHANTS) END
+         0.000           0          0 \endif
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set customer_id :DEBUG_CUSTOMER_ID
+         0.000           0          0 \set item_count :DEBUG_ITEM_COUNT
+         0.000           0          0 \else
+         0.003           0          0 \set customer_slot random(0, ((:NUM_CUSTOMERS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set customer_id :merchant_id + (:customer_slot * :NUM_MERCHANTS)
+         0.002           0          0 \set item_count random(:MIN_ITEMS_PER_ORDER, :MAX_ITEMS_PER_ORDER)
+         0.000           0          0 \endif
+         0.002           0          0 \set order_ok 1
+         0.002           0          0 \set order_total 0.0
+         0.294           0          0 BEGIN;
+        18.680           0          0 SELECT CASE WHEN EXISTS (
+         0.003           0          0 \if :t1_customer_ok
+         0.236           0          0 SELECT nextval('benchmark_order_id_seq') AS new_order_id
+         0.002           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \set new_order_id 0
+         0.000           0          0 \endif
+         0.002           0          0 \if :order_ok
+        13.182           0          0 INSERT INTO orders(
+         0.001           0          0 \endif
+         0.001           0          0 \if :order_ok
+         0.001           0          0 \if :item_count >= 1
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id_1 :DEBUG_PRODUCT_ID_1
+         0.000           0          0 \set qty_1 :DEBUG_QTY_1
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot_1 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set product_id_1 :merchant_id + (:product_slot_1 * :NUM_MERCHANTS)
+         0.002           0          0 \set qty_1 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+         0.000           0          0 \endif
+        16.411           0          0 SELECT
+         0.003           0          0 \if :item1_product_ok
+         9.296           0          0 WITH reserved AS (
+         0.003           0          0 \if :item1_stock_ok
+         0.200           0          0 SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+        13.609           0          0 INSERT INTO order_items(
+         0.009           0          0 \set order_total :order_total + (:qty_1 * :item1_price)
+         0.000           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.000           0          0 \endif
+         0.000           0          0 \endif
+         0.001           0          0 \if :order_ok
+         0.001           0          0 \if :item_count >= 2
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id_2 :DEBUG_PRODUCT_ID_2
+         0.000           0          0 \set qty_2 :DEBUG_QTY_2
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot_2 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set product_id_2 :merchant_id + (:product_slot_2 * :NUM_MERCHANTS)
+         0.003           0          0 \set qty_2 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+         0.000           0          0 \endif
+        14.712           0          0 SELECT
+         0.003           0          0 \if :item2_product_ok
+         9.044           0          0 WITH reserved AS (
+         0.003           0          0 \if :item2_stock_ok
+         0.174           0          0 SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+        15.934           0          0 INSERT INTO order_items(
+         0.006           0          0 \set order_total :order_total + (:qty_2 * :item2_price)
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.000           0          0 \endif
+         0.001           0          0 \endif
+         0.001           0          0 \if :order_ok
+         0.001           0          0 \if :item_count >= 3
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id_3 :DEBUG_PRODUCT_ID_3
+         0.000           0          0 \set qty_3 :DEBUG_QTY_3
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot_3 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.004           0          0 \set product_id_3 :merchant_id + (:product_slot_3 * :NUM_MERCHANTS)
+         0.003           0          0 \set qty_3 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+         0.000           0          0 \endif
+        10.779           0          0 SELECT
+         0.004           0          0 \if :item3_product_ok
+         9.463           0          0 WITH reserved AS (
+         0.004           0          0 \if :item3_stock_ok
+         0.190           0          0 SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+         7.411           0          0 INSERT INTO order_items(
+         0.006           0          0 \set order_total :order_total + (:qty_3 * :item3_price)
+         0.000           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.000           0          0 \endif
+         0.001           0          0 \endif
+         0.001           0          0 \if :order_ok
+         0.001           0          0 \if :item_count >= 4
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id_4 :DEBUG_PRODUCT_ID_4
+         0.000           0          0 \set qty_4 :DEBUG_QTY_4
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot_4 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.005           0          0 \set product_id_4 :merchant_id + (:product_slot_4 * :NUM_MERCHANTS)
+         0.004           0          0 \set qty_4 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+         0.000           0          0 \endif
+         7.902           0          0 SELECT
+         0.006           0          0 \if :item4_product_ok
+         8.646           0          0 WITH reserved AS (
+         0.006           0          0 \if :item4_stock_ok
+         0.183           0          0 SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+        23.446           0          0 INSERT INTO order_items(
+         0.006           0          0 \set order_total :order_total + (:qty_4 * :item4_price)
+         0.000           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \endif
+         0.001           0          0 \endif
+         0.001           0          0 \if :order_ok
+         0.001           0          0 \if :item_count >= 5
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id_5 :DEBUG_PRODUCT_ID_5
+         0.000           0          0 \set qty_5 :DEBUG_QTY_5
+         0.000           0          0 \else
+         0.004           0          0 \set product_slot_5 random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.007           0          0 \set product_id_5 :merchant_id + (:product_slot_5 * :NUM_MERCHANTS)
+         0.006           0          0 \set qty_5 random(:MIN_ORDER_QTY, :MAX_ORDER_QTY)
+         0.000           0          0 \endif
+         7.894           0          0 SELECT
+         0.009           0          0 \if :item5_product_ok
+         9.786           0          0 WITH reserved AS (
+         0.010           0          0 \if :item5_stock_ok
+         0.223           0          0 SELECT nextval('benchmark_order_item_id_seq') AS order_item_id
+         7.917           0          0 INSERT INTO order_items(
+         0.006           0          0 \set order_total :order_total + (:qty_5 * :item5_price)
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set order_ok 0
+         0.000           0          0 \endif
+         0.000           0          0 \endif
+         0.002           0          0 \endif
+         0.001           0          0 \if :order_ok
+         8.111           0          0 UPDATE orders
+       352.635           1         14 COMMIT;
+         0.001           0          0 \else
+         0.000           0          0 ROLLBACK;
+         0.000           0          0 \endif
+SQL script 2: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T2_update_inventory.sql
+ - weight: 10 (targets 10.0% of total)
+ - 247 transactions (10.4% of total)
+ - number of transactions actually processed: 247 (tps = 0.376209)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 126.466 ms
+ - latency stddev = 110.970 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set merchant_id :DEBUG_MERCHANT_ID
+         0.000           0          0 \else
+         0.004           0          0 \set merchant_id CASE WHEN random(1, 100) <= :HOT_ORDER_PERCENT THEN random(1, :HOT_MERCHANTS) ELSE random((:HOT_MERCHANTS + 1), :NUM_MERCHANTS) END
+         0.000           0          0 \endif
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id :DEBUG_PRODUCT_ID
+         0.000           0          0 \set inventory_change :DEBUG_INVENTORY_CHANGE
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set product_id :merchant_id + (:product_slot * :NUM_MERCHANTS)
+         0.002           0          0 \set inventory_change random(:INVENTORY_CHANGE_MIN, :INVENTORY_CHANGE_MAX)
+         0.000           0          0 \endif
+         0.197           0          0 BEGIN;
+        11.271           0          0 UPDATE inventory
+       114.862           0          0 COMMIT;
+SQL script 3: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T3_order_history.sql
+ - weight: 5 (targets 5.0% of total)
+ - 134 transactions (5.7% of total)
+ - number of transactions actually processed: 134 (tps = 0.204097)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 79930.140 ms
+ - latency stddev = 24230.488 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set merchant_id :DEBUG_MERCHANT_ID
+         0.000           0          0 \else
+         0.005           0          0 \set merchant_id CASE WHEN random(1, 100) <= :HOT_ORDER_PERCENT THEN random(1, :HOT_MERCHANTS) ELSE random((:HOT_MERCHANTS + 1), :NUM_MERCHANTS) END
+         0.000           0          0 \endif
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set customer_id :DEBUG_CUSTOMER_ID
+         0.000           0          0 \else
+         0.004           0          0 \set customer_slot random(0, ((:NUM_CUSTOMERS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set customer_id :merchant_id + (:customer_slot * :NUM_MERCHANTS)
+         0.000           0          0 \endif
+         0.151           0          0 BEGIN;
+     78436.297           0          0 SELECT
+      1493.677           0          0 COMMIT;
+SQL script 4: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T4_product_lookup.sql
+ - weight: 5 (targets 5.0% of total)
+ - 130 transactions (5.5% of total)
+ - number of transactions actually processed: 130 (tps = 0.198005)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 22678.067 ms
+ - latency stddev = 8874.869 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set merchant_id :DEBUG_MERCHANT_ID
+         0.000           0          0 \else
+         0.004           0          0 \set merchant_id CASE WHEN random(1, 100) <= :HOT_ORDER_PERCENT THEN random(1, :HOT_MERCHANTS) ELSE random((:HOT_MERCHANTS + 1), :NUM_MERCHANTS) END
+         0.000           0          0 \endif
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id :DEBUG_PRODUCT_ID
+         0.000           0          0 \else
+         0.003           0          0 \set product_slot random(0, ((:NUM_PRODUCTS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set product_id :merchant_id + (:product_slot * :NUM_MERCHANTS)
+         0.000           0          0 \endif
+         0.208           0          0 BEGIN;
+     22393.337           0          0 SELECT
+       284.508           0          0 COMMIT;
+SQL script 5: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T5_update_order_status.sql
+ - weight: 10 (targets 10.0% of total)
+ - 226 transactions (9.5% of total)
+ - number of transactions actually processed: 226 (tps = 0.344223)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 135.646 ms
+ - latency stddev = 141.877 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set order_id :DEBUG_ORDER_ID
+         0.000           0          0 \set status_roll :DEBUG_STATUS_ROLL
+         0.000           0          0 \else
+         0.003           0          0 \set order_id random(1, :INITIAL_NUM_ORDERS)
+         0.003           0          0 \set status_roll random(1, 3)
+         0.000           0          0 \endif
+         0.176           0          0 BEGIN;
+         0.004           0          0 \if :status_roll = 1
+         9.432           0          0 UPDATE orders
+         0.001           0          0 \elif :status_roll = 2
+        12.863           0          0 UPDATE orders
+         0.001           0          0 \else
+        11.269           0          0 UPDATE orders
+         0.001           0          0 \endif
+       124.100           0          0 COMMIT;
+SQL script 6: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T6_global_sales.sql
+ - weight: 10 (targets 10.0% of total)
+ - 232 transactions (9.8% of total)
+ - number of transactions actually processed: 232 (tps = 0.353362)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 3579.968 ms
+ - latency stddev = 1281.447 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.187           0          0 BEGIN;
+      3546.916           0          0 SELECT
+        32.865           0          0 COMMIT;
+SQL script 7: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T7_inventory_transfer.sql
+ - weight: 30 (targets 30.0% of total)
+ - 673 transactions (28.4% of total)
+ - number of transactions actually processed: 332 (tps = 0.505673)
+ - number of failed transactions: 341 (50.669%)
+ - number of serialization failures: 341 (50.669%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 486 (72.214%)
+ - total number of retries: 892
+ - latency average = 2767.314 ms
+ - latency stddev = 2052.640 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set source_product_id :DEBUG_T7_SOURCE_PRODUCT_ID
+         0.000           0          0 \set dest_product_id :DEBUG_T7_DEST_PRODUCT_ID
+         0.000           0          0 \set transfer_qty :DEBUG_T7_TRANSFER_QTY
+         0.000           0          0 \else
+         0.003           0          0 \set source_product_id random(1, :NUM_PRODUCTS)
+         0.001           0          0 \set dest_product_id random(1, :NUM_PRODUCTS)
+         0.001           0          0 \set transfer_qty random(:T7_MIN_TRANSFER_QTY, :T7_MAX_TRANSFER_QTY)
+         0.000           0          0 \endif
+         0.001           0          0 \set transfer_ok 1
+         0.862           0          0 BEGIN;
+       836.627           0          0 SELECT EXISTS(
+       288.907           0          0 SELECT EXISTS(
+         0.002           0          0 \if :t7_source_exists
+       285.371           0          0 SELECT inventory_id AS source_inventory_id FROM inventory WHERE product_id = (:source_product_id)::bigint
+         0.001           0          0 \else
+         0.000           0          0 \set transfer_ok 0
+         0.000           0          0 \endif
+         0.002           0          0 \if :t7_dest_exists
+       284.773           0          0 SELECT inventory_id AS dest_inventory_id FROM inventory WHERE product_id = (:dest_product_id)::bigint
+         0.001           0          0 \else
+         0.000           0          0 \set transfer_ok 0
+         0.000           0          0 \endif
+         0.003           0          0 \if :source_product_id = :dest_product_id
+         0.000           0          0 \set transfer_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \if :transfer_ok
+        23.458         266        690 WITH debit AS (
+         0.002           0          0 \if :t7_debit_ok
+        16.971          70        199 WITH credit AS (
+         0.002           0          0 \if :t7_credit_ok
+         0.000           0          0 \else
+         0.000           0          0 \set transfer_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \else
+         0.000           0          0 \set transfer_ok 0
+         0.000           0          0 \endif
+         0.001           0          0 \endif
+         0.001           0          0 \if :transfer_ok
+       301.271           5          4 COMMIT;
+         0.001           0          0 \else
+         0.000           0          0 ROLLBACK;
+         0.000           0          0 \endif
+SQL script 8: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T8_update_customer.sql
+ - weight: 10 (targets 10.0% of total)
+ - 238 transactions (10.0% of total)
+ - number of transactions actually processed: 238 (tps = 0.362501)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 112.256 ms
+ - latency stddev = 108.586 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set merchant_id :DEBUG_MERCHANT_ID
+         0.000           0          0 \else
+         0.003           0          0 \set merchant_id random(1, :NUM_MERCHANTS)
+         0.000           0          0 \endif
+         0.001           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set customer_id :DEBUG_CUSTOMER_ID
+         0.000           0          0 \set new_email_number :DEBUG_NEW_EMAIL_NUMBER
+         0.000           0          0 \else
+         0.003           0          0 \set customer_slot random(0, ((:NUM_CUSTOMERS - :merchant_id) / :NUM_MERCHANTS))
+         0.003           0          0 \set customer_id :merchant_id + (:customer_slot * :NUM_MERCHANTS)
+         0.001           0          0 \set new_email_number random(1, :NUM_CUSTOMERS)
+         0.000           0          0 \endif
+         0.236           0          0 BEGIN;
+        11.944           0          0 UPDATE customers
+       100.063           0          0 COMMIT;
+SQL script 9: /home/stuproj/cs08/citus_project_worktrees/baseline-runs/expt_b0/transactions/T9_update_product.sql
+ - weight: 10 (targets 10.0% of total)
+ - 249 transactions (10.5% of total)
+ - number of transactions actually processed: 249 (tps = 0.379255)
+ - number of failed transactions: 0 (0.000%)
+ - number of serialization failures: 0 (0.000%)
+ - number of deadlock failures: 0 (0.000%)
+ - number of transactions retried: 0 (0.000%)
+ - total number of retries: 0
+ - latency average = 134.044 ms
+ - latency stddev = 162.169 ms
+ - statement latencies in milliseconds, failures and retries:
+         0.002           0          0 \if :DEBUG_MODE
+         0.000           0          0 \set product_id :DEBUG_PRODUCT_ID
+         0.000           0          0 \else
+         0.003           0          0 \set product_id random(1, :NUM_PRODUCTS)
+         0.000           0          0 \endif
+         0.003           0          0 \set merchant_id  1 + ((:product_id - 1) % :NUM_MERCHANTS)
+         0.001           0          0 \set price_increase random(1, 10)
+         0.182           0          0 BEGIN;
+        15.359           0          0 UPDATE products
+       118.455           0          0 COMMIT;
+pgbench: error: Run was aborted; the above results are incomplete.
+pgbench_exit_code=2
+tee_exit_code=0

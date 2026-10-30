@@ -1,0 +1,234 @@
+2026-09-27 02:54:40.289 +08 [668276] LOG:  There is no designated Main database.
+2026-09-27 02:54:40.289 +08 [668276] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 02:54:40.289 +08 [668276] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 02:54:40.412 +08 [668276] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 02:54:40.412 +08 [668276] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 02:54:40.412 +08 [668276] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 02:54:40.413 +08 [668276] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 02:54:40.419 +08 [668283] LOG:  database system was shut down at 2026-09-27 02:54:37 +08
+2026-09-27 02:54:40.423 +08 [668276] LOG:  database system is ready to accept connections
+2026-09-27 02:54:44.193 +08 [668297] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 02:54:44.193 +08 [668297] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:12:49.443 +08 [668276] LOG:  received fast shutdown request
+2026-09-27 03:12:49.444 +08 [668276] LOG:  aborting any active transactions
+2026-09-27 03:12:49.444 +08 [674816] FATAL:  terminating connection due to administrator command
+2026-09-27 03:12:49.444 +08 [678762] FATAL:  terminating connection due to administrator command
+2026-09-27 03:12:49.444 +08 [674818] FATAL:  terminating connection due to administrator command
+2026-09-27 03:12:49.444 +08 [674817] FATAL:  terminating connection due to administrator command
+2026-09-27 03:12:49.452 +08 [668276] LOG:  background worker "logical replication launcher" (PID 668286) exited with exit code 1
+2026-09-27 03:12:49.456 +08 [668281] LOG:  shutting down
+2026-09-27 03:12:49.457 +08 [668281] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:12:49.851 +08 [690686] LOG:  PID 674817 in cancel request did not match any process
+2026-09-27 03:12:49.854 +08 [690687] LOG:  PID 674816 in cancel request did not match any process
+2026-09-27 03:12:49.876 +08 [690688] LOG:  PID 674818 in cancel request did not match any process
+2026-09-27 03:12:51.861 +08 [690689] FATAL:  the database system is shutting down
+2026-09-27 03:12:51.863 +08 [690690] FATAL:  the database system is shutting down
+2026-09-27 03:12:51.886 +08 [690691] FATAL:  the database system is shutting down
+2026-09-27 03:12:53.869 +08 [690696] FATAL:  the database system is shutting down
+2026-09-27 03:12:53.871 +08 [690697] FATAL:  the database system is shutting down
+2026-09-27 03:12:53.893 +08 [690698] FATAL:  the database system is shutting down
+2026-09-27 03:12:55.816 +08 [668281] LOG:  checkpoint complete: wrote 95848 buffers (73.1%), wrote 5 SLRU buffers; 0 WAL file(s) added, 0 removed, 205 recycled; write=6.132 s, sync=0.118 s, total=6.360 s; sync files=1024, longest=0.112 s, average=0.001 s; distance=3363232 kB, estimate=3363232 kB; lsn=0/CEBC7180, redo lsn=0/CEBC7180
+2026-09-27 03:12:56.031 +08 [668276] LOG:  database system is shut down
+2026-09-27 03:13:18.252 +08 [690742] LOG:  There is no designated Main database.
+2026-09-27 03:13:18.252 +08 [690742] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:13:18.252 +08 [690742] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:13:18.370 +08 [690742] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:13:18.370 +08 [690742] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:13:18.370 +08 [690742] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:13:18.380 +08 [690742] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:13:18.385 +08 [690749] LOG:  database system was shut down at 2026-09-27 03:12:55 +08
+2026-09-27 03:13:18.391 +08 [690742] LOG:  database system is ready to accept connections
+2026-09-27 03:13:19.579 +08 [690756] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:13:19.579 +08 [690756] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:25:42.861 +08 [693216] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 03:25:42.861 +08 [693216] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict out checking.
+2026-09-27 03:25:42.861 +08 [693216] HINT:  The transaction might succeed if retried.
+2026-09-27 03:25:42.861 +08 [693216] STATEMENT:  UPDATE public.orders_102112 orders SET total_amount = 8207.2::numeric(12,2) WHERE (order_id OPERATOR(pg_catalog.=) (5001867)::bigint)
+2026-09-27 03:27:50.900 +08 [690742] LOG:  received fast shutdown request
+2026-09-27 03:27:50.901 +08 [690742] LOG:  aborting any active transactions
+2026-09-27 03:27:50.901 +08 [707340] FATAL:  terminating connection due to administrator command
+2026-09-27 03:27:50.902 +08 [705376] FATAL:  terminating connection due to administrator command
+2026-09-27 03:27:50.907 +08 [705369] FATAL:  terminating connection due to administrator command
+2026-09-27 03:27:50.908 +08 [705367] FATAL:  terminating connection due to administrator command
+2026-09-27 03:27:50.910 +08 [690742] LOG:  background worker "logical replication launcher" (PID 690752) exited with exit code 1
+2026-09-27 03:27:50.916 +08 [690747] LOG:  shutting down
+2026-09-27 03:27:50.916 +08 [690747] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:27:52.464 +08 [714920] LOG:  PID 705367 in cancel request did not match any process
+2026-09-27 03:27:52.471 +08 [714921] LOG:  PID 705369 in cancel request did not match any process
+2026-09-27 03:27:52.563 +08 [714922] LOG:  PID 705376 in cancel request did not match any process
+2026-09-27 03:27:54.476 +08 [714932] FATAL:  the database system is shutting down
+2026-09-27 03:27:54.480 +08 [714933] FATAL:  the database system is shutting down
+2026-09-27 03:27:54.573 +08 [714934] FATAL:  the database system is shutting down
+2026-09-27 03:27:56.483 +08 [714936] FATAL:  the database system is shutting down
+2026-09-27 03:27:56.486 +08 [714937] FATAL:  the database system is shutting down
+2026-09-27 03:27:56.580 +08 [714938] FATAL:  the database system is shutting down
+2026-09-27 03:27:56.792 +08 [690747] LOG:  checkpoint complete: wrote 94581 buffers (72.2%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=5.669 s, sync=0.093 s, total=5.877 s; sync files=264, longest=0.091 s, average=0.001 s; distance=1688603 kB, estimate=1688603 kB; lsn=1/35CCDE20, redo lsn=1/35CCDE20
+2026-09-27 03:27:57.030 +08 [690742] LOG:  database system is shut down
+2026-09-27 03:28:17.811 +08 [714978] LOG:  There is no designated Main database.
+2026-09-27 03:28:17.811 +08 [714978] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:28:17.811 +08 [714978] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:28:17.932 +08 [714978] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:28:17.932 +08 [714978] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:28:17.932 +08 [714978] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:28:17.938 +08 [714978] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:28:17.943 +08 [714985] LOG:  database system was shut down at 2026-09-27 03:27:56 +08
+2026-09-27 03:28:17.948 +08 [714978] LOG:  database system is ready to accept connections
+2026-09-27 03:28:18.917 +08 [714995] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:28:18.917 +08 [714995] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:31:58.029 +08 [715248] LOG:  skipping vacuum of "order_items_102148" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102116" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102164" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102132" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102160" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102128" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102156" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102124" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102152" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102120" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102136" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102104" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102144" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102112" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "order_items_102140" --- lock not available
+2026-09-27 03:31:58.030 +08 [715248] LOG:  skipping vacuum of "orders_102108" --- lock not available
+2026-09-27 03:43:03.580 +08 [714978] LOG:  received fast shutdown request
+2026-09-27 03:43:03.735 +08 [714978] LOG:  aborting any active transactions
+2026-09-27 03:43:03.735 +08 [727792] FATAL:  terminating connection due to administrator command
+2026-09-27 03:43:03.735 +08 [727780] FATAL:  terminating connection due to administrator command
+2026-09-27 03:43:03.738 +08 [727774] FATAL:  terminating connection due to administrator command
+2026-09-27 03:43:03.738 +08 [727775] FATAL:  terminating connection due to administrator command
+2026-09-27 03:43:03.744 +08 [714978] LOG:  background worker "logical replication launcher" (PID 714988) exited with exit code 1
+2026-09-27 03:43:03.752 +08 [714983] LOG:  shutting down
+2026-09-27 03:43:03.753 +08 [714983] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:43:05.210 +08 [736808] LOG:  PID 727775 in cancel request did not match any process
+2026-09-27 03:43:05.486 +08 [736809] LOG:  PID 727780 in cancel request did not match any process
+2026-09-27 03:43:05.626 +08 [736810] LOG:  PID 727792 in cancel request did not match any process
+2026-09-27 03:43:07.221 +08 [736813] FATAL:  the database system is shutting down
+2026-09-27 03:43:07.496 +08 [736814] FATAL:  the database system is shutting down
+2026-09-27 03:43:07.637 +08 [736815] FATAL:  the database system is shutting down
+2026-09-27 03:43:09.228 +08 [736820] FATAL:  the database system is shutting down
+2026-09-27 03:43:09.505 +08 [736821] FATAL:  the database system is shutting down
+2026-09-27 03:43:09.644 +08 [736822] FATAL:  the database system is shutting down
+2026-09-27 03:43:09.668 +08 [714983] LOG:  checkpoint complete: wrote 94567 buffers (72.1%), wrote 6 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=5.750 s, sync=0.091 s, total=5.917 s; sync files=263, longest=0.089 s, average=0.001 s; distance=1687845 kB, estimate=1687845 kB; lsn=1/9CD17468, redo lsn=1/9CD17468
+2026-09-27 03:43:09.873 +08 [714978] LOG:  database system is shut down
+2026-09-27 03:43:31.468 +08 [736859] LOG:  There is no designated Main database.
+2026-09-27 03:43:31.468 +08 [736859] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:43:31.468 +08 [736859] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:43:31.624 +08 [736859] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:43:31.624 +08 [736859] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:43:31.624 +08 [736859] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:43:31.625 +08 [736859] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:43:31.632 +08 [736866] LOG:  database system was shut down at 2026-09-27 03:43:09 +08
+2026-09-27 03:43:31.638 +08 [736859] LOG:  database system is ready to accept connections
+2026-09-27 03:43:32.620 +08 [736873] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:43:32.620 +08 [736873] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 03:58:23.914 +08 [736859] LOG:  received fast shutdown request
+2026-09-27 03:58:23.915 +08 [736859] LOG:  aborting any active transactions
+2026-09-27 03:58:23.916 +08 [748682] FATAL:  terminating connection due to administrator command
+2026-09-27 03:58:23.916 +08 [748676] FATAL:  terminating connection due to administrator command
+2026-09-27 03:58:23.916 +08 [748653] FATAL:  terminating connection due to administrator command
+2026-09-27 03:58:23.916 +08 [748654] FATAL:  terminating connection due to administrator command
+2026-09-27 03:58:23.924 +08 [736859] LOG:  background worker "logical replication launcher" (PID 736869) exited with exit code 1
+2026-09-27 03:58:23.927 +08 [736864] LOG:  shutting down
+2026-09-27 03:58:23.928 +08 [736864] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 03:58:24.498 +08 [757241] LOG:  PID 748654 in cancel request did not match any process
+2026-09-27 03:58:25.026 +08 [757242] LOG:  PID 748676 in cancel request did not match any process
+2026-09-27 03:58:25.322 +08 [757243] LOG:  PID 748682 in cancel request did not match any process
+2026-09-27 03:58:26.508 +08 [757244] FATAL:  the database system is shutting down
+2026-09-27 03:58:27.037 +08 [757245] FATAL:  the database system is shutting down
+2026-09-27 03:58:27.332 +08 [757246] FATAL:  the database system is shutting down
+2026-09-27 03:58:28.518 +08 [757248] FATAL:  the database system is shutting down
+2026-09-27 03:58:29.045 +08 [757252] FATAL:  the database system is shutting down
+2026-09-27 03:58:29.340 +08 [757254] FATAL:  the database system is shutting down
+2026-09-27 03:58:29.754 +08 [736864] LOG:  checkpoint complete: wrote 95120 buffers (72.6%), wrote 6 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=5.643 s, sync=0.130 s, total=5.827 s; sync files=264, longest=0.127 s, average=0.001 s; distance=1689430 kB, estimate=1689430 kB; lsn=2/3EECD60, redo lsn=2/3EECD60
+2026-09-27 03:58:29.986 +08 [736859] LOG:  database system is shut down
+2026-09-27 03:58:55.560 +08 [757295] LOG:  There is no designated Main database.
+2026-09-27 03:58:55.560 +08 [757295] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 03:58:55.560 +08 [757295] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 03:58:55.679 +08 [757295] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 03:58:55.679 +08 [757295] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 03:58:55.679 +08 [757295] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 03:58:55.680 +08 [757295] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 03:58:55.686 +08 [757302] LOG:  database system was shut down at 2026-09-27 03:58:29 +08
+2026-09-27 03:58:55.691 +08 [757295] LOG:  database system is ready to accept connections
+2026-09-27 03:58:56.699 +08 [757309] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 03:58:56.699 +08 [757309] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 04:03:40.437 +08 [757632] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:03:40.437 +08 [757632] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 04:03:40.437 +08 [757632] HINT:  The transaction might succeed if retried.
+2026-09-27 04:03:40.437 +08 [757632] STATEMENT:  INSERT INTO public.order_items_102144 (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15000560'::bigint, '57'::bigint, '5000194'::bigint, '415057'::bigint, 4, 364.83::numeric(12,2))
+2026-09-27 04:09:41.216 +08 [759422] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:09:41.216 +08 [759422] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:09:41.216 +08 [759422] HINT:  The transaction might succeed if retried.
+2026-09-27 04:09:41.216 +08 [759422] STATEMENT:  PREPARE TRANSACTION 'citus_0_2774814_13658_300'
+2026-09-27 04:13:52.789 +08 [757295] LOG:  received fast shutdown request
+2026-09-27 04:13:52.791 +08 [757295] LOG:  aborting any active transactions
+2026-09-27 04:13:52.791 +08 [768229] FATAL:  terminating connection due to administrator command
+2026-09-27 04:13:52.794 +08 [768195] FATAL:  terminating connection due to administrator command
+2026-09-27 04:13:52.794 +08 [768191] FATAL:  terminating connection due to administrator command
+2026-09-27 04:13:52.794 +08 [768192] FATAL:  terminating connection due to administrator command
+2026-09-27 04:13:52.801 +08 [757295] LOG:  background worker "logical replication launcher" (PID 757305) exited with exit code 1
+2026-09-27 04:13:52.805 +08 [757300] LOG:  shutting down
+2026-09-27 04:13:52.806 +08 [757300] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 04:13:53.196 +08 [775966] LOG:  PID 768191 in cancel request did not match any process
+2026-09-27 04:13:53.928 +08 [775971] LOG:  PID 768192 in cancel request did not match any process
+2026-09-27 04:13:54.359 +08 [775972] LOG:  PID 768195 in cancel request did not match any process
+2026-09-27 04:13:55.205 +08 [775973] FATAL:  the database system is shutting down
+2026-09-27 04:13:55.939 +08 [775974] FATAL:  the database system is shutting down
+2026-09-27 04:13:56.369 +08 [775975] FATAL:  the database system is shutting down
+2026-09-27 04:13:57.212 +08 [775977] FATAL:  the database system is shutting down
+2026-09-27 04:13:57.947 +08 [775978] FATAL:  the database system is shutting down
+2026-09-27 04:13:58.377 +08 [775979] FATAL:  the database system is shutting down
+2026-09-27 04:13:58.765 +08 [757300] LOG:  checkpoint complete: wrote 94930 buffers (72.4%), wrote 6 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=5.758 s, sync=0.135 s, total=5.960 s; sync files=263, longest=0.133 s, average=0.001 s; distance=1688095 kB, estimate=1688095 kB; lsn=2/6AF74BF8, redo lsn=2/6AF74BF8
+2026-09-27 04:13:58.993 +08 [757295] LOG:  database system is shut down
+2026-09-27 04:14:24.183 +08 [776024] LOG:  There is no designated Main database.
+2026-09-27 04:14:24.183 +08 [776024] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 04:14:24.183 +08 [776024] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 04:14:24.329 +08 [776024] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 04:14:24.329 +08 [776024] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 04:14:24.329 +08 [776024] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 04:14:24.331 +08 [776024] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 04:14:24.338 +08 [776031] LOG:  database system was shut down at 2026-09-27 04:13:58 +08
+2026-09-27 04:14:24.344 +08 [776024] LOG:  database system is ready to accept connections
+2026-09-27 04:14:26.521 +08 [776038] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 04:14:26.521 +08 [776038] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 04:19:59.446 +08 [778113] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:19:59.446 +08 [778113] DETAIL:  Reason code: Canceled on identification as a pivot, during conflict out checking.
+2026-09-27 04:19:59.446 +08 [778113] HINT:  The transaction might succeed if retried.
+2026-09-27 04:19:59.446 +08 [778113] STATEMENT:  UPDATE public.orders_102124 orders SET total_amount = 7150.7::numeric(12,2) WHERE (order_id OPERATOR(pg_catalog.=) (5000331)::bigint)
+2026-09-27 04:20:21.343 +08 [777984] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:20:21.343 +08 [777984] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:20:21.343 +08 [777984] HINT:  The transaction might succeed if retried.
+2026-09-27 04:20:21.343 +08 [777984] STATEMENT:  COMMIT
+2026-09-27 04:20:21.346 +08 [777984] WARNING:  there is no transaction in progress
+2026-09-27 04:21:40.570 +08 [777930] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:21:40.570 +08 [777930] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:21:40.570 +08 [777930] HINT:  The transaction might succeed if retried.
+2026-09-27 04:21:40.570 +08 [777930] STATEMENT:  PREPARE TRANSACTION 'citus_0_2775766_7092_54'
+2026-09-27 04:26:00.618 +08 [777937] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 04:26:00.618 +08 [777937] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 04:26:00.618 +08 [777937] HINT:  The transaction might succeed if retried.
+2026-09-27 04:26:00.618 +08 [777937] STATEMENT:  PREPARE TRANSACTION 'citus_0_2775772_15311_245'
+2026-09-27 04:29:36.469 +08 [776024] LOG:  received fast shutdown request
+2026-09-27 04:29:36.470 +08 [776024] LOG:  aborting any active transactions
+2026-09-27 04:29:36.470 +08 [786187] FATAL:  terminating connection due to administrator command
+2026-09-27 04:29:36.470 +08 [786225] FATAL:  terminating connection due to administrator command
+2026-09-27 04:29:36.470 +08 [786177] FATAL:  terminating connection due to administrator command
+2026-09-27 04:29:36.470 +08 [786141] FATAL:  terminating connection due to administrator command
+2026-09-27 04:29:36.478 +08 [776024] LOG:  background worker "logical replication launcher" (PID 776034) exited with exit code 1
+2026-09-27 04:29:36.484 +08 [776029] LOG:  shutting down
+2026-09-27 04:29:36.485 +08 [776029] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 04:29:37.622 +08 [794295] LOG:  PID 786177 in cancel request did not match any process
+2026-09-27 04:29:37.721 +08 [794296] LOG:  PID 786141 in cancel request did not match any process
+2026-09-27 04:29:37.952 +08 [794297] LOG:  PID 786187 in cancel request did not match any process
+2026-09-27 04:29:39.632 +08 [794302] FATAL:  the database system is shutting down
+2026-09-27 04:29:39.641 +08 [794303] FATAL:  the database system is shutting down
+2026-09-27 04:29:39.731 +08 [794304] FATAL:  the database system is shutting down
+2026-09-27 04:29:39.742 +08 [794305] FATAL:  the database system is shutting down
+2026-09-27 04:29:39.962 +08 [794306] FATAL:  the database system is shutting down
+2026-09-27 04:29:39.972 +08 [794307] FATAL:  the database system is shutting down
+2026-09-27 04:29:41.649 +08 [794309] FATAL:  the database system is shutting down
+2026-09-27 04:29:41.750 +08 [794310] FATAL:  the database system is shutting down
+2026-09-27 04:29:41.979 +08 [794311] FATAL:  the database system is shutting down
+2026-09-27 04:29:42.379 +08 [776029] LOG:  checkpoint complete: wrote 95360 buffers (72.8%), wrote 8 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=5.686 s, sync=0.138 s, total=5.896 s; sync files=264, longest=0.134 s, average=0.001 s; distance=1689984 kB, estimate=1689984 kB; lsn=2/D21D4DC8, redo lsn=2/D21D4DC8
+2026-09-27 04:29:42.606 +08 [776024] LOG:  database system is shut down

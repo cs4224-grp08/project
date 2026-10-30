@@ -1,0 +1,974 @@
+2026-09-27 10:31:16.218 +08 [1558282] LOG:  There is no designated Main database.
+2026-09-27 10:31:16.218 +08 [1558282] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 10:31:16.218 +08 [1558282] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 10:31:16.417 +08 [1558282] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 10:31:16.418 +08 [1558282] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 10:31:16.418 +08 [1558282] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 10:31:16.481 +08 [1558282] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 10:31:16.554 +08 [1558289] LOG:  database system was shut down at 2026-09-27 10:31:13 +08
+2026-09-27 10:31:16.637 +08 [1558282] LOG:  database system is ready to accept connections
+2026-09-27 10:31:20.443 +08 [1558297] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 10:31:20.443 +08 [1558297] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:16.565 +08 [1558297] WARNING:  terminating connection due to administrator command
+2026-09-27 10:50:16.565 +08 [1558297] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:18.577 +08 [1558297] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 10:50:18.577 +08 [1558297] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:18.577 +08 [1558297] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 10:50:18.577 +08 [1558297] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:20.584 +08 [1558297] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 10:50:20.584 +08 [1558297] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:20.584 +08 [1558297] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 10:50:20.584 +08 [1558297] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:50:21.363 +08 [1558282] LOG:  received fast shutdown request
+2026-09-27 10:50:21.400 +08 [1558282] LOG:  aborting any active transactions
+2026-09-27 10:50:21.400 +08 [1560816] FATAL:  terminating connection due to administrator command
+2026-09-27 10:50:21.400 +08 [1563125] FATAL:  terminating connection due to administrator command
+2026-09-27 10:50:21.400 +08 [1560842] FATAL:  terminating connection due to administrator command
+2026-09-27 10:50:21.406 +08 [1558282] LOG:  background worker "logical replication launcher" (PID 1558292) exited with exit code 1
+2026-09-27 10:50:21.410 +08 [1558287] LOG:  shutting down
+2026-09-27 10:50:21.450 +08 [1558287] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 10:50:22.058 +08 [1570947] LOG:  PID 1560816 in cancel request did not match any process
+2026-09-27 10:50:22.585 +08 [1570948] LOG:  PID 1560842 in cancel request did not match any process
+2026-09-27 10:50:24.070 +08 [1570949] FATAL:  the database system is shutting down
+2026-09-27 10:50:24.080 +08 [1570950] FATAL:  the database system is shutting down
+2026-09-27 10:50:24.598 +08 [1570951] FATAL:  the database system is shutting down
+2026-09-27 10:50:24.608 +08 [1570952] FATAL:  the database system is shutting down
+2026-09-27 10:50:26.089 +08 [1570953] FATAL:  the database system is shutting down
+2026-09-27 10:50:26.617 +08 [1570954] FATAL:  the database system is shutting down
+2026-09-27 10:50:28.098 +08 [1570956] FATAL:  the database system is shutting down
+2026-09-27 10:50:28.626 +08 [1570957] FATAL:  the database system is shutting down
+2026-09-27 10:50:30.107 +08 [1570958] FATAL:  the database system is shutting down
+2026-09-27 10:50:30.636 +08 [1570959] FATAL:  the database system is shutting down
+2026-09-27 10:50:32.117 +08 [1570961] FATAL:  the database system is shutting down
+2026-09-27 10:50:32.645 +08 [1570962] FATAL:  the database system is shutting down
+2026-09-27 10:50:34.126 +08 [1570963] FATAL:  the database system is shutting down
+2026-09-27 10:50:34.654 +08 [1570964] FATAL:  the database system is shutting down
+2026-09-27 10:50:34.764 +08 [1558287] LOG:  checkpoint complete: wrote 95766 buffers (73.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 206 recycled; write=9.474 s, sync=0.270 s, total=13.354 s; sync files=1024, longest=0.221 s, average=0.001 s; distance=3370019 kB, estimate=3370019 kB; lsn=0/CF267D08, redo lsn=0/CF267D08
+2026-09-27 10:50:35.061 +08 [1558282] LOG:  database system is shut down
+2026-09-27 10:51:01.706 +08 [1570981] LOG:  There is no designated Main database.
+2026-09-27 10:51:01.706 +08 [1570981] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 10:51:01.706 +08 [1570981] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 10:51:01.878 +08 [1570981] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 10:51:01.878 +08 [1570981] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 10:51:01.879 +08 [1570981] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 10:51:01.948 +08 [1570981] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 10:51:02.029 +08 [1570988] LOG:  database system was shut down at 2026-09-27 10:50:31 +08
+2026-09-27 10:51:02.070 +08 [1570981] LOG:  database system is ready to accept connections
+2026-09-27 10:51:02.790 +08 [1570997] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 10:51:02.790 +08 [1570997] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 10:56:39.233 +08 [1573884] ERROR:  could not serialize access due to concurrent update
+2026-09-27 10:56:39.233 +08 [1573884] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '285052'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '495052'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '179052'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '400052'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '353052'::bigint) THEN 4 ELSE 0 END)), updated_at = '2026-09-27 10:56:39.19395'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{285052,495052,179052,400052,353052}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '52'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '285052'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '495052'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '179052'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '400052'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '353052'::bigint) THEN 4 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:05:49.773 +08 [1570997] WARNING:  terminating connection due to administrator command
+2026-09-27 11:05:49.773 +08 [1570997] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:05:51.786 +08 [1570997] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:05:51.786 +08 [1570997] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:05:51.787 +08 [1570997] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:05:51.787 +08 [1570997] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:05:53.793 +08 [1570997] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:05:53.793 +08 [1570997] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:05:53.794 +08 [1570997] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:05:53.794 +08 [1570997] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:05:54.548 +08 [1570981] LOG:  received fast shutdown request
+2026-09-27 11:05:54.584 +08 [1570981] LOG:  aborting any active transactions
+2026-09-27 11:05:54.584 +08 [1585300] FATAL:  terminating connection due to administrator command
+2026-09-27 11:05:54.584 +08 [1585297] FATAL:  terminating connection due to administrator command
+2026-09-27 11:05:54.592 +08 [1587665] FATAL:  terminating connection due to administrator command
+2026-09-27 11:05:54.595 +08 [1570981] LOG:  background worker "logical replication launcher" (PID 1570991) exited with exit code 1
+2026-09-27 11:05:54.597 +08 [1570986] LOG:  shutting down
+2026-09-27 11:05:54.634 +08 [1570986] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 11:05:55.774 +08 [1595836] LOG:  PID 1585297 in cancel request did not match any process
+2026-09-27 11:05:55.827 +08 [1595837] LOG:  PID 1585300 in cancel request did not match any process
+2026-09-27 11:05:57.786 +08 [1595838] FATAL:  the database system is shutting down
+2026-09-27 11:05:57.838 +08 [1595839] FATAL:  the database system is shutting down
+2026-09-27 11:05:59.795 +08 [1595842] FATAL:  the database system is shutting down
+2026-09-27 11:05:59.847 +08 [1595843] FATAL:  the database system is shutting down
+2026-09-27 11:06:01.804 +08 [1595844] FATAL:  the database system is shutting down
+2026-09-27 11:06:01.856 +08 [1595845] FATAL:  the database system is shutting down
+2026-09-27 11:06:03.814 +08 [1595846] FATAL:  the database system is shutting down
+2026-09-27 11:06:03.864 +08 [1595847] FATAL:  the database system is shutting down
+2026-09-27 11:06:05.755 +08 [1570986] LOG:  checkpoint complete: wrote 94751 buffers (72.3%), wrote 11 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=8.979 s, sync=0.250 s, total=11.158 s; sync files=264, longest=0.232 s, average=0.001 s; distance=1703290 kB, estimate=1703290 kB; lsn=1/371C6808, redo lsn=1/371C6808
+2026-09-27 11:06:05.823 +08 [1595848] FATAL:  the database system is shutting down
+2026-09-27 11:06:05.833 +08 [1595849] FATAL:  the database system is shutting down
+2026-09-27 11:06:06.002 +08 [1570981] LOG:  database system is shut down
+2026-09-27 11:06:26.305 +08 [1595871] LOG:  There is no designated Main database.
+2026-09-27 11:06:26.305 +08 [1595871] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 11:06:26.305 +08 [1595871] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 11:06:26.507 +08 [1595871] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 11:06:26.507 +08 [1595871] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 11:06:26.507 +08 [1595871] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 11:06:26.581 +08 [1595871] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 11:06:26.679 +08 [1595878] LOG:  database system was shut down at 2026-09-27 11:06:03 +08
+2026-09-27 11:06:26.726 +08 [1595871] LOG:  database system is ready to accept connections
+2026-09-27 11:06:27.376 +08 [1595887] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 11:06:27.376 +08 [1595887] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:10:43.795 +08 [1595965] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:10:43.795 +08 [1595965] DETAIL:  Reason code: Canceled on identification as a pivot, during commit attempt.
+2026-09-27 11:10:43.795 +08 [1595965] HINT:  The transaction might succeed if retried.
+2026-09-27 11:10:43.795 +08 [1595965] STATEMENT:  PREPARE TRANSACTION 'citus_0_66918_1038_273'
+2026-09-27 11:12:32.582 +08 [1598178] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:12:32.582 +08 [1598178] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:12:32.582 +08 [1598178] HINT:  The transaction might succeed if retried.
+2026-09-27 11:12:32.582 +08 [1598178] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15008984'::bigint,'23'::bigint,'5002969'::bigint,'99023'::bigint,4,632.37::numeric(12,2))
+2026-09-27 11:15:03.257 +08 [1598178] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:15:03.257 +08 [1598178] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 11:15:03.257 +08 [1598178] HINT:  The transaction might succeed if retried.
+2026-09-27 11:20:39.519 +08 [1598186] ERROR:  canceling statement due to user request
+2026-09-27 11:20:39.519 +08 [1598186] STATEMENT:  SELECT merchant_id, count(*) AS order_count, sum(total_amount) AS revenue FROM public.orders_102105 orders WHERE ((created_at OPERATOR(pg_catalog.>=) (CURRENT_TIMESTAMP OPERATOR(pg_catalog.-) '30 days'::interval)) AND (created_at OPERATOR(pg_catalog.<) CURRENT_TIMESTAMP)) GROUP BY merchant_id
+2026-09-27 11:20:39.521 +08 [1598186] LOG:  could not send data to client: Broken pipe
+2026-09-27 11:20:39.521 +08 [1598186] FATAL:  connection to client lost
+2026-09-27 11:20:39.529 +08 [1618560] ERROR:  canceling statement due to user request
+2026-09-27 11:20:39.529 +08 [1618560] STATEMENT:  SELECT merchant_id, count(*) AS order_count, sum(total_amount) AS revenue FROM public.orders_102113 orders WHERE ((created_at OPERATOR(pg_catalog.>=) (CURRENT_TIMESTAMP OPERATOR(pg_catalog.-) '30 days'::interval)) AND (created_at OPERATOR(pg_catalog.<) CURRENT_TIMESTAMP)) GROUP BY merchant_id
+2026-09-27 11:20:39.548 +08 [1618560] LOG:  could not send data to client: Connection reset by peer
+2026-09-27 11:20:39.548 +08 [1618560] FATAL:  connection to client lost
+2026-09-27 11:20:39.571 +08 [1618562] ERROR:  canceling statement due to user request
+2026-09-27 11:20:39.571 +08 [1618562] STATEMENT:  SELECT merchant_id, count(*) AS order_count, sum(total_amount) AS revenue FROM public.orders_102117 orders WHERE ((created_at OPERATOR(pg_catalog.>=) (CURRENT_TIMESTAMP OPERATOR(pg_catalog.-) '30 days'::interval)) AND (created_at OPERATOR(pg_catalog.<) CURRENT_TIMESTAMP)) GROUP BY merchant_id
+2026-09-27 11:20:39.571 +08 [1618562] LOG:  could not send data to client: Broken pipe
+2026-09-27 11:20:39.581 +08 [1618562] FATAL:  connection to client lost
+2026-09-27 11:21:18.609 +08 [1595887] WARNING:  terminating connection due to administrator command
+2026-09-27 11:21:18.609 +08 [1595887] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:21:20.622 +08 [1595887] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:21:20.622 +08 [1595887] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:21:20.623 +08 [1595887] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:21:20.623 +08 [1595887] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:21:22.629 +08 [1595887] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:21:22.629 +08 [1595887] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:21:22.630 +08 [1595887] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:21:22.630 +08 [1595887] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:21:24.556 +08 [1595871] LOG:  received fast shutdown request
+2026-09-27 11:21:24.591 +08 [1595871] LOG:  aborting any active transactions
+2026-09-27 11:21:24.592 +08 [1611705] FATAL:  terminating connection due to administrator command
+2026-09-27 11:21:24.595 +08 [1609508] FATAL:  terminating connection due to administrator command
+2026-09-27 11:21:24.597 +08 [1609507] FATAL:  terminating connection due to administrator command
+2026-09-27 11:21:24.601 +08 [1595871] LOG:  background worker "logical replication launcher" (PID 1595881) exited with exit code 1
+2026-09-27 11:21:24.605 +08 [1595876] LOG:  shutting down
+2026-09-27 11:21:24.640 +08 [1619849] LOG:  PID 1609508 in cancel request did not match any process
+2026-09-27 11:21:24.642 +08 [1595876] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 11:21:24.644 +08 [1619850] LOG:  PID 1609507 in cancel request did not match any process
+2026-09-27 11:21:26.652 +08 [1619851] FATAL:  the database system is shutting down
+2026-09-27 11:21:26.655 +08 [1619852] FATAL:  the database system is shutting down
+2026-09-27 11:21:28.662 +08 [1619853] FATAL:  the database system is shutting down
+2026-09-27 11:21:28.664 +08 [1619854] FATAL:  the database system is shutting down
+2026-09-27 11:21:30.672 +08 [1619856] FATAL:  the database system is shutting down
+2026-09-27 11:21:30.674 +08 [1619857] FATAL:  the database system is shutting down
+2026-09-27 11:21:30.681 +08 [1619858] FATAL:  the database system is shutting down
+2026-09-27 11:21:30.685 +08 [1619859] FATAL:  the database system is shutting down
+2026-09-27 11:21:32.690 +08 [1619861] FATAL:  the database system is shutting down
+2026-09-27 11:21:32.693 +08 [1619862] FATAL:  the database system is shutting down
+2026-09-27 11:21:34.700 +08 [1619863] FATAL:  the database system is shutting down
+2026-09-27 11:21:34.702 +08 [1619864] FATAL:  the database system is shutting down
+2026-09-27 11:21:35.768 +08 [1595876] LOG:  checkpoint complete: wrote 94944 buffers (72.4%), wrote 13 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=9.015 s, sync=0.265 s, total=11.164 s; sync files=263, longest=0.246 s, average=0.002 s; distance=1706728 kB, estimate=1706728 kB; lsn=1/9F4808F8, redo lsn=1/9F4808F8
+2026-09-27 11:21:36.069 +08 [1595871] LOG:  database system is shut down
+2026-09-27 11:21:56.713 +08 [1619881] LOG:  There is no designated Main database.
+2026-09-27 11:21:56.713 +08 [1619881] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 11:21:56.713 +08 [1619881] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 11:21:56.904 +08 [1619881] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 11:21:56.904 +08 [1619881] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 11:21:56.904 +08 [1619881] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 11:21:56.978 +08 [1619881] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 11:21:57.059 +08 [1619888] LOG:  database system was shut down at 2026-09-27 11:21:33 +08
+2026-09-27 11:21:57.099 +08 [1619881] LOG:  database system is ready to accept connections
+2026-09-27 11:21:57.780 +08 [1619897] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 11:21:57.780 +08 [1619897] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:25:58.754 +08 [1619968] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:25:58.754 +08 [1619968] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 11:25:58.754 +08 [1619968] HINT:  The transaction might succeed if retried.
+2026-09-27 11:26:14.451 +08 [1619969] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:26:14.451 +08 [1619969] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 11:26:14.451 +08 [1619969] HINT:  The transaction might succeed if retried.
+2026-09-27 11:27:40.728 +08 [1622287] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:27:40.728 +08 [1622287] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 11:27:40.728 +08 [1622287] HINT:  The transaction might succeed if retried.
+2026-09-27 11:27:40.728 +08 [1622287] STATEMENT:  COMMIT
+2026-09-27 11:27:40.743 +08 [1622287] WARNING:  there is no transaction in progress
+2026-09-27 11:29:04.459 +08 [1622312] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:29:04.459 +08 [1622312] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:29:04.459 +08 [1622312] HINT:  The transaction might succeed if retried.
+2026-09-27 11:29:04.459 +08 [1622312] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15013866'::bigint,'15'::bigint,'5004640'::bigint,'408015'::bigint,5,708.85::numeric(12,2))
+2026-09-27 11:32:03.041 +08 [1622284] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:32:03.041 +08 [1622284] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:32:03.041 +08 [1622284] HINT:  The transaction might succeed if retried.
+2026-09-27 11:32:03.041 +08 [1622284] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5008834'::bigint, '753'::bigint, '789753'::bigint, 'PENDING'::text, 7502.84::numeric(12,2), '2026-09-27 11:32:02.355854'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:33:01.748 +08 [1622312] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:33:01.748 +08 [1622312] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:33:01.748 +08 [1622312] HINT:  The transaction might succeed if retried.
+2026-09-27 11:33:01.748 +08 [1622312] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15029455'::bigint,'6'::bigint,'5009854'::bigint,'142006'::bigint,3,456.14::numeric(12,2))
+2026-09-27 11:36:11.728 +08 [1622289] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:36:11.728 +08 [1622289] STATEMENT:  UPDATE public.inventory_102101 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '142204'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '395204'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '484204'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '12204'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:36:11.300898'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{142204,395204,484204,12204,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '204'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '142204'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '395204'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '484204'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '12204'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:36:13.370 +08 [1625924] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:36:13.370 +08 [1625924] STATEMENT:  UPDATE public.inventory_102097 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111075'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '407075'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '121075'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:36:13.111913'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{111075,407075,121075,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '75'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111075'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '407075'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '121075'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:36:45.303 +08 [1619897] WARNING:  terminating connection due to administrator command
+2026-09-27 11:36:45.303 +08 [1619897] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:47.316 +08 [1619897] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:36:47.316 +08 [1619897] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:47.316 +08 [1619897] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:36:47.316 +08 [1619897] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:49.323 +08 [1619897] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:36:49.323 +08 [1619897] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:49.324 +08 [1619897] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:36:49.324 +08 [1619897] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:51.328 +08 [1619897] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: server closed the connection unexpectedly
+		This probably means the server terminated abnormally
+		before or while processing the request.
+2026-09-27 11:36:51.328 +08 [1619897] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:51.329 +08 [1619897] WARNING:  server closed the connection unexpectedly
+		This probably means the server terminated abnormally
+		before or while processing the request.
+2026-09-27 11:36:51.329 +08 [1619897] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:36:53.277 +08 [1619881] LOG:  received fast shutdown request
+2026-09-27 11:36:53.317 +08 [1619881] LOG:  aborting any active transactions
+2026-09-27 11:36:53.317 +08 [1633224] FATAL:  terminating connection due to administrator command
+2026-09-27 11:36:53.317 +08 [1633226] FATAL:  terminating connection due to administrator command
+2026-09-27 11:36:53.317 +08 [1633225] FATAL:  terminating connection due to administrator command
+2026-09-27 11:36:53.323 +08 [1619881] LOG:  background worker "logical replication launcher" (PID 1619891) exited with exit code 1
+2026-09-27 11:36:53.327 +08 [1619886] LOG:  shutting down
+2026-09-27 11:36:53.359 +08 [1619886] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 11:36:55.209 +08 [1642530] LOG:  PID 1633226 in cancel request did not match any process
+2026-09-27 11:36:55.261 +08 [1642531] LOG:  PID 1633225 in cancel request did not match any process
+2026-09-27 11:36:57.221 +08 [1642532] FATAL:  the database system is shutting down
+2026-09-27 11:36:57.272 +08 [1642533] FATAL:  the database system is shutting down
+2026-09-27 11:36:59.231 +08 [1642534] FATAL:  the database system is shutting down
+2026-09-27 11:36:59.282 +08 [1642535] FATAL:  the database system is shutting down
+2026-09-27 11:37:01.241 +08 [1642536] FATAL:  the database system is shutting down
+2026-09-27 11:37:01.250 +08 [1642537] FATAL:  the database system is shutting down
+2026-09-27 11:37:01.291 +08 [1642538] FATAL:  the database system is shutting down
+2026-09-27 11:37:01.300 +08 [1642539] FATAL:  the database system is shutting down
+2026-09-27 11:37:03.259 +08 [1642540] FATAL:  the database system is shutting down
+2026-09-27 11:37:03.309 +08 [1642541] FATAL:  the database system is shutting down
+2026-09-27 11:37:04.294 +08 [1619886] LOG:  checkpoint complete: wrote 95114 buffers (72.6%), wrote 12 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=8.852 s, sync=0.219 s, total=10.967 s; sync files=264, longest=0.201 s, average=0.001 s; distance=1707290 kB, estimate=1707290 kB; lsn=2/77C7260, redo lsn=2/77C7260
+2026-09-27 11:37:04.582 +08 [1619881] LOG:  database system is shut down
+2026-09-27 11:37:27.143 +08 [1642562] LOG:  There is no designated Main database.
+2026-09-27 11:37:27.143 +08 [1642562] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 11:37:27.143 +08 [1642562] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 11:37:27.326 +08 [1642562] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 11:37:27.326 +08 [1642562] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 11:37:27.326 +08 [1642562] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 11:37:27.394 +08 [1642562] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 11:37:27.475 +08 [1642569] LOG:  database system was shut down at 2026-09-27 11:37:02 +08
+2026-09-27 11:37:27.507 +08 [1642562] LOG:  database system is ready to accept connections
+2026-09-27 11:37:28.208 +08 [1642578] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 11:37:28.208 +08 [1642578] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:41:20.898 +08 [1642670] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:41:20.898 +08 [1642670] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:41:20.898 +08 [1642670] HINT:  The transaction might succeed if retried.
+2026-09-27 11:41:20.898 +08 [1642670] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15000452'::bigint,'384'::bigint,'5000150'::bigint,'95384'::bigint,3,459.96::numeric(12,2))
+2026-09-27 11:41:47.366 +08 [1642725] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:41:47.366 +08 [1642725] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:41:47.366 +08 [1642725] HINT:  The transaction might succeed if retried.
+2026-09-27 11:41:47.366 +08 [1642725] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5000781'::bigint, '88'::bigint, '358088'::bigint, 'PENDING'::text, 4236.64::numeric(12,2), '2026-09-27 11:41:42.206231'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:41:47.894 +08 [1642684] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:41:47.894 +08 [1642684] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:41:47.894 +08 [1642684] HINT:  The transaction might succeed if retried.
+2026-09-27 11:41:47.894 +08 [1642684] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15002375'::bigint,'88'::bigint,'5000794'::bigint,'65088'::bigint,5,319.72::numeric(12,2))
+2026-09-27 11:41:52.374 +08 [1642689] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:41:52.374 +08 [1642689] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:41:52.374 +08 [1642689] HINT:  The transaction might succeed if retried.
+2026-09-27 11:41:52.374 +08 [1642689] STATEMENT:  INSERT INTO public.order_items_102165 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15002690'::bigint,'48'::bigint,'5000908'::bigint,'281048'::bigint,2,192.12::numeric(12,2))
+2026-09-27 11:41:56.843 +08 [1642676] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:41:56.843 +08 [1642676] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:41:56.843 +08 [1642676] HINT:  The transaction might succeed if retried.
+2026-09-27 11:41:56.843 +08 [1642676] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15002972'::bigint,'287'::bigint,'5001001'::bigint,'189287'::bigint,5,638.53::numeric(12,2))
+2026-09-27 11:42:31.096 +08 [1644903] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:42:31.096 +08 [1644903] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:42:31.096 +08 [1644903] HINT:  The transaction might succeed if retried.
+2026-09-27 11:42:31.096 +08 [1644903] STATEMENT:  UPDATE public.inventory_102077 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '124383'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '444383'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '292383'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '116383'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '305383'::bigint) THEN 3 ELSE 0 END)), updated_at = '2026-09-27 11:42:24.796373'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{124383,444383,292383,116383,305383}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '383'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '124383'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '444383'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '292383'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '116383'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '305383'::bigint) THEN 3 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:42:49.797 +08 [1644888] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:42:49.797 +08 [1644888] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:42:49.797 +08 [1644888] HINT:  The transaction might succeed if retried.
+2026-09-27 11:42:49.797 +08 [1644888] STATEMENT:  UPDATE public.inventory_102093 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '321082'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '322082'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '236082'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '165082'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '281082'::bigint) THEN 4 ELSE 0 END)), updated_at = '2026-09-27 11:42:43.020228'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{321082,322082,236082,165082,281082}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '82'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '321082'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '322082'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '236082'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '165082'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '281082'::bigint) THEN 4 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:42:50.779 +08 [1644892] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:42:50.779 +08 [1644892] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:42:50.779 +08 [1644892] HINT:  The transaction might succeed if retried.
+2026-09-27 11:42:50.779 +08 [1644892] STATEMENT:  INSERT INTO public.orders_102133 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002253'::bigint, '754'::bigint, '818754'::bigint, 'PENDING'::text, 4982.86::numeric(12,2), '2026-09-27 11:42:43.865266'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:42:56.676 +08 [1644887] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:42:56.676 +08 [1644887] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:42:56.676 +08 [1644887] HINT:  The transaction might succeed if retried.
+2026-09-27 11:42:56.676 +08 [1644887] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002387'::bigint, '460'::bigint, '839460'::bigint, 'PENDING'::text, 7087.60::numeric(12,2), '2026-09-27 11:42:50.372476'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:42:59.518 +08 [1644924] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:42:59.518 +08 [1644924] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:42:59.518 +08 [1644924] HINT:  The transaction might succeed if retried.
+2026-09-27 11:42:59.518 +08 [1644924] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002457'::bigint, '89'::bigint, '236089'::bigint, 'PENDING'::text, 2779.10::numeric(12,2), '2026-09-27 11:42:51.578752'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:43:19.100 +08 [1644896] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:19.100 +08 [1644896] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:19.100 +08 [1644896] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:19.100 +08 [1644896] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15008535'::bigint,'838'::bigint,'5002870'::bigint,'399838'::bigint,4,172.22::numeric(12,2))
+2026-09-27 11:43:34.698 +08 [1644892] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:34.698 +08 [1644892] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:34.698 +08 [1644892] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:34.698 +08 [1644892] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5003268'::bigint, '796'::bigint, '715796'::bigint, 'PENDING'::text, 1257.44::numeric(12,2), '2026-09-27 11:43:32.698334'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:43:40.033 +08 [1644887] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:40.033 +08 [1644887] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:40.033 +08 [1644887] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:40.033 +08 [1644887] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15010099'::bigint,'98'::bigint,'5003398'::bigint,'132098'::bigint,2,841.62::numeric(12,2))
+2026-09-27 11:43:45.526 +08 [1644918] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:45.526 +08 [1644918] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:45.526 +08 [1644918] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:45.526 +08 [1644918] STATEMENT:  INSERT INTO public.order_items_102157 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15010556'::bigint,'69'::bigint,'5003552'::bigint,'272069'::bigint,5,145.11::numeric(12,2))
+2026-09-27 11:43:47.440 +08 [1644912] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:47.440 +08 [1644912] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:47.440 +08 [1644912] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:47.440 +08 [1644912] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '273536'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '222536'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '428536'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '449536'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16536'::bigint) THEN 1 ELSE 0 END)), updated_at = '2026-09-27 11:43:41.26362'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{273536,222536,428536,449536,16536}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '536'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '273536'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '222536'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '428536'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '449536'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16536'::bigint) THEN 1 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:43:57.486 +08 [1645598] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:43:57.486 +08 [1645598] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:43:57.486 +08 [1645598] HINT:  The transaction might succeed if retried.
+2026-09-27 11:43:57.486 +08 [1645598] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5003822'::bigint, '982'::bigint, '638982'::bigint, 'PENDING'::text, 3144.64::numeric(12,2), '2026-09-27 11:43:56.364592'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:44:01.651 +08 [1644910] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:44:01.651 +08 [1644910] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:44:01.651 +08 [1644910] HINT:  The transaction might succeed if retried.
+2026-09-27 11:44:01.651 +08 [1644910] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5003924'::bigint, '521'::bigint, '410521'::bigint, 'PENDING'::text, 6684.85::numeric(12,2), '2026-09-27 11:44:00.948995'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:44:06.764 +08 [1645036] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:44:06.764 +08 [1645036] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '13058'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '35058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '250058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '400058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '230058'::bigint) THEN 3 ELSE 0 END)), updated_at = '2026-09-27 11:44:05.30125'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{13058,35058,250058,400058,230058}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '58'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '13058'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '35058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '250058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '400058'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '230058'::bigint) THEN 3 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:44:24.659 +08 [1644916] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:44:24.659 +08 [1644916] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:44:24.659 +08 [1644916] HINT:  The transaction might succeed if retried.
+2026-09-27 11:44:24.659 +08 [1644916] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5004417'::bigint, '1'::bigint, '706001'::bigint, 'PENDING'::text, 3901.33::numeric(12,2), '2026-09-27 11:44:23.746837'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:44:45.723 +08 [1644914] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:44:45.723 +08 [1644914] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:44:45.723 +08 [1644914] HINT:  The transaction might succeed if retried.
+2026-09-27 11:44:45.723 +08 [1644914] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15014454'::bigint,'88'::bigint,'5004841'::bigint,'252088'::bigint,2,849.72::numeric(12,2))
+2026-09-27 11:45:04.400 +08 [1644920] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:04.400 +08 [1644920] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:04.400 +08 [1644920] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:04.400 +08 [1644920] STATEMENT:  INSERT INTO public.orders_102113 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5005301'::bigint, '64'::bigint, '313064'::bigint, 'PENDING'::text, 10527.40::numeric(12,2), '2026-09-27 11:45:03.826007'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:04.859 +08 [1644889] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:04.859 +08 [1644889] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:04.859 +08 [1644889] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:04.859 +08 [1644889] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5005317'::bigint, '648'::bigint, '85648'::bigint, 'PENDING'::text, 9990.16::numeric(12,2), '2026-09-27 11:45:04.352015'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:24.363 +08 [1644906] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:24.363 +08 [1644906] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:24.363 +08 [1644906] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:24.363 +08 [1644906] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15017286'::bigint,'314'::bigint,'5005791'::bigint,'91314'::bigint,2,156.66::numeric(12,2))
+2026-09-27 11:45:48.756 +08 [1644888] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:48.756 +08 [1644888] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:48.756 +08 [1644888] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:48.756 +08 [1644888] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006368'::bigint, '40'::bigint, '161040'::bigint, 'PENDING'::text, 2503.20::numeric(12,2), '2026-09-27 11:45:48.636778'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:48.905 +08 [1644905] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:48.905 +08 [1644905] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:48.905 +08 [1644905] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:48.905 +08 [1644905] STATEMENT:  INSERT INTO public.order_items_102161 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15018991'::bigint,'86'::bigint,'5006371'::bigint,'322086'::bigint,2,991.34::numeric(12,2))
+2026-09-27 11:45:48.979 +08 [1645036] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:48.979 +08 [1645036] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:48.979 +08 [1645036] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:48.979 +08 [1645036] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15018997'::bigint,'81'::bigint,'5006373'::bigint,'68081'::bigint,3,335.39::numeric(12,2))
+2026-09-27 11:45:49.249 +08 [1644910] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:49.249 +08 [1644910] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:49.249 +08 [1644910] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:49.249 +08 [1644910] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006378'::bigint, '835'::bigint, '193835'::bigint, 'PENDING'::text, 1033.25::numeric(12,2), '2026-09-27 11:45:45.736209'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:49.548 +08 [1644906] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:49.548 +08 [1644906] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:49.548 +08 [1644906] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:49.548 +08 [1644906] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15019032'::bigint,'611'::bigint,'5006385'::bigint,'213611'::bigint,3,856.09::numeric(12,2))
+2026-09-27 11:45:49.815 +08 [1644916] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:49.815 +08 [1644916] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:49.815 +08 [1644916] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:49.815 +08 [1644916] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006391'::bigint, '908'::bigint, '550908'::bigint, 'PENDING'::text, 1516.56::numeric(12,2), '2026-09-27 11:45:48.154917'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:50.235 +08 [1645598] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:50.235 +08 [1645598] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:50.235 +08 [1645598] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:50.235 +08 [1645598] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15019083'::bigint,'182'::bigint,'5006402'::bigint,'213182'::bigint,4,883.58::numeric(12,2))
+2026-09-27 11:45:50.354 +08 [1644897] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:50.354 +08 [1644897] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:50.354 +08 [1644897] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:50.354 +08 [1644897] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006405'::bigint, '606'::bigint, '369606'::bigint, 'PENDING'::text, 6251.26::numeric(12,2), '2026-09-27 11:45:45.455302'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:50.508 +08 [1644890] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:50.508 +08 [1644890] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:50.508 +08 [1644890] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:50.508 +08 [1644890] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15019099'::bigint,'42'::bigint,'5006409'::bigint,'287042'::bigint,2,856.98::numeric(12,2))
+2026-09-27 11:45:50.703 +08 [1644894] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:50.703 +08 [1644894] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:50.703 +08 [1644894] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:50.703 +08 [1644894] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006416'::bigint, '848'::bigint, '861848'::bigint, 'PENDING'::text, 5209.44::numeric(12,2), '2026-09-27 11:45:47.702709'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:45:51.223 +08 [1644921] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:45:51.223 +08 [1644921] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:45:51.223 +08 [1644921] HINT:  The transaction might succeed if retried.
+2026-09-27 11:45:51.223 +08 [1644921] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15019158'::bigint,'134'::bigint,'5006427'::bigint,'282134'::bigint,1,192.46::numeric(12,2))
+2026-09-27 11:46:23.380 +08 [1644910] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:46:23.380 +08 [1644910] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:46:23.380 +08 [1644910] HINT:  The transaction might succeed if retried.
+2026-09-27 11:46:23.380 +08 [1644910] STATEMENT:  INSERT INTO public.orders_102133 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007207'::bigint, '19'::bigint, '802019'::bigint, 'PENDING'::text, 5230.49::numeric(12,2), '2026-09-27 11:46:19.97418'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:46:25.326 +08 [1644912] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:46:25.326 +08 [1644912] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:46:25.326 +08 [1644912] HINT:  The transaction might succeed if retried.
+2026-09-27 11:46:25.326 +08 [1644912] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007256'::bigint, '58'::bigint, '111058'::bigint, 'PENDING'::text, 4088.24::numeric(12,2), '2026-09-27 11:46:21.932102'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:46:53.150 +08 [1644916] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:46:53.150 +08 [1644916] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:46:53.150 +08 [1644916] HINT:  The transaction might succeed if retried.
+2026-09-27 11:46:53.150 +08 [1644916] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007925'::bigint, '71'::bigint, '762071'::bigint, 'PENDING'::text, 7412.35::numeric(12,2), '2026-09-27 11:46:51.474967'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:47:20.017 +08 [1644943] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:47:20.017 +08 [1644943] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:47:20.017 +08 [1644943] HINT:  The transaction might succeed if retried.
+2026-09-27 11:47:20.017 +08 [1644943] STATEMENT:  INSERT INTO public.order_items_102157 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15025030'::bigint,'601'::bigint,'5008388'::bigint,'413601'::bigint,3,64.19::numeric(12,2))
+2026-09-27 11:47:20.657 +08 [1644912] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:47:20.657 +08 [1644912] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:47:20.657 +08 [1644912] HINT:  The transaction might succeed if retried.
+2026-09-27 11:47:20.657 +08 [1644912] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5008403'::bigint, '50'::bigint, '74050'::bigint, 'PENDING'::text, 5465.00::numeric(12,2), '2026-09-27 11:47:17.746367'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:47:53.436 +08 [1644892] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:47:53.436 +08 [1644892] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:47:53.436 +08 [1644892] HINT:  The transaction might succeed if retried.
+2026-09-27 11:47:53.436 +08 [1644892] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5008846'::bigint, '49'::bigint, '316049'::bigint, 'PENDING'::text, 4568.34::numeric(12,2), '2026-09-27 11:47:51.509756'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:47:54.014 +08 [1644896] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:47:54.014 +08 [1644896] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:47:54.014 +08 [1644896] HINT:  The transaction might succeed if retried.
+2026-09-27 11:47:54.014 +08 [1644896] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15026415'::bigint,'971'::bigint,'5008849'::bigint,'92971'::bigint,4,374.49::numeric(12,2))
+2026-09-27 11:47:58.558 +08 [1644924] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:47:58.558 +08 [1644924] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:47:58.558 +08 [1644924] HINT:  The transaction might succeed if retried.
+2026-09-27 11:47:58.558 +08 [1644924] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15026638'::bigint,'43'::bigint,'5008920'::bigint,'273043'::bigint,5,276.17::numeric(12,2))
+2026-09-27 11:49:11.673 +08 [1644893] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:49:11.673 +08 [1644893] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '136089'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '8089'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '465089'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '321089'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:48:23.835904'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{136089,8089,465089,321089,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '89'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '136089'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '8089'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '465089'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '321089'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:50:45.605 +08 [1644921] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:50:45.605 +08 [1644921] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '312210'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '39210'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '316210'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '375210'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:49:51.183166'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{312210,39210,316210,375210,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '210'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '312210'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '39210'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '316210'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '375210'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:50:54.077 +08 [1653880] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:50:54.077 +08 [1653880] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:50:54.077 +08 [1653880] HINT:  The transaction might succeed if retried.
+2026-09-27 11:50:54.077 +08 [1653880] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15029841'::bigint,'550'::bigint,'5009969'::bigint,'440550'::bigint,4,155.50::numeric(12,2))
+2026-09-27 11:51:14.947 +08 [1644917] ERROR:  could not serialize access due to concurrent update
+2026-09-27 11:51:14.947 +08 [1644917] STATEMENT:  UPDATE public.inventory_102097 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83070'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '427070'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '52070'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '206070'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '262070'::bigint) THEN 5 ELSE 0 END)), updated_at = '2026-09-27 11:50:59.229841'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{83070,427070,52070,206070,262070}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '70'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83070'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '427070'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '52070'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '206070'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '262070'::bigint) THEN 5 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:51:56.942 +08 [1644918] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:51:56.942 +08 [1644918] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:51:56.942 +08 [1644918] HINT:  The transaction might succeed if retried.
+2026-09-27 11:51:56.942 +08 [1644918] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011212'::bigint, '377'::bigint, '366377'::bigint, 'PENDING'::text, 5129.41::numeric(12,2), '2026-09-27 11:51:56.191228'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:51:57.292 +08 [1644943] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:51:57.292 +08 [1644943] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:51:57.292 +08 [1644943] HINT:  The transaction might succeed if retried.
+2026-09-27 11:51:57.292 +08 [1644943] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15033631'::bigint,'83'::bigint,'5011222'::bigint,'499083'::bigint,5,383.77::numeric(12,2))
+2026-09-27 11:52:19.117 +08 [1642578] WARNING:  terminating connection due to administrator command
+2026-09-27 11:52:19.117 +08 [1642578] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:52:21.129 +08 [1642578] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:52:21.129 +08 [1642578] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:52:21.129 +08 [1642578] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:52:21.129 +08 [1642578] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:52:23.135 +08 [1642578] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 11:52:23.135 +08 [1642578] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:52:23.136 +08 [1642578] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 11:52:23.136 +08 [1642578] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:52:24.920 +08 [1642562] LOG:  received fast shutdown request
+2026-09-27 11:52:24.956 +08 [1642562] LOG:  aborting any active transactions
+2026-09-27 11:52:24.957 +08 [1655817] FATAL:  terminating connection due to administrator command
+2026-09-27 11:52:24.957 +08 [1655816] FATAL:  terminating connection due to administrator command
+2026-09-27 11:52:24.957 +08 [1655818] FATAL:  terminating connection due to administrator command
+2026-09-27 11:52:24.963 +08 [1642562] LOG:  background worker "logical replication launcher" (PID 1642572) exited with exit code 1
+2026-09-27 11:52:24.968 +08 [1642567] LOG:  shutting down
+2026-09-27 11:52:25.007 +08 [1642567] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 11:52:25.116 +08 [1660267] LOG:  PID 1655817 in cancel request did not match any process
+2026-09-27 11:52:25.182 +08 [1660268] LOG:  PID 1655818 in cancel request did not match any process
+2026-09-27 11:52:27.128 +08 [1660269] FATAL:  the database system is shutting down
+2026-09-27 11:52:27.194 +08 [1660270] FATAL:  the database system is shutting down
+2026-09-27 11:52:29.137 +08 [1660271] FATAL:  the database system is shutting down
+2026-09-27 11:52:29.202 +08 [1660272] FATAL:  the database system is shutting down
+2026-09-27 11:52:31.147 +08 [1660273] FATAL:  the database system is shutting down
+2026-09-27 11:52:31.157 +08 [1660274] FATAL:  the database system is shutting down
+2026-09-27 11:52:31.212 +08 [1660275] FATAL:  the database system is shutting down
+2026-09-27 11:52:31.220 +08 [1660276] FATAL:  the database system is shutting down
+2026-09-27 11:52:33.166 +08 [1660277] FATAL:  the database system is shutting down
+2026-09-27 11:52:33.229 +08 [1660278] FATAL:  the database system is shutting down
+2026-09-27 11:52:35.176 +08 [1660279] FATAL:  the database system is shutting down
+2026-09-27 11:52:35.238 +08 [1660280] FATAL:  the database system is shutting down
+2026-09-27 11:52:36.126 +08 [1642567] LOG:  checkpoint complete: wrote 95221 buffers (72.6%), wrote 12 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=9.056 s, sync=0.223 s, total=11.158 s; sync files=263, longest=0.205 s, average=0.001 s; distance=1702015 kB, estimate=1702015 kB; lsn=2/6F5E7128, redo lsn=2/6F5E7128
+2026-09-27 11:52:36.408 +08 [1642562] LOG:  database system is shut down
+2026-09-27 11:52:57.485 +08 [1660298] LOG:  There is no designated Main database.
+2026-09-27 11:52:57.485 +08 [1660298] LOG:  number of prepared transactions has not been configured, overriding
+2026-09-27 11:52:57.485 +08 [1660298] DETAIL:  max_prepared_transactions is now set to 2000
+2026-09-27 11:52:57.696 +08 [1660298] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-09-27 11:52:57.696 +08 [1660298] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-09-27 11:52:57.697 +08 [1660298] LOG:  listening on IPv6 address "::", port 5440
+2026-09-27 11:52:57.776 +08 [1660298] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-09-27 11:52:57.874 +08 [1660305] LOG:  database system was shut down at 2026-09-27 11:52:34 +08
+2026-09-27 11:52:57.914 +08 [1660298] LOG:  database system is ready to accept connections
+2026-09-27 11:52:58.549 +08 [1660314] LOG:  starting maintenance daemon on database 16384 user 10
+2026-09-27 11:52:58.549 +08 [1660314] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 11:57:01.237 +08 [1660422] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:57:01.237 +08 [1660422] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:57:01.237 +08 [1660422] HINT:  The transaction might succeed if retried.
+2026-09-27 11:57:01.237 +08 [1660422] STATEMENT:  INSERT INTO public.orders_102113 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5000227'::bigint, '79'::bigint, '250079'::bigint, 'PENDING'::text, 4780.10::numeric(12,2), '2026-09-27 11:56:58.371714'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:57:16.110 +08 [1660400] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:57:16.110 +08 [1660400] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:57:16.110 +08 [1660400] HINT:  The transaction might succeed if retried.
+2026-09-27 11:57:16.110 +08 [1660400] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '271097'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '215097'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '152097'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '396097'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:57:11.349847'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{271097,215097,152097,396097,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '97'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '271097'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '215097'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '152097'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '396097'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:57:18.017 +08 [1660399] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:57:18.017 +08 [1660399] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:57:18.017 +08 [1660399] HINT:  The transaction might succeed if retried.
+2026-09-27 11:57:18.017 +08 [1660399] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '396050'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:57:12.261386'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{396050,0,0,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '50'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '396050'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:58:01.201 +08 [1662543] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.201 +08 [1662543] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.201 +08 [1662543] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.201 +08 [1662543] STATEMENT:  INSERT INTO public.orders_102113 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001436'::bigint, '998'::bigint, '561998'::bigint, 'PENDING'::text, 1985.24::numeric(12,2), '2026-09-27 11:58:00.829407'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:01.434 +08 [1662580] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.434 +08 [1662580] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.434 +08 [1662580] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.434 +08 [1662580] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001443'::bigint, '738'::bigint, '753738'::bigint, 'PENDING'::text, 3159.32::numeric(12,2), '2026-09-27 11:58:00.961555'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:01.444 +08 [1662551] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.444 +08 [1662551] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.444 +08 [1662551] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.444 +08 [1662551] STATEMENT:  INSERT INTO public.orders_102133 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001444'::bigint, '39'::bigint, '637039'::bigint, 'PENDING'::text, 5183.51::numeric(12,2), '2026-09-27 11:57:59.347179'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:01.454 +08 [1662516] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.454 +08 [1662516] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.454 +08 [1662516] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.454 +08 [1662516] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004340'::bigint,'373'::bigint,'5001445'::bigint,'459373'::bigint,2,748.87::numeric(12,2)), ('15004341'::bigint,'373'::bigint,'5001445'::bigint,'259373'::bigint,5,748.87::numeric(12,2))
+2026-09-27 11:58:01.536 +08 [1662482] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.536 +08 [1662482] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.536 +08 [1662482] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.536 +08 [1662482] STATEMENT:  INSERT INTO public.order_items_102165 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004347'::bigint,'66'::bigint,'5001449'::bigint,'389066'::bigint,2,137.54::numeric(12,2))
+2026-09-27 11:58:01.883 +08 [1662497] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:01.883 +08 [1662497] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:01.883 +08 [1662497] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:01.883 +08 [1662497] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001459'::bigint, '112'::bigint, '909112'::bigint, 'PENDING'::text, 4482.24::numeric(12,2), '2026-09-27 11:57:55.158855'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:02.707 +08 [1662494] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:02.707 +08 [1662494] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:02.707 +08 [1662494] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:02.707 +08 [1662494] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001478'::bigint, '445'::bigint, '87445'::bigint, 'PENDING'::text, 3843.85::numeric(12,2), '2026-09-27 11:58:00.408918'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:02.995 +08 [1662490] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:02.995 +08 [1662490] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:02.995 +08 [1662490] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:02.995 +08 [1662490] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004423'::bigint,'942'::bigint,'5001483'::bigint,'235942'::bigint,2,247.98::numeric(12,2))
+2026-09-27 11:58:03.849 +08 [1662511] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:03.849 +08 [1662511] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:03.849 +08 [1662511] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:03.849 +08 [1662511] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001506'::bigint, '3'::bigint, '212003'::bigint, 'PENDING'::text, 1434.28::numeric(12,2), '2026-09-27 11:57:56.432907'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:04.064 +08 [1662549] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:04.064 +08 [1662549] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:04.064 +08 [1662549] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:04.064 +08 [1662549] STATEMENT:  INSERT INTO public.order_items_102157 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004500'::bigint,'89'::bigint,'5001512'::bigint,'173089'::bigint,2,918.91::numeric(12,2))
+2026-09-27 11:58:04.871 +08 [1662488] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:04.871 +08 [1662488] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:04.871 +08 [1662488] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:04.871 +08 [1662488] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '229098'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '17098'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '27098'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '5098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '18098'::bigint) THEN 3 ELSE 0 END)), updated_at = '2026-09-27 11:57:57.896977'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{229098,17098,27098,5098,18098}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '98'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '229098'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '17098'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '27098'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '5098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '18098'::bigint) THEN 3 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:58:04.895 +08 [1662546] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:04.895 +08 [1662546] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:04.895 +08 [1662546] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:04.895 +08 [1662546] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '465078'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '147078'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '178078'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:57:57.93962'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{465078,147078,178078,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '78'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '465078'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '147078'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '178078'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:58:05.116 +08 [1662528] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.116 +08 [1662528] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.116 +08 [1662528] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.116 +08 [1662528] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001539'::bigint, '439'::bigint, '417439'::bigint, 'PENDING'::text, 2626.23::numeric(12,2), '2026-09-27 11:57:59.108899'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:05.223 +08 [1662573] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.223 +08 [1662573] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.223 +08 [1662573] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.223 +08 [1662573] STATEMENT:  UPDATE public.inventory_102101 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16384'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '496384'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '95384'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:57:59.41952'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{16384,496384,95384,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '384'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16384'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '496384'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '95384'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:58:05.323 +08 [1662552] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.323 +08 [1662552] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.323 +08 [1662552] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.323 +08 [1662552] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001544'::bigint, '2'::bigint, '46002'::bigint, 'PENDING'::text, 5583.18::numeric(12,2), '2026-09-27 11:57:59.928438'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:05.369 +08 [1662608] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.369 +08 [1662608] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.369 +08 [1662608] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.369 +08 [1662608] STATEMENT:  INSERT INTO public.order_items_102161 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004596'::bigint,'968'::bigint,'5001545'::bigint,'163968'::bigint,1,626.92::numeric(12,2))
+2026-09-27 11:58:05.449 +08 [1662570] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.449 +08 [1662570] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.449 +08 [1662570] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.449 +08 [1662570] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001547'::bigint, '307'::bigint, '631307'::bigint, 'PENDING'::text, 7707.96::numeric(12,2), '2026-09-27 11:57:56.354079'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:05.470 +08 [1662541] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:05.470 +08 [1662541] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:05.470 +08 [1662541] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:05.470 +08 [1662541] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004602'::bigint,'968'::bigint,'5001548'::bigint,'446968'::bigint,1,396.92::numeric(12,2))
+2026-09-27 11:58:06.974 +08 [1662521] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:06.974 +08 [1662521] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:06.974 +08 [1662521] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:06.974 +08 [1662521] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004724'::bigint,'31'::bigint,'5001588'::bigint,'195031'::bigint,4,505.89::numeric(12,2))
+2026-09-27 11:58:07.498 +08 [1662559] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:07.498 +08 [1662559] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:07.498 +08 [1662559] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:07.498 +08 [1662559] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001597'::bigint, '17'::bigint, '450017'::bigint, 'PENDING'::text, 4257.84::numeric(12,2), '2026-09-27 11:57:57.598126'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:08.766 +08 [1662527] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:08.766 +08 [1662527] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:08.766 +08 [1662527] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:08.766 +08 [1662527] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004800'::bigint,'68'::bigint,'5001619'::bigint,'463068'::bigint,5,355.92::numeric(12,2))
+2026-09-27 11:58:08.905 +08 [1662533] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:08.905 +08 [1662533] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:08.905 +08 [1662533] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:08.905 +08 [1662533] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004813'::bigint,'28'::bigint,'5001622'::bigint,'118028'::bigint,4,638.32::numeric(12,2))
+2026-09-27 11:58:09.091 +08 [1662524] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:09.091 +08 [1662524] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:09.091 +08 [1662524] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:09.091 +08 [1662524] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004832'::bigint,'632'::bigint,'5001627'::bigint,'472632'::bigint,3,729.08::numeric(12,2))
+2026-09-27 11:58:09.168 +08 [1662515] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:09.168 +08 [1662515] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:09.168 +08 [1662515] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:09.168 +08 [1662515] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15004837'::bigint,'48'::bigint,'5001631'::bigint,'201048'::bigint,3,992.12::numeric(12,2))
+2026-09-27 11:58:13.331 +08 [1662507] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:13.331 +08 [1662507] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:13.331 +08 [1662507] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:13.331 +08 [1662507] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001702'::bigint, '508'::bigint, '411508'::bigint, 'PENDING'::text, 5295.68::numeric(12,2), '2026-09-27 11:58:00.274351'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:20.169 +08 [1662609] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:20.169 +08 [1662609] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:20.169 +08 [1662609] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:20.169 +08 [1662609] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001869'::bigint, '992'::bigint, '242992'::bigint, 'PENDING'::text, 5607.24::numeric(12,2), '2026-09-27 11:58:05.618038'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:20.939 +08 [1662521] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:20.939 +08 [1662521] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:20.939 +08 [1662521] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:20.939 +08 [1662521] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001887'::bigint, '31'::bigint, '982031'::bigint, 'PENDING'::text, 3693.01::numeric(12,2), '2026-09-27 11:58:06.986247'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:21.612 +08 [1662574] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:21.612 +08 [1662574] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:21.612 +08 [1662574] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:21.612 +08 [1662574] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001898'::bigint, '772'::bigint, '779772'::bigint, 'PENDING'::text, 9799.52::numeric(12,2), '2026-09-27 11:58:18.719241'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:24.264 +08 [1662570] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:24.264 +08 [1662570] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:24.264 +08 [1662570] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:24.264 +08 [1662570] STATEMENT:  INSERT INTO public.orders_102113 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5001955'::bigint, '74'::bigint, '946074'::bigint, 'PENDING'::text, 2228.48::numeric(12,2), '2026-09-27 11:58:23.962572'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:26.908 +08 [1662528] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:26.908 +08 [1662528] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:26.908 +08 [1662528] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:26.908 +08 [1662528] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15006039'::bigint,'56'::bigint,'5002032'::bigint,'310056'::bigint,3,335.64::numeric(12,2))
+2026-09-27 11:58:31.714 +08 [1662526] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:31.714 +08 [1662526] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:31.714 +08 [1662526] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:31.714 +08 [1662526] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002174'::bigint, '920'::bigint, '520920'::bigint, 'PENDING'::text, 2612.20::numeric(12,2), '2026-09-27 11:58:29.25522'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:32.720 +08 [1662507] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:32.720 +08 [1662507] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:32.720 +08 [1662507] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:32.720 +08 [1662507] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15006526'::bigint,'508'::bigint,'5002194'::bigint,'67508'::bigint,2,959.52::numeric(12,2))
+2026-09-27 11:58:35.531 +08 [1662545] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:35.531 +08 [1662545] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:35.531 +08 [1662545] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:35.531 +08 [1662545] STATEMENT:  UPDATE public.inventory_102097 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '172098'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '290098'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '394098'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '229098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:58:16.394388'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{172098,290098,394098,229098,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '98'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '172098'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '290098'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '394098'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '229098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 11:58:36.648 +08 [1662494] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:36.648 +08 [1662494] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:36.648 +08 [1662494] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:36.648 +08 [1662494] STATEMENT:  INSERT INTO public.orders_102121 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002271'::bigint, '51'::bigint, '800051'::bigint, 'PENDING'::text, 958.76::numeric(12,2), '2026-09-27 11:58:18.086379'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:58:54.881 +08 [1662495] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:58:54.881 +08 [1662495] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:58:54.881 +08 [1662495] HINT:  The transaction might succeed if retried.
+2026-09-27 11:58:54.881 +08 [1662495] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15007457'::bigint,'588'::bigint,'5002502'::bigint,'588'::bigint,2,564.72::numeric(12,2))
+2026-09-27 11:59:29.511 +08 [1664591] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:59:29.511 +08 [1664591] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:59:29.511 +08 [1664591] HINT:  The transaction might succeed if retried.
+2026-09-27 11:59:29.511 +08 [1664591] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5002975'::bigint, '588'::bigint, '317588'::bigint, 'PENDING'::text, 5971.92::numeric(12,2), '2026-09-27 11:58:54.890567'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:59:32.152 +08 [1662524] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:59:32.152 +08 [1662524] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:59:32.152 +08 [1662524] HINT:  The transaction might succeed if retried.
+2026-09-27 11:59:32.152 +08 [1662524] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5003014'::bigint, '275'::bigint, '159275'::bigint, 'PENDING'::text, 6897.25::numeric(12,2), '2026-09-27 11:59:31.806597'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 11:59:33.182 +08 [1662507] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 11:59:33.182 +08 [1662507] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 11:59:33.182 +08 [1662507] HINT:  The transaction might succeed if retried.
+2026-09-27 11:59:33.182 +08 [1662507] STATEMENT:  INSERT INTO public.order_items_102165 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15008981'::bigint,'66'::bigint,'5003028'::bigint,'235066'::bigint,1,877.54::numeric(12,2))
+2026-09-27 12:00:55.381 +08 [1662507] ERROR:  canceling statement due to user request
+2026-09-27 12:00:55.381 +08 [1662507] STATEMENT:  UPDATE public.inventory_102077 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '344066'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '263066'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '235066'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '31066'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '424066'::bigint) THEN 2 ELSE 0 END)), updated_at = '2026-09-27 11:59:33.184972'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{344066,263066,235066,31066,424066}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '66'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '344066'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '263066'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '235066'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '31066'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '424066'::bigint) THEN 2 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:01:06.154 +08 [1662551] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:01:06.154 +08 [1662551] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:01:06.154 +08 [1662551] HINT:  The transaction might succeed if retried.
+2026-09-27 12:01:06.154 +08 [1662551] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15010242'::bigint,'41'::bigint,'5003464'::bigint,'19041'::bigint,5,857.79::numeric(12,2)), ('15010243'::bigint,'41'::bigint,'5003464'::bigint,'197041'::bigint,2,677.79::numeric(12,2))
+2026-09-27 12:01:08.835 +08 [1662541] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:01:08.835 +08 [1662541] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:01:08.835 +08 [1662541] HINT:  The transaction might succeed if retried.
+2026-09-27 12:01:08.835 +08 [1662541] STATEMENT:  UPDATE public.inventory_102077 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '425004'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '364004'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '463004'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '192004'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '2004'::bigint) THEN 2 ELSE 0 END)), updated_at = '2026-09-27 11:59:54.140902'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{425004,364004,463004,192004,2004}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '4'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '425004'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '364004'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '463004'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '192004'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '2004'::bigint) THEN 2 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:01:09.783 +08 [1662531] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:01:09.783 +08 [1662531] STATEMENT:  UPDATE public.inventory_102097 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '224083'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '411083'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 11:59:55.834081'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{224083,411083,0,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '83'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '224083'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '411083'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:01:13.524 +08 [1662482] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:01:13.524 +08 [1662482] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:01:13.524 +08 [1662482] HINT:  The transaction might succeed if retried.
+2026-09-27 12:01:13.524 +08 [1662482] STATEMENT:  UPDATE public.inventory_102089 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16002'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99002'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '275002'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83002'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '275002'::bigint) THEN 3 ELSE 0 END)), updated_at = '2026-09-27 12:00:13.71654'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{16002,99002,275002,83002,275002}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '2'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16002'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99002'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '275002'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83002'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '275002'::bigint) THEN 3 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:02:01.103 +08 [1662492] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:02:01.103 +08 [1662492] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:02:01.103 +08 [1662492] HINT:  The transaction might succeed if retried.
+2026-09-27 12:02:01.103 +08 [1662492] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15011325'::bigint,'86'::bigint,'5003823'::bigint,'429086'::bigint,3,321.34::numeric(12,2))
+2026-09-27 12:02:52.982 +08 [1662550] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:02:52.982 +08 [1662550] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:02:52.982 +08 [1662550] HINT:  The transaction might succeed if retried.
+2026-09-27 12:02:52.982 +08 [1662550] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '384889'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '356889'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '2889'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '309889'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:02:12.572673'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{384889,356889,2889,309889,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '889'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '384889'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '356889'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '2889'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '309889'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:02:56.050 +08 [1662487] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:02:56.050 +08 [1662487] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '312093'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '289093'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '46093'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:02:55.877763'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{312093,289093,46093,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '93'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '312093'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '289093'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '46093'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:03:08.354 +08 [1662484] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:08.354 +08 [1662484] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:08.354 +08 [1662484] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:08.354 +08 [1662484] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15013912'::bigint,'40'::bigint,'5004679'::bigint,'82040'::bigint,2,748.60::numeric(12,2))
+2026-09-27 12:03:12.292 +08 [1665318] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:12.292 +08 [1665318] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:12.292 +08 [1665318] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:12.292 +08 [1665318] STATEMENT:  UPDATE public.inventory_102097 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '211074'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '222074'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '253074'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '271074'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:02:59.307313'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{211074,222074,253074,271074,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '74'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '211074'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '222074'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '253074'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '271074'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:03:14.700 +08 [1663156] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:14.700 +08 [1663156] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:14.700 +08 [1663156] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:14.700 +08 [1663156] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15014395'::bigint,'327'::bigint,'5004851'::bigint,'423327'::bigint,2,266.13::numeric(12,2))
+2026-09-27 12:03:16.646 +08 [1662521] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:16.646 +08 [1662521] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:16.646 +08 [1662521] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:16.646 +08 [1662521] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5004904'::bigint, '155'::bigint, '163155'::bigint, 'PENDING'::text, 767.25::numeric(12,2), '2026-09-27 12:03:06.83932'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:03:35.147 +08 [1662551] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:35.147 +08 [1662551] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:35.147 +08 [1662551] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:35.147 +08 [1662551] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5005324'::bigint, '38'::bigint, '365038'::bigint, 'PENDING'::text, 440.88::numeric(12,2), '2026-09-27 12:03:34.033014'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:03:35.253 +08 [1662491] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:35.253 +08 [1662491] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:35.253 +08 [1662491] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:35.253 +08 [1662491] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15015820'::bigint,'199'::bigint,'5005327'::bigint,'367199'::bigint,1,489.81::numeric(12,2))
+2026-09-27 12:03:37.361 +08 [1662501] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:37.361 +08 [1662501] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:37.361 +08 [1662501] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:37.361 +08 [1662501] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15016007'::bigint,'825'::bigint,'5005385'::bigint,'299825'::bigint,5,142.75::numeric(12,2))
+2026-09-27 12:03:51.099 +08 [1662494] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:51.099 +08 [1662494] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:51.099 +08 [1662494] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:51.099 +08 [1662494] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '80098'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '36098'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '356098'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '70098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '107098'::bigint) THEN 3 ELSE 0 END)), updated_at = '2026-09-27 12:03:34.706731'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{80098,36098,356098,70098,107098}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '98'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '80098'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '36098'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '356098'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '70098'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '107098'::bigint) THEN 3 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:03:51.252 +08 [1662527] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:51.252 +08 [1662527] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:51.252 +08 [1662527] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:51.252 +08 [1662527] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '146034'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '468034'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '47034'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '388034'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '158034'::bigint) THEN 5 ELSE 0 END)), updated_at = '2026-09-27 12:03:49.062144'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{146034,468034,47034,388034,158034}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '34'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '146034'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '468034'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '47034'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '388034'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '158034'::bigint) THEN 5 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:03:52.721 +08 [1662506] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:52.721 +08 [1662506] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:52.721 +08 [1662506] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:52.721 +08 [1662506] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111195'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '318195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '77195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:03:36.109409'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{111195,318195,77195,99195,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '195'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111195'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '318195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '77195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:03:59.545 +08 [1662572] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:03:59.545 +08 [1662572] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:03:59.545 +08 [1662572] HINT:  The transaction might succeed if retried.
+2026-09-27 12:03:59.545 +08 [1662572] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15017814'::bigint,'129'::bigint,'5006002'::bigint,'448129'::bigint,3,336.51::numeric(12,2))
+2026-09-27 12:04:01.082 +08 [1663156] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:01.082 +08 [1663156] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:01.082 +08 [1663156] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:01.082 +08 [1663156] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15017942'::bigint,'28'::bigint,'5006047'::bigint,'96028'::bigint,1,458.32::numeric(12,2)), ('15017944'::bigint,'28'::bigint,'5006047'::bigint,'319028'::bigint,1,828.32::numeric(12,2))
+2026-09-27 12:04:01.712 +08 [1662492] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:01.712 +08 [1662492] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:01.712 +08 [1662492] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:01.712 +08 [1662492] STATEMENT:  INSERT INTO public.order_items_102157 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15017990'::bigint,'195'::bigint,'5006063'::bigint,'479195'::bigint,5,453.05::numeric(12,2))
+2026-09-27 12:04:02.602 +08 [1662549] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:02.602 +08 [1662549] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:02.602 +08 [1662549] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:02.602 +08 [1662549] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15018074'::bigint,'3'::bigint,'5006085'::bigint,'256003'::bigint,3,878.57::numeric(12,2))
+2026-09-27 12:04:06.721 +08 [1662523] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:04:06.721 +08 [1662523] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '408028'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '497028'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '213028'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '253028'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '402028'::bigint) THEN 5 ELSE 0 END)), updated_at = '2026-09-27 12:04:06.310584'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{408028,497028,213028,253028,402028}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '28'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '408028'::bigint) THEN 5 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '497028'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '213028'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '253028'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '402028'::bigint) THEN 5 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:04:07.735 +08 [1662506] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:07.735 +08 [1662506] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:07.735 +08 [1662506] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:07.735 +08 [1662506] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111195'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '318195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '77195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:03:52.733052'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{111195,318195,77195,99195,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '195'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '111195'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '318195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '77195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '99195'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:04:09.156 +08 [1662524] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:09.156 +08 [1662524] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:09.156 +08 [1662524] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:09.156 +08 [1662524] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15018527'::bigint,'285'::bigint,'5006237'::bigint,'398285'::bigint,2,190.15::numeric(12,2))
+2026-09-27 12:04:24.725 +08 [1662527] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:24.725 +08 [1662527] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:24.725 +08 [1662527] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:24.725 +08 [1662527] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006610'::bigint, '31'::bigint, '502031'::bigint, 'PENDING'::text, 4783.01::numeric(12,2), '2026-09-27 12:04:08.027857'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:04:40.455 +08 [1662527] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:40.455 +08 [1662527] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:40.455 +08 [1662527] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:40.455 +08 [1662527] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5006910'::bigint, '31'::bigint, '502031'::bigint, 'PENDING'::text, 4783.01::numeric(12,2), '2026-09-27 12:04:24.731493'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:04:50.908 +08 [1663051] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:50.908 +08 [1663051] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:50.908 +08 [1663051] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:50.908 +08 [1663051] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15021483'::bigint,'243'::bigint,'5007189'::bigint,'184243'::bigint,3,204.17::numeric(12,2))
+2026-09-27 12:04:52.277 +08 [1662491] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:04:52.277 +08 [1662491] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '354099'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '190099'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '228099'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '420099'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83099'::bigint) THEN 2 ELSE 0 END)), updated_at = '2026-09-27 12:04:36.280934'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{354099,190099,228099,420099,83099}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '99'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '354099'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '190099'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '228099'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '420099'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '83099'::bigint) THEN 2 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:04:53.858 +08 [1667679] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:53.858 +08 [1667679] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:53.858 +08 [1667679] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:53.858 +08 [1667679] STATEMENT:  INSERT INTO public.order_items_102157 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15021721'::bigint,'36'::bigint,'5007266'::bigint,'275036'::bigint,5,101.84::numeric(12,2))
+2026-09-27 12:04:54.210 +08 [1663242] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:54.210 +08 [1663242] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:54.210 +08 [1663242] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:54.210 +08 [1663242] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15021745'::bigint,'55'::bigint,'5007273'::bigint,'439055'::bigint,1,766.45::numeric(12,2))
+2026-09-27 12:04:54.400 +08 [1662489] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:54.400 +08 [1662489] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:54.400 +08 [1662489] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:54.400 +08 [1662489] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15021761'::bigint,'763'::bigint,'5007278'::bigint,'355763'::bigint,5,872.97::numeric(12,2)), ('15021764'::bigint,'763'::bigint,'5007278'::bigint,'291763'::bigint,4,712.97::numeric(12,2))
+2026-09-27 12:04:54.600 +08 [1663156] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:54.600 +08 [1663156] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:54.600 +08 [1663156] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:54.600 +08 [1663156] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007286'::bigint, '37'::bigint, '759037'::bigint, 'PENDING'::text, 6753.39::numeric(12,2), '2026-09-27 12:04:42.048028'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:04:55.823 +08 [1662488] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:55.823 +08 [1662488] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:55.823 +08 [1662488] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:55.823 +08 [1662488] STATEMENT:  INSERT INTO public.orders_102117 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007319'::bigint, '31'::bigint, '871031'::bigint, 'PENDING'::text, 1027.67::numeric(12,2), '2026-09-27 12:04:43.788103'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:04:57.314 +08 [1662572] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:57.314 +08 [1662572] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:57.314 +08 [1662572] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:57.314 +08 [1662572] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5007362'::bigint, '838'::bigint, '153838'::bigint, 'PENDING'::text, 6195.54::numeric(12,2), '2026-09-27 12:04:44.873346'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:04:59.814 +08 [1662553] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:04:59.814 +08 [1662553] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:04:59.814 +08 [1662553] HINT:  The transaction might succeed if retried.
+2026-09-27 12:04:59.814 +08 [1662553] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15022202'::bigint,'818'::bigint,'5007428'::bigint,'144818'::bigint,5,138.42::numeric(12,2))
+2026-09-27 12:05:00.174 +08 [1662482] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:00.174 +08 [1662482] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:00.174 +08 [1662482] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:00.174 +08 [1662482] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15022236'::bigint,'910'::bigint,'5007443'::bigint,'271910'::bigint,2,553.90::numeric(12,2))
+2026-09-27 12:05:16.739 +08 [1662520] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:16.739 +08 [1662520] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:16.739 +08 [1662520] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:16.739 +08 [1662520] STATEMENT:  INSERT INTO public.order_items_102161 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15023572'::bigint,'254'::bigint,'5007876'::bigint,'59254'::bigint,2,325.26::numeric(12,2))
+2026-09-27 12:05:24.247 +08 [1662538] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:24.247 +08 [1662538] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:24.247 +08 [1662538] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:24.247 +08 [1662538] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5008028'::bigint, '906'::bigint, '740906'::bigint, 'PENDING'::text, 5504.26::numeric(12,2), '2026-09-27 12:05:10.465947'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:05:27.009 +08 [1662516] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:27.009 +08 [1662516] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:27.009 +08 [1662516] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:27.009 +08 [1662516] STATEMENT:  INSERT INTO public.order_items_102137 (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15024191'::bigint, '803'::bigint, '5008091'::bigint, '83803'::bigint, 2, 360.57::numeric(12,2))
+2026-09-27 12:05:40.475 +08 [1667679] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:05:40.475 +08 [1667679] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '12067'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '172067'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '107067'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:05:40.11322'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{12067,172067,107067,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '67'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '12067'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '172067'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '107067'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:05:57.351 +08 [1667445] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:57.351 +08 [1667445] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:57.351 +08 [1667445] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:57.351 +08 [1667445] STATEMENT:  INSERT INTO public.order_items_102165 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15026344'::bigint,'719'::bigint,'5008822'::bigint,'218719'::bigint,1,358.61::numeric(12,2))
+2026-09-27 12:05:58.001 +08 [1669948] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:05:58.001 +08 [1669948] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:05:58.001 +08 [1669948] HINT:  The transaction might succeed if retried.
+2026-09-27 12:05:58.001 +08 [1669948] STATEMENT:  INSERT INTO public.order_items_102145 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15026387'::bigint,'536'::bigint,'5008838'::bigint,'308536'::bigint,4,966.84::numeric(12,2)), ('15026388'::bigint,'536'::bigint,'5008838'::bigint,'119536'::bigint,1,56.84::numeric(12,2))
+2026-09-27 12:06:06.957 +08 [1671396] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:06.957 +08 [1671396] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:06.957 +08 [1671396] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:06.957 +08 [1671396] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15027145'::bigint,'450'::bigint,'5009096'::bigint,'165450'::bigint,3,986.50::numeric(12,2))
+2026-09-27 12:06:15.789 +08 [1662531] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:15.789 +08 [1662531] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:15.789 +08 [1662531] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:15.789 +08 [1662531] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15027978'::bigint,'337'::bigint,'5009361'::bigint,'467337'::bigint,4,418.03::numeric(12,2))
+2026-09-27 12:06:22.789 +08 [1664398] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:22.789 +08 [1664398] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:22.789 +08 [1664398] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:22.789 +08 [1664398] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '26799'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '119799'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '139799'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '97799'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:06:08.333127'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{26799,119799,139799,97799,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '799'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '26799'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '119799'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '139799'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '97799'::bigint) THEN 2 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:06:30.100 +08 [1662493] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:30.100 +08 [1662493] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:30.100 +08 [1662493] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:30.100 +08 [1662493] STATEMENT:  INSERT INTO public.order_items_102161 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15029243'::bigint,'251'::bigint,'5009787'::bigint,'459251'::bigint,4,87.69::numeric(12,2))
+2026-09-27 12:06:30.349 +08 [1662531] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:30.349 +08 [1662531] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:30.349 +08 [1662531] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:30.349 +08 [1662531] STATEMENT:  INSERT INTO public.orders_102113 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5009795'::bigint, '337'::bigint, '407337'::bigint, 'PENDING'::text, 6832.42::numeric(12,2), '2026-09-27 12:06:15.795532'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:06:42.716 +08 [1673121] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:42.716 +08 [1673121] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:42.716 +08 [1673121] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:42.716 +08 [1673121] STATEMENT:  INSERT INTO public.order_items_102141 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15030244'::bigint,'649'::bigint,'5010128'::bigint,'40649'::bigint,5,995.31::numeric(12,2))
+2026-09-27 12:06:54.133 +08 [1673397] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:54.133 +08 [1673397] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:54.133 +08 [1673397] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:54.133 +08 [1673397] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15031253'::bigint,'29'::bigint,'5010452'::bigint,'56029'::bigint,1,937.51::numeric(12,2))
+2026-09-27 12:06:56.484 +08 [1662538] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:56.484 +08 [1662538] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:56.484 +08 [1662538] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:56.484 +08 [1662538] STATEMENT:  INSERT INTO public.orders_102125 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5010514'::bigint, '137'::bigint, '876137'::bigint, 'PENDING'::text, 3140.18::numeric(12,2), '2026-09-27 12:06:43.5929'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:06:56.816 +08 [1662487] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:56.816 +08 [1662487] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:56.816 +08 [1662487] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:56.816 +08 [1662487] STATEMENT:  UPDATE public.inventory_102101 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '330010'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '221010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '45010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '191010'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:06:43.727008'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{330010,221010,45010,191010,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '10'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '330010'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '221010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '45010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '191010'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:06:57.549 +08 [1662493] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:57.549 +08 [1662493] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:57.549 +08 [1662493] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:57.549 +08 [1662493] STATEMENT:  INSERT INTO public.orders_102133 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5010544'::bigint, '251'::bigint, '363251'::bigint, 'PENDING'::text, 5812.28::numeric(12,2), '2026-09-27 12:06:43.946075'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:06:58.169 +08 [1669948] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:06:58.169 +08 [1669948] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:06:58.169 +08 [1669948] HINT:  The transaction might succeed if retried.
+2026-09-27 12:06:58.169 +08 [1669948] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5010562'::bigint, '967'::bigint, '411967'::bigint, 'PENDING'::text, 9502.76::numeric(12,2), '2026-09-27 12:06:44.597601'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:07.542 +08 [1662509] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:07.542 +08 [1662509] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:07.542 +08 [1662509] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:07.542 +08 [1662509] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15032418'::bigint,'57'::bigint,'5010837'::bigint,'279057'::bigint,4,524.83::numeric(12,2))
+2026-09-27 12:07:08.597 +08 [1662487] ERROR:  could not serialize access due to concurrent update
+2026-09-27 12:07:08.597 +08 [1662487] STATEMENT:  UPDATE public.inventory_102101 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '330010'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '221010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '45010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '191010'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:06:56.827148'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{330010,221010,45010,191010,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '10'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '330010'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '221010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '45010'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '191010'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:07:10.976 +08 [1671396] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:10.976 +08 [1671396] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:10.976 +08 [1671396] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:10.976 +08 [1671396] STATEMENT:  UPDATE public.inventory_102073 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '393182'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '213182'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '124182'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:07:00.208077'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{393182,213182,124182,0,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '182'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '393182'::bigint) THEN 3 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '213182'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '124182'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:07:11.341 +08 [1669930] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:11.341 +08 [1669930] DETAIL:  Reason code: Canceled on commit attempt with conflict in from prepared pivot.
+2026-09-27 12:07:11.341 +08 [1669930] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:14.952 +08 [1662496] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:14.952 +08 [1662496] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:14.952 +08 [1662496] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:14.952 +08 [1662496] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15032987'::bigint,'473'::bigint,'5011025'::bigint,'41473'::bigint,5,247.87::numeric(12,2))
+2026-09-27 12:07:16.343 +08 [1662516] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:16.343 +08 [1662516] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:16.343 +08 [1662516] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:16.343 +08 [1662516] STATEMENT:  UPDATE public.inventory_102077 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '151037'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '464037'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '119037'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '185037'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:07:02.96718'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{151037,464037,119037,185037,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '37'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '151037'::bigint) THEN 1 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '464037'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '119037'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '185037'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:07:19.934 +08 [1662489] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:19.934 +08 [1662489] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:19.934 +08 [1662489] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:19.934 +08 [1662489] STATEMENT:  INSERT INTO public.order_items_102165 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15033355'::bigint,'20'::bigint,'5011149'::bigint,'224020'::bigint,3,144.80::numeric(12,2))
+2026-09-27 12:07:25.471 +08 [1666489] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:25.471 +08 [1666489] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:25.471 +08 [1666489] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:25.471 +08 [1666489] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011297'::bigint, '6'::bigint, '229006'::bigint, 'PENDING'::text, 7302.80::numeric(12,2), '2026-09-27 12:07:10.152306'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:27.600 +08 [1673121] ERROR:  canceling statement due to user request
+2026-09-27 12:07:27.600 +08 [1673121] STATEMENT:  UPDATE public.inventory_102085 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '430100'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16100'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '303100'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '24100'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:07:27.342341'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{430100,16100,303100,24100,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '100'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '430100'::bigint) THEN 2 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '16100'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '303100'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '24100'::bigint) THEN 4 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:07:29.360 +08 [1672191] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:29.360 +08 [1672191] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:29.360 +08 [1672191] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:29.360 +08 [1672191] STATEMENT:  INSERT INTO public.orders_102129 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011400'::bigint, '766'::bigint, '114766'::bigint, 'PENDING'::text, 8569.18::numeric(12,2), '2026-09-27 12:07:12.229'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:34.375 +08 [1662489] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:34.375 +08 [1662489] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:34.375 +08 [1662489] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:34.375 +08 [1662489] STATEMENT:  INSERT INTO public.orders_102109 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011538'::bigint, '20'::bigint, '493020'::bigint, 'PENDING'::text, 6426.40::numeric(12,2), '2026-09-27 12:07:19.947345'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:40.497 +08 [1667457] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:40.497 +08 [1667457] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:40.497 +08 [1667457] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:40.497 +08 [1667457] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035056'::bigint,'113'::bigint,'5011719'::bigint,'481113'::bigint,5,339.47::numeric(12,2))
+2026-09-27 12:07:41.598 +08 [1669271] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:41.598 +08 [1669271] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:41.598 +08 [1669271] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:41.598 +08 [1669271] STATEMENT:  UPDATE public.inventory_102077 inventory SET quantity = (quantity OPERATOR(pg_catalog.-) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '497045'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '49045'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '383045'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '374045'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END)), updated_at = '2026-09-27 12:07:28.250973'::timestamp without time zone WHERE ((inventory_id OPERATOR(pg_catalog.=) ANY ('{497045,49045,383045,374045,0}'::bigint[])) AND (merchant_id OPERATOR(pg_catalog.=) '45'::bigint) AND (product_id OPERATOR(pg_catalog.=) inventory_id) AND (quantity OPERATOR(pg_catalog.>=) ((((CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '497045'::bigint) THEN 4 ELSE 0 END OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '49045'::bigint) THEN 3 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '383045'::bigint) THEN 5 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '374045'::bigint) THEN 1 ELSE 0 END) OPERATOR(pg_catalog.+) CASE WHEN (inventory_id OPERATOR(pg_catalog.=) '0'::bigint) THEN 0 ELSE 0 END))) RETURNING 1 AS "?column?"
+2026-09-27 12:07:43.308 +08 [1672191] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:43.308 +08 [1672191] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:43.308 +08 [1672191] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:43.308 +08 [1672191] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035274'::bigint,'766'::bigint,'5011790'::bigint,'344766'::bigint,4,20.54::numeric(12,2))
+2026-09-27 12:07:45.048 +08 [1670378] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:45.048 +08 [1670378] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:45.048 +08 [1670378] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:45.048 +08 [1670378] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035401'::bigint,'47'::bigint,'5011834'::bigint,'353047'::bigint,4,792.93::numeric(12,2))
+2026-09-27 12:07:46.455 +08 [1667679] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:46.455 +08 [1667679] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:46.455 +08 [1667679] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:46.455 +08 [1667679] STATEMENT:  INSERT INTO public.order_items_102149 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035502'::bigint,'156'::bigint,'5011866'::bigint,'30156'::bigint,2,54.64::numeric(12,2))
+2026-09-27 12:07:47.273 +08 [1662538] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:47.273 +08 [1662538] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:47.273 +08 [1662538] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:47.273 +08 [1662538] STATEMENT:  INSERT INTO public.order_items_102137 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035560'::bigint,'652'::bigint,'5011887'::bigint,'350652'::bigint,5,132.88::numeric(12,2))
+2026-09-27 12:07:47.808 +08 [1674767] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:47.808 +08 [1674767] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:47.808 +08 [1674767] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:47.808 +08 [1674767] STATEMENT:  INSERT INTO public.orders_102105 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011901'::bigint, '221'::bigint, '396221'::bigint, 'PENDING'::text, 13319.80::numeric(12,2), '2026-09-27 12:07:36.874433'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:48.382 +08 [1662528] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:48.382 +08 [1662528] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:48.382 +08 [1662528] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:48.382 +08 [1662528] STATEMENT:  INSERT INTO public.order_items_102153 AS citus_table_alias (order_item_id, merchant_id, order_id, product_id, quantity, unit_price) VALUES ('15035665'::bigint,'50'::bigint,'5011918'::bigint,'251050'::bigint,1,650.50::numeric(12,2))
+2026-09-27 12:07:48.457 +08 [1670378] ERROR:  could not serialize access due to read/write dependencies among transactions
+2026-09-27 12:07:48.457 +08 [1670378] DETAIL:  Reason code: Canceled on identification as a pivot, during write.
+2026-09-27 12:07:48.457 +08 [1670378] HINT:  The transaction might succeed if retried.
+2026-09-27 12:07:48.457 +08 [1670378] STATEMENT:  INSERT INTO public.orders_102133 (order_id, merchant_id, customer_id, order_status, total_amount, created_at) VALUES ('5011921'::bigint, '47'::bigint, '371047'::bigint, 'PENDING'::text, 9381.02::numeric(12,2), '2026-09-27 12:07:45.054476'::timestamp without time zone) RETURNING order_id AS new_order_id
+2026-09-27 12:07:51.440 +08 [1660314] WARNING:  terminating connection due to administrator command
+2026-09-27 12:07:51.440 +08 [1660314] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 12:07:53.452 +08 [1660314] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 12:07:53.452 +08 [1660314] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 12:07:53.453 +08 [1660314] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 12:07:53.453 +08 [1660314] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 12:07:55.459 +08 [1660314] WARNING:  connection to the remote node cs08@xcnc37:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-09-27 12:07:55.459 +08 [1660314] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-09-27 12:07:55.460 +08 [1660314] WARNING:  FATAL:  the database system is shutting down
+2026-09-27 12:07:55.460 +08 [1660314] CONTEXT:  while executing command on xcnc37:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-09-27 12:07:56.482 +08 [1660298] LOG:  received fast shutdown request
+2026-09-27 12:07:56.529 +08 [1660298] LOG:  aborting any active transactions
+2026-09-27 12:07:56.529 +08 [1667970] FATAL:  terminating connection due to administrator command
+2026-09-27 12:07:56.529 +08 [1667968] FATAL:  terminating connection due to administrator command
+2026-09-27 12:07:56.529 +08 [1669850] FATAL:  terminating connection due to administrator command
+2026-09-27 12:07:56.538 +08 [1660298] LOG:  background worker "logical replication launcher" (PID 1660308) exited with exit code 1
+2026-09-27 12:07:56.542 +08 [1660303] LOG:  shutting down
+2026-09-27 12:07:56.571 +08 [1660303] LOG:  checkpoint starting: shutdown immediate
+2026-09-27 12:07:57.439 +08 [1676094] LOG:  PID 1667968 in cancel request did not match any process
+2026-09-27 12:07:57.460 +08 [1676095] LOG:  PID 1667970 in cancel request did not match any process
+2026-09-27 12:07:59.451 +08 [1676096] FATAL:  the database system is shutting down
+2026-09-27 12:07:59.471 +08 [1676097] FATAL:  the database system is shutting down
+2026-09-27 12:08:01.461 +08 [1676098] FATAL:  the database system is shutting down
+2026-09-27 12:08:01.470 +08 [1676099] FATAL:  the database system is shutting down
+2026-09-27 12:08:01.480 +08 [1676100] FATAL:  the database system is shutting down
+2026-09-27 12:08:01.489 +08 [1676101] FATAL:  the database system is shutting down
+2026-09-27 12:08:03.479 +08 [1676102] FATAL:  the database system is shutting down
+2026-09-27 12:08:03.498 +08 [1676103] FATAL:  the database system is shutting down
+2026-09-27 12:08:05.488 +08 [1676104] FATAL:  the database system is shutting down
+2026-09-27 12:08:05.506 +08 [1676105] FATAL:  the database system is shutting down
+2026-09-27 12:08:07.497 +08 [1676107] FATAL:  the database system is shutting down
+2026-09-27 12:08:07.515 +08 [1676108] FATAL:  the database system is shutting down
+2026-09-27 12:08:07.855 +08 [1660303] LOG:  checkpoint complete: wrote 95389 buffers (72.8%), wrote 10 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=9.197 s, sync=0.241 s, total=11.314 s; sync files=264, longest=0.197 s, average=0.001 s; distance=1702233 kB, estimate=1702233 kB; lsn=2/D743D700, redo lsn=2/D743D700
+2026-09-27 12:08:08.150 +08 [1660298] LOG:  database system is shut down

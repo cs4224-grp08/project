@@ -1,0 +1,285 @@
+2026-10-22 01:56:57.736 +08 [353498] LOG:  There is no designated Main database.
+2026-10-22 01:56:57.737 +08 [353498] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 01:56:57.737 +08 [353498] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 01:56:57.894 +08 [353498] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 01:56:57.894 +08 [353498] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 01:56:57.894 +08 [353498] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 01:56:57.959 +08 [353498] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 01:56:58.030 +08 [353505] LOG:  database system was shut down at 2026-10-22 01:56:55 +08
+2026-10-22 01:56:58.122 +08 [353498] LOG:  database system is ready to accept connections
+2026-10-22 01:57:01.216 +08 [353513] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 01:57:01.216 +08 [353513] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:07.767 +08 [353513] WARNING:  terminating connection due to administrator command
+2026-10-22 02:16:07.767 +08 [353513] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:09.782 +08 [353513] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:16:09.782 +08 [353513] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:09.782 +08 [353513] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:16:09.782 +08 [353513] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:11.789 +08 [353513] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:16:11.789 +08 [353513] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:11.789 +08 [353513] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:16:11.789 +08 [353513] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:16:13.567 +08 [353498] LOG:  received fast shutdown request
+2026-10-22 02:16:13.603 +08 [353498] LOG:  aborting any active transactions
+2026-10-22 02:16:13.603 +08 [356228] FATAL:  terminating connection due to administrator command
+2026-10-22 02:16:13.603 +08 [358764] FATAL:  terminating connection due to administrator command
+2026-10-22 02:16:13.603 +08 [356227] FATAL:  terminating connection due to administrator command
+2026-10-22 02:16:13.610 +08 [353498] LOG:  background worker "logical replication launcher" (PID 353508) exited with exit code 1
+2026-10-22 02:16:13.616 +08 [353503] LOG:  shutting down
+2026-10-22 02:16:13.653 +08 [353503] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 02:16:13.794 +08 [367782] LOG:  PID 356227 in cancel request did not match any process
+2026-10-22 02:16:13.795 +08 [367783] LOG:  PID 356228 in cancel request did not match any process
+2026-10-22 02:16:15.807 +08 [367784] FATAL:  the database system is shutting down
+2026-10-22 02:16:15.808 +08 [367785] FATAL:  the database system is shutting down
+2026-10-22 02:16:17.817 +08 [367786] FATAL:  the database system is shutting down
+2026-10-22 02:16:17.818 +08 [367787] FATAL:  the database system is shutting down
+2026-10-22 02:16:19.826 +08 [367788] FATAL:  the database system is shutting down
+2026-10-22 02:16:19.827 +08 [367789] FATAL:  the database system is shutting down
+2026-10-22 02:16:21.836 +08 [367790] FATAL:  the database system is shutting down
+2026-10-22 02:16:21.837 +08 [367791] FATAL:  the database system is shutting down
+2026-10-22 02:16:23.845 +08 [367793] FATAL:  the database system is shutting down
+2026-10-22 02:16:23.846 +08 [367794] FATAL:  the database system is shutting down
+2026-10-22 02:16:25.854 +08 [367795] FATAL:  the database system is shutting down
+2026-10-22 02:16:25.855 +08 [367796] FATAL:  the database system is shutting down
+2026-10-22 02:16:26.589 +08 [353503] LOG:  checkpoint complete: wrote 95923 buffers (73.2%), wrote 5 SLRU buffers; 0 WAL file(s) added, 0 removed, 205 recycled; write=9.147 s, sync=0.234 s, total=12.973 s; sync files=1024, longest=0.148 s, average=0.001 s; distance=3363361 kB, estimate=3363361 kB; lsn=0/CEBE73C8, redo lsn=0/CEBE73C8
+2026-10-22 02:16:26.876 +08 [353498] LOG:  database system is shut down
+2026-10-22 02:16:41.164 +08 [367817] LOG:  There is no designated Main database.
+2026-10-22 02:16:41.164 +08 [367817] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 02:16:41.164 +08 [367817] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 02:16:41.362 +08 [367817] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 02:16:41.362 +08 [367817] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 02:16:41.362 +08 [367817] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 02:16:41.440 +08 [367817] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 02:16:41.537 +08 [367824] LOG:  database system was shut down at 2026-10-22 02:16:23 +08
+2026-10-22 02:16:41.587 +08 [367817] LOG:  database system is ready to accept connections
+2026-10-22 02:16:42.252 +08 [367833] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 02:16:42.252 +08 [367833] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:32.632 +08 [367833] WARNING:  terminating connection due to administrator command
+2026-10-22 02:31:32.632 +08 [367833] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:34.645 +08 [367833] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:31:34.645 +08 [367833] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:34.645 +08 [367833] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:31:34.645 +08 [367833] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:36.653 +08 [367833] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:31:36.653 +08 [367833] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:36.653 +08 [367833] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:31:36.653 +08 [367833] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:38.657 +08 [367833] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: server closed the connection unexpectedly
+		This probably means the server terminated abnormally
+		before or while processing the request.
+2026-10-22 02:31:38.657 +08 [367833] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:38.657 +08 [367833] WARNING:  server closed the connection unexpectedly
+		This probably means the server terminated abnormally
+		before or while processing the request.
+2026-10-22 02:31:38.657 +08 [367833] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:31:38.678 +08 [367817] LOG:  received fast shutdown request
+2026-10-22 02:31:38.723 +08 [367817] LOG:  aborting any active transactions
+2026-10-22 02:31:38.723 +08 [382004] FATAL:  terminating connection due to administrator command
+2026-10-22 02:31:38.723 +08 [384274] FATAL:  terminating connection due to administrator command
+2026-10-22 02:31:38.723 +08 [381998] FATAL:  terminating connection due to administrator command
+2026-10-22 02:31:38.729 +08 [367817] LOG:  background worker "logical replication launcher" (PID 367827) exited with exit code 1
+2026-10-22 02:31:38.733 +08 [367822] LOG:  shutting down
+2026-10-22 02:31:38.773 +08 [367822] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 02:31:40.576 +08 [392915] LOG:  PID 381998 in cancel request did not match any process
+2026-10-22 02:31:40.594 +08 [392916] LOG:  PID 382004 in cancel request did not match any process
+2026-10-22 02:31:42.589 +08 [392917] FATAL:  the database system is shutting down
+2026-10-22 02:31:42.604 +08 [392918] FATAL:  the database system is shutting down
+2026-10-22 02:31:44.598 +08 [392920] FATAL:  the database system is shutting down
+2026-10-22 02:31:44.608 +08 [392921] FATAL:  the database system is shutting down
+2026-10-22 02:31:44.614 +08 [392922] FATAL:  the database system is shutting down
+2026-10-22 02:31:44.623 +08 [392923] FATAL:  the database system is shutting down
+2026-10-22 02:31:46.617 +08 [392924] FATAL:  the database system is shutting down
+2026-10-22 02:31:46.631 +08 [392925] FATAL:  the database system is shutting down
+2026-10-22 02:31:48.626 +08 [392926] FATAL:  the database system is shutting down
+2026-10-22 02:31:48.639 +08 [392927] FATAL:  the database system is shutting down
+2026-10-22 02:31:49.008 +08 [367822] LOG:  checkpoint complete: wrote 94512 buffers (72.1%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=8.191 s, sync=0.213 s, total=10.275 s; sync files=264, longest=0.195 s, average=0.001 s; distance=1687931 kB, estimate=1687931 kB; lsn=1/35C46130, redo lsn=1/35C46130
+2026-10-22 02:31:49.293 +08 [367817] LOG:  database system is shut down
+2026-10-22 02:32:02.704 +08 [392945] LOG:  There is no designated Main database.
+2026-10-22 02:32:02.704 +08 [392945] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 02:32:02.704 +08 [392945] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 02:32:02.901 +08 [392945] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 02:32:02.902 +08 [392945] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 02:32:02.902 +08 [392945] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 02:32:02.968 +08 [392945] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 02:32:03.048 +08 [392952] LOG:  database system was shut down at 2026-10-22 02:31:47 +08
+2026-10-22 02:32:03.097 +08 [392945] LOG:  database system is ready to accept connections
+2026-10-22 02:32:03.798 +08 [392961] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 02:32:03.798 +08 [392961] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:46:56.222 +08 [392961] WARNING:  terminating connection due to administrator command
+2026-10-22 02:46:56.222 +08 [392961] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:46:58.235 +08 [392961] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:46:58.235 +08 [392961] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:46:58.235 +08 [392961] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:46:58.235 +08 [392961] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:47:00.243 +08 [392961] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 02:47:00.243 +08 [392961] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:47:00.243 +08 [392961] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 02:47:00.243 +08 [392961] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 02:47:01.316 +08 [392945] LOG:  received fast shutdown request
+2026-10-22 02:47:01.346 +08 [392945] LOG:  aborting any active transactions
+2026-10-22 02:47:01.346 +08 [406016] FATAL:  terminating connection due to administrator command
+2026-10-22 02:47:01.346 +08 [406017] FATAL:  terminating connection due to administrator command
+2026-10-22 02:47:01.346 +08 [408083] FATAL:  terminating connection due to administrator command
+2026-10-22 02:47:01.353 +08 [392945] LOG:  background worker "logical replication launcher" (PID 392955) exited with exit code 1
+2026-10-22 02:47:01.357 +08 [392950] LOG:  shutting down
+2026-10-22 02:47:01.388 +08 [392950] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 02:47:02.252 +08 [416223] LOG:  PID 406017 in cancel request did not match any process
+2026-10-22 02:47:02.262 +08 [416224] LOG:  PID 406016 in cancel request did not match any process
+2026-10-22 02:47:04.264 +08 [416225] FATAL:  the database system is shutting down
+2026-10-22 02:47:04.271 +08 [416226] FATAL:  the database system is shutting down
+2026-10-22 02:47:06.274 +08 [416227] FATAL:  the database system is shutting down
+2026-10-22 02:47:06.280 +08 [416228] FATAL:  the database system is shutting down
+2026-10-22 02:47:06.283 +08 [416229] FATAL:  the database system is shutting down
+2026-10-22 02:47:06.290 +08 [416230] FATAL:  the database system is shutting down
+2026-10-22 02:47:08.292 +08 [416232] FATAL:  the database system is shutting down
+2026-10-22 02:47:08.298 +08 [416233] FATAL:  the database system is shutting down
+2026-10-22 02:47:10.301 +08 [416234] FATAL:  the database system is shutting down
+2026-10-22 02:47:10.307 +08 [416235] FATAL:  the database system is shutting down
+2026-10-22 02:47:12.082 +08 [392950] LOG:  checkpoint complete: wrote 94733 buffers (72.3%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=8.622 s, sync=0.241 s, total=10.725 s; sync files=263, longest=0.222 s, average=0.001 s; distance=1688615 kB, estimate=1688615 kB; lsn=1/9CD4FF20, redo lsn=1/9CD4FF20
+2026-10-22 02:47:12.358 +08 [392945] LOG:  database system is shut down
+2026-10-22 02:47:25.676 +08 [416252] LOG:  There is no designated Main database.
+2026-10-22 02:47:25.676 +08 [416252] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 02:47:25.676 +08 [416252] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 02:47:25.877 +08 [416252] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 02:47:25.877 +08 [416252] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 02:47:25.877 +08 [416252] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 02:47:25.958 +08 [416252] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 02:47:26.039 +08 [416260] LOG:  database system was shut down at 2026-10-22 02:47:10 +08
+2026-10-22 02:47:26.079 +08 [416252] LOG:  database system is ready to accept connections
+2026-10-22 02:47:26.730 +08 [416269] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 02:47:26.730 +08 [416269] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:17.598 +08 [416269] WARNING:  terminating connection due to administrator command
+2026-10-22 03:02:17.598 +08 [416269] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:19.612 +08 [416269] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 03:02:19.612 +08 [416269] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:19.612 +08 [416269] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 03:02:19.612 +08 [416269] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:21.621 +08 [416269] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 03:02:21.621 +08 [416269] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:21.621 +08 [416269] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 03:02:21.621 +08 [416269] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:02:23.408 +08 [416252] LOG:  received fast shutdown request
+2026-10-22 03:02:23.450 +08 [416252] LOG:  aborting any active transactions
+2026-10-22 03:02:23.450 +08 [426809] FATAL:  terminating connection due to administrator command
+2026-10-22 03:02:23.450 +08 [425360] FATAL:  terminating connection due to administrator command
+2026-10-22 03:02:23.450 +08 [425358] FATAL:  terminating connection due to administrator command
+2026-10-22 03:02:23.456 +08 [416252] LOG:  background worker "logical replication launcher" (PID 416263) exited with exit code 1
+2026-10-22 03:02:23.461 +08 [416258] LOG:  shutting down
+2026-10-22 03:02:23.491 +08 [416258] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 03:02:23.625 +08 [432781] LOG:  PID 425360 in cancel request did not match any process
+2026-10-22 03:02:23.625 +08 [432782] LOG:  PID 425358 in cancel request did not match any process
+2026-10-22 03:02:25.636 +08 [432783] FATAL:  the database system is shutting down
+2026-10-22 03:02:25.637 +08 [432784] FATAL:  the database system is shutting down
+2026-10-22 03:02:27.645 +08 [432786] FATAL:  the database system is shutting down
+2026-10-22 03:02:27.646 +08 [432787] FATAL:  the database system is shutting down
+2026-10-22 03:02:29.655 +08 [432791] FATAL:  the database system is shutting down
+2026-10-22 03:02:29.655 +08 [432792] FATAL:  the database system is shutting down
+2026-10-22 03:02:29.665 +08 [432793] FATAL:  the database system is shutting down
+2026-10-22 03:02:29.666 +08 [432794] FATAL:  the database system is shutting down
+2026-10-22 03:02:31.674 +08 [432795] FATAL:  the database system is shutting down
+2026-10-22 03:02:31.675 +08 [432796] FATAL:  the database system is shutting down
+2026-10-22 03:02:33.527 +08 [416258] LOG:  checkpoint complete: wrote 94982 buffers (72.5%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=7.986 s, sync=0.227 s, total=10.067 s; sync files=264, longest=0.209 s, average=0.001 s; distance=1689187 kB, estimate=1689187 kB; lsn=2/3EE8D48, redo lsn=2/3EE8D48
+2026-10-22 03:02:33.816 +08 [416252] LOG:  database system is shut down
+2026-10-22 03:02:47.306 +08 [432813] LOG:  There is no designated Main database.
+2026-10-22 03:02:47.306 +08 [432813] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 03:02:47.306 +08 [432813] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 03:02:47.503 +08 [432813] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 03:02:47.504 +08 [432813] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 03:02:47.504 +08 [432813] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 03:02:47.586 +08 [432813] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 03:02:47.684 +08 [432820] LOG:  database system was shut down at 2026-10-22 03:02:31 +08
+2026-10-22 03:02:47.733 +08 [432813] LOG:  database system is ready to accept connections
+2026-10-22 03:02:48.369 +08 [432829] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 03:02:48.369 +08 [432829] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:36.336 +08 [432829] WARNING:  terminating connection due to administrator command
+2026-10-22 03:17:36.336 +08 [432829] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:38.350 +08 [432829] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 03:17:38.350 +08 [432829] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:38.350 +08 [432829] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 03:17:38.350 +08 [432829] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:40.359 +08 [432829] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 03:17:40.359 +08 [432829] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:40.359 +08 [432829] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 03:17:40.359 +08 [432829] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:17:41.089 +08 [432813] LOG:  received fast shutdown request
+2026-10-22 03:17:41.123 +08 [432813] LOG:  aborting any active transactions
+2026-10-22 03:17:41.123 +08 [439605] FATAL:  terminating connection due to administrator command
+2026-10-22 03:17:41.123 +08 [439600] FATAL:  terminating connection due to administrator command
+2026-10-22 03:17:41.123 +08 [439598] FATAL:  terminating connection due to administrator command
+2026-10-22 03:17:41.130 +08 [432813] LOG:  background worker "logical replication launcher" (PID 432823) exited with exit code 1
+2026-10-22 03:17:41.133 +08 [432818] LOG:  shutting down
+2026-10-22 03:17:41.173 +08 [432818] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 03:17:42.137 +08 [444350] LOG:  PID 439598 in cancel request did not match any process
+2026-10-22 03:17:42.197 +08 [444351] LOG:  PID 439600 in cancel request did not match any process
+2026-10-22 03:17:44.148 +08 [444352] FATAL:  the database system is shutting down
+2026-10-22 03:17:44.240 +08 [444353] FATAL:  the database system is shutting down
+2026-10-22 03:17:46.157 +08 [444354] FATAL:  the database system is shutting down
+2026-10-22 03:17:46.249 +08 [444355] FATAL:  the database system is shutting down
+2026-10-22 03:17:48.167 +08 [444358] FATAL:  the database system is shutting down
+2026-10-22 03:17:48.258 +08 [444359] FATAL:  the database system is shutting down
+2026-10-22 03:17:50.176 +08 [444360] FATAL:  the database system is shutting down
+2026-10-22 03:17:50.267 +08 [444361] FATAL:  the database system is shutting down
+2026-10-22 03:17:51.559 +08 [432818] LOG:  checkpoint complete: wrote 94962 buffers (72.5%), wrote 8 SLRU buffers; 0 WAL file(s) added, 0 removed, 103 recycled; write=8.305 s, sync=0.258 s, total=10.426 s; sync files=263, longest=0.240 s, average=0.001 s; distance=1688312 kB, estimate=1688312 kB; lsn=2/6AFA6DC0, redo lsn=2/6AFA6DC0
+2026-10-22 03:17:51.844 +08 [432813] LOG:  database system is shut down
+2026-10-22 03:18:05.393 +08 [444377] LOG:  There is no designated Main database.
+2026-10-22 03:18:05.393 +08 [444377] LOG:  number of prepared transactions has not been configured, overriding
+2026-10-22 03:18:05.393 +08 [444377] DETAIL:  max_prepared_transactions is now set to 2000
+2026-10-22 03:18:05.591 +08 [444377] LOG:  starting PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-10-22 03:18:05.591 +08 [444377] LOG:  listening on IPv4 address "0.0.0.0", port 5440
+2026-10-22 03:18:05.591 +08 [444377] LOG:  listening on IPv6 address "::", port 5440
+2026-10-22 03:18:05.660 +08 [444377] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5440"
+2026-10-22 03:18:05.741 +08 [444384] LOG:  database system was shut down at 2026-10-22 03:17:49 +08
+2026-10-22 03:18:05.781 +08 [444377] LOG:  database system is ready to accept connections
+2026-10-22 03:18:06.505 +08 [444393] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 03:18:06.505 +08 [444393] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:12.503 +08 [444393] ERROR:  terminating connection due to administrator command
+2026-10-22 03:33:12.503 +08 [444393] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:12.515 +08 [444377] LOG:  background worker "Citus Maintenance Daemon: 16384/10" (PID 444393) exited with exit code 1
+2026-10-22 03:33:17.425 +08 [452958] LOG:  starting maintenance daemon on database 16384 user 10
+2026-10-22 03:33:17.425 +08 [452958] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:17.452 +08 [452958] WARNING:  transaction recovery cannot connect to xcnc1:5440
+2026-10-22 03:33:17.452 +08 [452958] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:17.468 +08 [452958] WARNING:  connection to the remote node cs08@xcnc1:5440 failed with the following error: FATAL:  the database system is shutting down
+2026-10-22 03:33:17.468 +08 [452958] CONTEXT:  Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:17.468 +08 [452958] WARNING:  FATAL:  the database system is shutting down
+2026-10-22 03:33:17.468 +08 [452958] CONTEXT:  while executing command on xcnc1:5440
+	Citus maintenance daemon for database 16384 user 10
+2026-10-22 03:33:18.828 +08 [444377] LOG:  received fast shutdown request
+2026-10-22 03:33:18.869 +08 [444377] LOG:  aborting any active transactions
+2026-10-22 03:33:18.870 +08 [452957] FATAL:  terminating connection due to administrator command
+2026-10-22 03:33:18.870 +08 [452959] FATAL:  terminating connection due to administrator command
+2026-10-22 03:33:18.873 +08 [452956] FATAL:  terminating connection due to administrator command
+2026-10-22 03:33:18.877 +08 [444377] LOG:  background worker "logical replication launcher" (PID 444387) exited with exit code 1
+2026-10-22 03:33:18.882 +08 [444382] LOG:  shutting down
+2026-10-22 03:33:18.920 +08 [444382] LOG:  checkpoint starting: shutdown immediate
+2026-10-22 03:33:19.447 +08 [452976] LOG:  PID 452956 in cancel request did not match any process
+2026-10-22 03:33:19.454 +08 [452977] LOG:  PID 452957 in cancel request did not match any process
+2026-10-22 03:33:21.458 +08 [452979] FATAL:  the database system is shutting down
+2026-10-22 03:33:21.464 +08 [452980] FATAL:  the database system is shutting down
+2026-10-22 03:33:23.467 +08 [452981] FATAL:  the database system is shutting down
+2026-10-22 03:33:23.473 +08 [452982] FATAL:  the database system is shutting down
+2026-10-22 03:33:25.477 +08 [452984] FATAL:  the database system is shutting down
+2026-10-22 03:33:25.481 +08 [452985] FATAL:  the database system is shutting down
+2026-10-22 03:33:27.486 +08 [452986] FATAL:  the database system is shutting down
+2026-10-22 03:33:27.490 +08 [452987] FATAL:  the database system is shutting down
+2026-10-22 03:33:29.496 +08 [452991] FATAL:  the database system is shutting down
+2026-10-22 03:33:29.499 +08 [452992] FATAL:  the database system is shutting down
+2026-10-22 03:33:29.946 +08 [444382] LOG:  checkpoint complete: wrote 95191 buffers (72.6%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 104 recycled; write=8.752 s, sync=0.327 s, total=11.065 s; sync files=264, longest=0.292 s, average=0.002 s; distance=1689119 kB, estimate=1689119 kB; lsn=2/D212ED88, redo lsn=2/D212ED88
+2026-10-22 03:33:30.235 +08 [444377] LOG:  database system is shut down
