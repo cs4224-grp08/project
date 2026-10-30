@@ -56,7 +56,7 @@ Every comparison the report makes, the nodes behind it, and why it holds. Node s
   - They ran on different nodes: a205 on xcnc0–4, the other two on xcnc33–37.
   - a207 (AutoPart, which only moves `email`) stands in for a205 on those nodes. On B, b207 is within 8% of b205 on the same nodes.
 - **b206 has two jobs in its folder. Which one counts?** 1042354, on the same nodes as b205 and b207. 1038832 ran on xcnc0–4 and isn't comparable with them.
-- **Why is the protocol serializable if T6 releases G early?** See the barrier table (Table 3). T6 is equivalent to running alone at the barrier, and every other transaction follows strict 2PL.
+- **Why is the protocol serializable if T6 releases G early?** See the T6 snapshot-initialization schedule (Table 3). T6 initializes every participating worker's snapshot under X(G), then reuses those snapshots after releasing G. Its report is equivalent to a serial placement between preceding and subsequent T1 writers; every other transaction follows strict 2PL.
 - **How do you know the barrier works?** The argument is in §2.3. Don's snapshot test (job 995999, SCALE=0.1, not in the submission) saw 0 of 200 new orders with the barrier, 200 of 200 without it, and 155 of 200 with a one-worker barrier.
 - **How is TPS computed?** The supplied `run.sh`: successful transactions from the logs ÷ `DURATION` (600 s). pgbench's own "tps" divides by the actual elapsed time, which runs past 600 s when long transactions are still in flight. So the two differ for slow designs.
 - **Why does Navathe's split make T7 slower on B (50 → 65 ms)?** We don't know, and the report says so.
