@@ -909,19 +909,21 @@ every client count. Navathe's split raises throughput by 7\% at 32 and 64 client
 446~TPS, and lowers it by 2--5\% at 4 to 16 clients. Both differences are below our
 threshold.
 
-Navathe's split does not change T6's query, yet T6 gets faster. At 64 clients, its
-average latency is 652\,ms in \expt{b206} against 797\,ms in \expt{b205}, 18\% less,
-although its 99th percentile rises from 1.25\,s to 1.52\,s. The likely reason is the
-visibility map. T5 updates \texttt{order\_status}, so in \expt{b205} every status
-update changes a page of \texttt{orders} and clears that page's all-visible bit. T6's
-index-only scan must then visit the table for every order in its window on such a
-page~\cite{pgindexonly, pgvisibilitymap}. In \expt{b206}, \texttt{order\_status} lives
-in its own table, so \texttt{orders} only receives inserts and keeps most of its pages
-all-visible. A T5-heavy test on the Local Cluster showed the same pattern: PostgreSQL
-gave up the index-only scan for T6 in \expt{b205} after a few minutes, but kept it
-throughout in \expt{b206}. Neither Navathe's nor HillClimb's cost model sees this
-effect. Both count which attributes each transaction reads or writes, not how an update
-to one attribute affects an index on others.
+T6 uses the same query after Navathe's split, but its average latency at 64
+clients falls from 797\,ms in \expt{b205} to 652\,ms in \expt{b206}, an 18\%
+reduction. Its 99th percentile rises from 1.25\,s to 1.52\,s. The visibility map
+is a likely explanation for the lower average. In \expt{b205}, T5 updates
+\texttt{order\_status} in \texttt{orders}, clearing the modified page's all-visible
+bit. T6's index-only scan must then visit the table for orders in its window on
+that page~\cite{pgindexonly, pgvisibilitymap}. In \expt{b206}, status updates go
+to a separate table. \texttt{orders} receives only inserts and keeps most of its
+pages all-visible.
+
+A T5-heavy test on the Local Cluster showed the same pattern. PostgreSQL switched
+away from T6's index-only scan after a few minutes in \expt{b205}, but retained
+it throughout the test in \expt{b206}. Navathe's and HillClimb's cost models do
+not account for this effect: they track the attributes each transaction reads or
+writes, but not how updating one attribute affects an index used to read others.
 
 The split also has costs. T1 must insert into two tables, and T7's average latency at
 64 clients rose from 50\,ms to 65\,ms, for reasons we did not establish. Workload B
