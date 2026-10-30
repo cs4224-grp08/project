@@ -929,8 +929,8 @@ still accounts for 45\% of transaction time, and T1 for 38\%.
 
 We set out to make the benchmark fast without giving up serializability across the
 cluster. Citus does not provide this on its own, because each worker checks only its
-own conflicts. Two-phase locking on the coordinator, with a short snapshot barrier for
-the global report, provided it. On the same nodes, the locking protocol was within 9\%
+own conflicts. Two-phase locking on the coordinator, with snapshot initialization under a
+short-duration exclusive lock for the global report, provided it. On the same nodes, the locking protocol was within 9\%
 of the unsafe alternative at up to 16 clients and about 40\% faster at 32 and 64
 clients, where the unsafe alternative lost work to retries and failed commits.
 
