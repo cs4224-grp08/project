@@ -346,17 +346,20 @@ Experiment & {1} & {8} & {32} & {64} & {Retried} & {Aborted} \\
 \label{sec:a99}
 
 \paragraph{Locking protocol.} To make the workload serializable across workers,
-\expt{a99} adds strict two-phase locking (2PL) on the coordinator. Under strict 2PL, a
-transaction locks data before accessing it and releases its locks only when it
-commits; every schedule that follows this rule is serializable~\cite{ozsu2020}. We use
-PostgreSQL advisory locks, which lock an application-chosen number rather than a
-row~\cite{pgadvisory}, so that one lock can stand for a set of rows. Lock $M(m)$ stands
-for all rows of merchant $m$ in every table, including ranges such as a customer's order
-history. Lock $G$ stands for the order attributes that T6 reads across all merchants.
-Each transaction takes its locks immediately after \texttt{BEGIN}, shared for reads and
-exclusive for writes, and holds them until it commits (\cref{tab:locks}). Locks are
-always acquired in the same order ($G$ first, then merchants in ascending order), so no
-deadlock can occur.
+\expt{a99} uses centralized strict two-phase locking (2PL) for ordinary transactions,
+with a snapshot-based exception for T6 described below. Under strict 2PL, exclusive
+locks are retained until transaction completion; our ordinary transactions retain
+both shared and exclusive locks~\cite{ozsu2020}. We use PostgreSQL advisory locks,
+which lock an application-chosen number rather than a row~\cite{pgadvisory}, so that
+one lock can stand for a set of rows. Lock $M(m)$ stands for all rows of merchant
+$m$ in every table, including ranges such as a customer's order history. Lock $G$
+coordinates T1 writes with T6 reads of order attributes across all merchants.
+Ordinary transactions acquire their locks before protected accesses and retain them
+through distributed completion (\cref{tab:locks}); T5's immutable preliminary lookup
+is explained below. Merchant locks are shared for reads and exclusive for writes.
+On $G$, T1 takes a shared lock and T6 takes an exclusive lock. Locks are acquired
+in a fixed order ($G$ first, then merchants ascending), one SQL statement per lock,
+which prevents circular waits among these advisory locks.
 
 The coordinator releases a transaction's locks only after all workers have
 committed~\cite{citustx}, so a transaction that acquires a lock sees every change made
