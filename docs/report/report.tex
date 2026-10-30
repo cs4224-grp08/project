@@ -530,9 +530,7 @@ eight clients.
 In parallel, we tested three denormalizations of the serializable baseline.
 \expt{a102} copies each order and its items into an order-history table distributed by
 customer,to eliminate the expensive distributed join in T3.  In exchange, T1 and T5 must
-keep the copy up to date. It removes the same bottleneck as the T3 rewrite. At 64
-clients, T3's average latency falls from 258\,s to 36\,ms, and throughput rises from
-1.34 to 17.4~TPS. \expt{a112} merges products and inventory into one table, and
+keep the copy up to date. This removes the same bottleneck as the T3 rewrite while introducing additional write overhead. At 64 clients, T3's average latency falls from 258 s to 36 ms, reducing lock holding times and contention across transactions. Consequently, overall throughput rises from 1.34 to 17.4 TPS, while T1's average latency decreases from 53.5 s to 5.45 s. Although the additional projection update increases T5's latency from 7.43 to 18.81 ms at one client, the reduction in contention outweighs this overhead at higher concurrency. \expt{a112} merges products and inventory into one table, and
 \expt{a122} splits product data into hot and cold tables. Both put a
 product and its stock on the same shard, so T4's average latency at one client falls
 from 522\,ms to 3.1\,ms and 2.8\,ms. Neither touches T3, which still dominates, and both
