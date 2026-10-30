@@ -150,7 +150,7 @@
 Citus scales PostgreSQL by spreading tables across worker nodes, but it enforces
 serializable isolation only within each worker. We optimize a multi-tenant
 order-processing benchmark on a five-node Citus~14.1 cluster for two transaction mixes,
-A and B, while keeping every design serializable across the whole cluster. Our baseline
+A and B, while requiring the final designs to be serializable across the whole cluster. Our baseline
 achieves this with two-phase locking on the coordinator and reaches 1.3 transactions
 per second (TPS) on workload A and 3.2~TPS on workload B at 64 clients. Query rewrites,
 partitioning every table by merchant, and a covering index raise throughput to 625~TPS
