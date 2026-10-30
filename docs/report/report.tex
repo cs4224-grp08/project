@@ -508,8 +508,17 @@ which Citus routes to a single shard. T4's median latency at 64 clients falls fr
 the data generator, which a real application would have to guarantee.
 
 The remaining two rewrites reduce the number of statements. \expt{a121} checks stock,
-reserves it and inserts all items of a T1 order with one statement each. \expt{a131}
-debits and credits both products of a T7 transfer in a single \texttt{UPDATE}.
+reserves it and inserts all items of a T1 order with one statement each.
+At 64 clients, throughput changes from 67.02~TPS in \expt{a111} to 63.29~TPS in
+\expt{a121}, while T1's 99th-percentile latency falls from 16.37 to 6.49\,s.
+However, these runs used different node allocations, so neither difference can be
+attributed to batching alone. On workload B, \expt{b121} and \expt{b131} used the
+same nodes, and batching changes throughput by less than 1\% at every client count.
+These runs therefore do not demonstrate an aggregate-throughput benefit from
+batching.
+
+\expt{a131} debits and credits both products of a T7 transfer in a single
+\texttt{UPDATE}.
 Compared with \expt{a121}, T7's median latency at 64 clients falls from 358\,ms to
 37\,ms, but its 99th percentile rises from 692\,ms to 824\,ms, and throughput rises by
 only 6\%, to 67.3~TPS. In all four designs, throughput grows by less than 9\% beyond
