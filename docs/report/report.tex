@@ -387,7 +387,7 @@ T7 & $M(m_1)$, $M(m_2)$ exclusive, in ascending order \\
 \end{tabular}
 \end{table}
 
-\paragraph{Snapshot barrier for T6.} T6 reads the recent orders of every merchant, so
+\paragraph{T6 snapshot initialization.} T6 reads the recent orders of every merchant, so
 it conflicts with every T1. Holding $G$ for the whole report would stop all new orders
 while T6 runs, which takes about 340\,ms in \expt{a99}. Instead, T6 holds $G$ only long
 enough to start a consistent snapshot on every worker. It runs at \texttt{REPEATABLE
