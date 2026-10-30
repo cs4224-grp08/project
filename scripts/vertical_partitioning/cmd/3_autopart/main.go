@@ -12,12 +12,17 @@ import (
 
 func main() {
 	workloadName := flag.String("workload", "A", "Workload A or B")
+	withCoveringIndex := flag.Bool("covering-index", false, "Model expt_a205: T6 reads only its covering index, not orders rows")
 	scanScalingFactor := flag.Float64("scan-scaling", 1, "SR, the cost of scanning one attribute of a fragment")
 	fragmentJoinCost := flag.Float64("join-cost", 18.76, "J, the cost of joining one more fragment (from 3_autopart/join_cost_calibration.sql)")
 	replicationBudget := flag.Float64("replication-budget", 0, "Replicated bytes allowed, as a fraction of the relation's bytes")
 	minimumQueryExtent := flag.Int("minimum-query-extent", 1, "X, the fewest queries a composite fragment must serve")
 
 	flag.Parse()
+
+	if *withCoveringIndex {
+		workload.UseCoveringIndexForGlobalSales()
+	}
 
 	if !slices.Contains(workload.WorkloadNames, *workloadName) {
 		fmt.Fprintf(os.Stderr, "Unknown Workload %q\n", *workloadName)

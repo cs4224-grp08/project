@@ -169,6 +169,25 @@ var Transactions = []Transaction{
 	},
 }
 
+// UseCoveringIndexForGlobalSales models expt_a205's access paths: its covering index
+// orders (created_at) INCLUDE (merchant_id, total_amount) answers T6 without reading orders rows.
+func UseCoveringIndexForGlobalSales() {
+	for transactionIndex, transaction := range Transactions {
+		if transaction.TransactionName == "T6" {
+			Transactions[transactionIndex].TransactionAccesses = nil
+		}
+	}
+}
+
+func EntityNamed(entityName string) Entity {
+	for _, entity := range Entities {
+		if entity.EntityName == entityName {
+			return entity
+		}
+	}
+	panic("unknown entity " + entityName)
+}
+
 func (entity Entity) NonKeyAttributes() []Attribute {
 	var nonKeyAttributes []Attribute
 	for _, attribute := range entity.EntityAttributes {

@@ -12,9 +12,14 @@ import (
 
 func main() {
 	workloadName := flag.String("workload", "A", "Workload A or B")
+	withCoveringIndex := flag.Bool("covering-index", false, "Model expt_a205: T6 reads only its covering index, not orders rows")
 	cacheLineBytes := flag.Float64("cache-line-bytes", 64, "Size of the unit the cost model counts misses of")
 
 	flag.Parse()
+
+	if *withCoveringIndex {
+		workload.UseCoveringIndexForGlobalSales()
+	}
 
 	if !slices.Contains(workload.WorkloadNames, *workloadName) {
 		fmt.Fprintf(os.Stderr, "Unknown Workload %q\n", *workloadName)

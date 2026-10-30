@@ -13,6 +13,7 @@ import (
 
 func main() {
 	workloadName := flag.String("workload", "A", "Workload A or B")
+	withCoveringIndex := flag.Bool("covering-index", false, "Model expt_a205: T6 reads only its covering index, not orders rows")
 	withOverlap := flag.Bool("overlap", false, "Allow overlapping fragments (SPLIT-OVERLAP)")
 	withShift := flag.Bool("shift", false, "Try every rotation of the clustered order (SHIFT)")
 	withCluster := flag.Bool("cluster", false, "Recluster each fragment before splitting it (CLUSTER)")
@@ -22,6 +23,10 @@ func main() {
 	replicatedByteCost := flag.Float64("replicated-byte-cost", 100, "C3, cost of storing a replicated byte")
 
 	flag.Parse()
+
+	if *withCoveringIndex {
+		workload.UseCoveringIndexForGlobalSales()
+	}
 
 	if !slices.Contains(workload.WorkloadNames, *workloadName) {
 		fmt.Fprintf(os.Stderr, "Unknown Workload %q\n", *workloadName)
