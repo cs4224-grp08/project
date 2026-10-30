@@ -393,7 +393,7 @@ while T6 runs, which takes about 340\,ms in \expt{a99}. Instead, T6 holds $G$ on
 enough to start a consistent snapshot on every worker. It runs at \texttt{REPEATABLE
 READ}, takes $G$ exclusively (which waits for all running T1s to commit), opens a
 snapshot on each worker with a single statement, and releases $G$. It then computes the
-report from these snapshots while new orders proceed (\cref{tab:barrier}). Only T1
+report from these snapshots while new orders proceed (\cref{tab:t6-snapshot-schedule}). Only T1
 changes the attributes that T6 reads (T5 changes the order status, which T6 does not
 read), so T6 returns exactly what it would return if it ran alone at the moment of the
 barrier. Because T6 releases $G$ before it commits, the protocol as a whole is not
